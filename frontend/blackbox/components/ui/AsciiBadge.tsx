@@ -8,11 +8,11 @@ export type BadgeVariant =
   | "neutral"
   | "accent";
 
-interface AsciiBadgeProps {
+export interface AsciiBadgeProps {
   status?: string;
   variant?: BadgeVariant;
   label?: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | (string & {});
   className?: string;
 }
 
