@@ -1,0 +1,167 @@
+{
+  "run_id": "run_0253",
+  "task_type": "calendar_scheduling",
+  "agent_name": "calendar_scheduling_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T12:59:01.330000+00:00",
+  "end_time": "2026-10-03T12:59:00.356000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_api_response_handling",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Downstream parser crashed attempting to index non-existent response attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_meeting_intent",
+      "input": {
+        "prompt": "Execute action parse_meeting_intent for calendar_scheduling workflow"
+      },
+      "output": {
+        "attendees": "output_attendees_808",
+        "duration_mins": "output_duration_mins_138",
+        "time_window": "output_time_window_710"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_808",
+        "duration_mins": "output_duration_mins_138",
+        "time_window": "output_time_window_710"
+      },
+      "timestamp": "2026-10-03T12:59:01.330000+00:00",
+      "duration_ms": 1330,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_calendar_freebusy",
+      "input": {
+        "attendees": "val_attendees_73",
+        "time_window": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "common_free_slots": "output_common_free_slots_726"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_808",
+        "duration_mins": "output_duration_mins_138",
+        "time_window": "output_time_window_710"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_808",
+        "duration_mins": "output_duration_mins_138",
+        "time_window": "output_time_window_710",
+        "common_free_slots": "output_common_free_slots_726"
+      },
+      "timestamp": "2026-10-03T12:59:00.896000+00:00",
+      "duration_ms": 448,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "select_optimal_slot",
+      "input": {
+        "common_free_slots": "val_common_free_slots_90",
+        "duration_mins": "val_duration_mins_48"
+      },
+      "output": {
+        "code": 404,
+        "body": {
+          "message": "Not Found"
+        },
+        "treated_as_success": true
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_808",
+        "duration_mins": "output_duration_mins_138",
+        "time_window": "output_time_window_710",
+        "common_free_slots": "output_common_free_slots_726"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_808",
+        "duration_mins": "output_duration_mins_138",
+        "time_window": "output_time_window_710",
+        "common_free_slots": "output_common_free_slots_726",
+        "chosen_start": "output_chosen_start_456",
+        "chosen_end": "output_chosen_end_528"
+      },
+      "timestamp": "2026-10-03T12:59:00.780000+00:00",
+      "duration_ms": 260,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "schedule_calendar_event",
+      "input": {
+        "attendees": "val_attendees_81",
+        "chosen_start": "val_chosen_start_40",
+        "chosen_end": "val_chosen_end_34",
+        "meeting_title": "val_meeting_title_25"
+      },
+      "output": {
+        "error": "Downstream parser crashed attempting to index non-existent response attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_808",
+        "duration_mins": "output_duration_mins_138",
+        "time_window": "output_time_window_710",
+        "common_free_slots": "output_common_free_slots_726",
+        "chosen_start": "output_chosen_start_456",
+        "chosen_end": "output_chosen_end_528"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_808",
+        "duration_mins": "output_duration_mins_138",
+        "time_window": "output_time_window_710",
+        "common_free_slots": "output_common_free_slots_726",
+        "chosen_start": "output_chosen_start_456",
+        "chosen_end": "output_chosen_end_528",
+        "execution_status": "failed",
+        "last_error": "Downstream parser crashed attempting to index non-existent response attributes"
+      },
+      "timestamp": "2026-10-03T12:59:00.356000+00:00",
+      "duration_ms": 89,
+      "status": "failed",
+      "error": "Downstream parser crashed attempting to index non-existent response attributes",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

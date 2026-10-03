@@ -1,0 +1,226 @@
+{
+  "run_id": "run_0166",
+  "task_type": "hotel_booking",
+  "agent_name": "hotel_booking_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T19:30:00.621000+00:00",
+  "end_time": "2026-10-03T19:30:06.030000+00:00",
+  "total_steps": 5,
+  "failure_type": "hallucinated_value",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_hotel_criteria",
+      "input": {
+        "query": "Execute action parse_hotel_criteria for hotel_booking workflow"
+      },
+      "output": {
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966"
+      },
+      "timestamp": "2026-10-03T19:30:00.621000+00:00",
+      "duration_ms": 621,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_available_hotels",
+      "input": {
+        "city": "val_city_10",
+        "checkin_date": "2026-10-04T09:00:00Z",
+        "nights": "val_nights_52"
+      },
+      "output": {
+        "hotel_ids": 8640,
+        "price_range": "output_price_range_826"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966",
+        "hotel_ids": 8640,
+        "price_range": "output_price_range_826"
+      },
+      "timestamp": "2026-10-03T19:30:01.204000+00:00",
+      "duration_ms": 602,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_room_allocation",
+      "input": {
+        "hotel_id": 1024,
+        "room_type": "val_room_type_29",
+        "nights": "val_nights_51"
+      },
+      "output": {
+        "hallucinated_id": "FAKE_TOKEN_XYZ_9876",
+        "confidence": 0.99,
+        "verified": false
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966",
+        "hotel_ids": 8640,
+        "price_range": "output_price_range_826"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966",
+        "hotel_ids": 8640,
+        "price_range": "output_price_range_826",
+        "available": "output_available_711",
+        "nightly_rate": 108.48
+      },
+      "timestamp": "2026-10-03T19:30:01.191000+00:00",
+      "duration_ms": 397,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "commit_hotel_reservation",
+      "input": {
+        "hotel_id": 334,
+        "guest_name": "val_guest_name_94",
+        "total_price": 303.57
+      },
+      "output": {
+        "confirmation_num": "output_confirmation_num_908",
+        "voucher": "output_voucher_686"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966",
+        "hotel_ids": 8640,
+        "price_range": "output_price_range_826",
+        "available": "output_available_711",
+        "nightly_rate": 108.48
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966",
+        "hotel_ids": 8640,
+        "price_range": "output_price_range_826",
+        "available": "output_available_711",
+        "nightly_rate": 108.48,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T19:30:05.440000+00:00",
+      "duration_ms": 1360,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "generate_booking_confirmation",
+      "input": {
+        "confirmation_num": "val_confirmation_num_55"
+      },
+      "output": {
+        "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966",
+        "hotel_ids": 8640,
+        "price_range": "output_price_range_826",
+        "available": "output_available_711",
+        "nightly_rate": 108.48,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_233",
+        "checkin_date": "output_checkin_date_264",
+        "nights": "output_nights_698",
+        "guests": "output_guests_966",
+        "hotel_ids": 8640,
+        "price_range": "output_price_range_826",
+        "available": "output_available_711",
+        "nightly_rate": 108.48,
+        "step_4_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Hallucinated token does not exist in backend database; 401 Unauthorized"
+      },
+      "timestamp": "2026-10-03T19:30:06.030000+00:00",
+      "duration_ms": 1206,
+      "status": "failed",
+      "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

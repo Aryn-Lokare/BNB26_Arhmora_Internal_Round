@@ -1,0 +1,272 @@
+{
+  "run_id": "run_0466",
+  "task_type": "coding_assistant",
+  "agent_name": "coding_assistant_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T17:01:01.353000+00:00",
+  "end_time": "2026-10-03T17:01:00.894000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_retrieval",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_issue_description",
+      "input": {
+        "issue_text": "val_issue_text_72",
+        "stacktrace": "val_stacktrace_45"
+      },
+      "output": {
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240"
+      },
+      "timestamp": "2026-10-03T17:01:01.353000+00:00",
+      "duration_ms": 1353,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "read_source_code_file",
+      "input": {
+        "target_file": "val_target_file_39",
+        "root_function": "val_root_function_49"
+      },
+      "output": {
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240",
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666"
+      },
+      "timestamp": "2026-10-03T17:01:02.292000+00:00",
+      "duration_ms": 1146,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "generate_code_diff",
+      "input": {
+        "code_snippet": "val_code_snippet_25",
+        "issue_text": "val_issue_text_57"
+      },
+      "output": {
+        "patch_diff": "output_patch_diff_842",
+        "functions_modified": "output_functions_modified_935"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240",
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240",
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666",
+        "patch_diff": "output_patch_diff_842",
+        "functions_modified": "output_functions_modified_935"
+      },
+      "timestamp": "2026-10-03T17:01:01.533000+00:00",
+      "duration_ms": 511,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "run_unit_test_suite",
+      "input": {
+        "patch_diff": "val_patch_diff_14",
+        "target_file": "val_target_file_40"
+      },
+      "output": {
+        "retrieved_records": [
+          {
+            "id": "MISMATCH_999",
+            "score": 0.12,
+            "content": "Unrelated topic"
+          }
+        ],
+        "top_match": "MISMATCH_999"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240",
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666",
+        "patch_diff": "output_patch_diff_842",
+        "functions_modified": "output_functions_modified_935"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240",
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666",
+        "patch_diff": "output_patch_diff_842",
+        "functions_modified": "output_functions_modified_935",
+        "tests_passed": "output_tests_passed_815",
+        "coverage_pct": "output_coverage_pct_550"
+      },
+      "timestamp": "2026-10-03T17:01:01.480000+00:00",
+      "duration_ms": 370,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "create_git_pull_request",
+      "input": {
+        "patch_diff": "val_patch_diff_24",
+        "tests_passed": "val_tests_passed_12"
+      },
+      "output": {
+        "pr_number": "output_pr_number_610",
+        "pr_url": "output_pr_url_956"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240",
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666",
+        "patch_diff": "output_patch_diff_842",
+        "functions_modified": "output_functions_modified_935",
+        "tests_passed": "output_tests_passed_815",
+        "coverage_pct": "output_coverage_pct_550"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240",
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666",
+        "patch_diff": "output_patch_diff_842",
+        "functions_modified": "output_functions_modified_935",
+        "tests_passed": "output_tests_passed_815",
+        "coverage_pct": "output_coverage_pct_550",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T17:01:05.045000+00:00",
+      "duration_ms": 1009,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "post_pr_summary",
+      "input": {
+        "pr_number": "val_pr_number_44",
+        "coverage_pct": "val_coverage_pct_45"
+      },
+      "output": {
+        "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240",
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666",
+        "patch_diff": "output_patch_diff_842",
+        "functions_modified": "output_functions_modified_935",
+        "tests_passed": "output_tests_passed_815",
+        "coverage_pct": "output_coverage_pct_550",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_180",
+        "root_function": "output_root_function_308",
+        "repro_steps": "output_repro_steps_240",
+        "code_snippet": "output_code_snippet_859",
+        "imports": "output_imports_666",
+        "patch_diff": "output_patch_diff_842",
+        "functions_modified": "output_functions_modified_935",
+        "tests_passed": "output_tests_passed_815",
+        "coverage_pct": "output_coverage_pct_550",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Retrieved entity mismatch: downstream operations applied to wrong entity"
+      },
+      "timestamp": "2026-10-03T17:01:00.894000+00:00",
+      "duration_ms": 149,
+      "status": "failed",
+      "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

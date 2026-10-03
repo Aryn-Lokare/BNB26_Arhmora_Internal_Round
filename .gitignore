@@ -36,3 +36,4 @@ _query_*.py
 # OS
 .DS_Store
 Thumbs.db
+blackbox/ml/model/checkpoints/best_model.pt

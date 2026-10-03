@@ -1,0 +1,155 @@
+{
+  "run_id": "run_0016",
+  "task_type": "customer_support",
+  "agent_name": "customer_support_agent_v3",
+  "status": "success",
+  "start_time": "2026-10-03T19:13:00.186000+00:00",
+  "end_time": "2026-10-03T19:13:01.568000+00:00",
+  "total_steps": 4,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "records_updated": "output_records_updated_584"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_address_request",
+      "input": {
+        "user_message": "Execute action parse_address_request for customer_support workflow"
+      },
+      "output": {
+        "customer_id": 6733,
+        "new_address": "output_new_address_329"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 6733,
+        "new_address": "output_new_address_329"
+      },
+      "timestamp": "2026-10-03T19:13:00.186000+00:00",
+      "duration_ms": 186,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_shipping_address",
+      "input": {
+        "customer_id": 6733
+      },
+      "output": {
+        "current_address": "output_current_address_872",
+        "pending_shipments": "output_pending_shipments_131"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 6733,
+        "new_address": "output_new_address_329"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 6733,
+        "new_address": "output_new_address_329",
+        "current_address": "output_current_address_872",
+        "pending_shipments": "output_pending_shipments_131"
+      },
+      "timestamp": "2026-10-03T19:13:00.440000+00:00",
+      "duration_ms": 220,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_postal_code",
+      "input": {
+        "zip_code": "val_zip_code_35"
+      },
+      "output": {
+        "valid_zone": 1333,
+        "carrier": "output_carrier_736"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 6733,
+        "new_address": "output_new_address_329",
+        "current_address": "output_current_address_872",
+        "pending_shipments": "output_pending_shipments_131"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 6733,
+        "new_address": "output_new_address_329",
+        "current_address": "output_current_address_872",
+        "pending_shipments": "output_pending_shipments_131",
+        "valid_zone": 1333,
+        "carrier": "output_carrier_736"
+      },
+      "timestamp": "2026-10-03T19:13:01.758000+00:00",
+      "duration_ms": 586,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "update_customer_record",
+      "input": {
+        "customer_id": 6733,
+        "new_address": "val_new_address_26"
+      },
+      "output": {
+        "records_updated": "output_records_updated_584"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 6733,
+        "new_address": "output_new_address_329",
+        "current_address": "output_current_address_872",
+        "pending_shipments": "output_pending_shipments_131",
+        "valid_zone": 1333,
+        "carrier": "output_carrier_736"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 6733,
+        "new_address": "output_new_address_329",
+        "current_address": "output_current_address_872",
+        "pending_shipments": "output_pending_shipments_131",
+        "valid_zone": 1333,
+        "carrier": "output_carrier_736",
+        "records_updated": "output_records_updated_584"
+      },
+      "timestamp": "2026-10-03T19:13:01.568000+00:00",
+      "duration_ms": 392,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

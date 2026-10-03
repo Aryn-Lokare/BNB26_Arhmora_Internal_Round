@@ -1,0 +1,178 @@
+{
+  "run_id": "run_0115",
+  "task_type": "travel_booking",
+  "agent_name": "travel_booking_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T19:37:00.097000+00:00",
+  "end_time": "2026-10-03T19:37:01.028000+00:00",
+  "total_steps": 4,
+  "failure_type": "wrong_tool_argument",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Invalid tool argument caused downstream processing error: entity not found",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_flight_preferences",
+      "input": {
+        "user_prompt": "Execute action extract_flight_preferences for travel_booking workflow"
+      },
+      "output": {
+        "origin": "output_origin_724",
+        "destination": "output_destination_765",
+        "travel_date": "output_travel_date_268",
+        "cabin_class": "output_cabin_class_550"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_724",
+        "destination": "output_destination_765",
+        "travel_date": "output_travel_date_268",
+        "cabin_class": "output_cabin_class_550"
+      },
+      "timestamp": "2026-10-03T19:37:00.097000+00:00",
+      "duration_ms": 97,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_flight_routes",
+      "input": {
+        "origin": "val_origin_37",
+        "destination": "val_destination_90",
+        "travel_date": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "flight_candidates": 3480,
+        "min_fare": "output_min_fare_521"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_724",
+        "destination": "output_destination_765",
+        "travel_date": "output_travel_date_268",
+        "cabin_class": "output_cabin_class_550"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_724",
+        "destination": "output_destination_765",
+        "travel_date": "output_travel_date_268",
+        "cabin_class": "output_cabin_class_550",
+        "flight_candidates": 3480,
+        "min_fare": "output_min_fare_521"
+      },
+      "timestamp": "2026-10-03T19:37:01.598000+00:00",
+      "duration_ms": 799,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "check_seat_inventory",
+      "input": {
+        "flight_number": "INVALID_FLIGHT_NUMBER_9999",
+        "cabin_class": "val_cabin_class_66"
+      },
+      "output": {
+        "status": "accepted_with_bad_arg",
+        "warning": "Unchecked parameter format"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_724",
+        "destination": "output_destination_765",
+        "travel_date": "output_travel_date_268",
+        "cabin_class": "output_cabin_class_550",
+        "flight_candidates": 3480,
+        "min_fare": "output_min_fare_521"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_724",
+        "destination": "output_destination_765",
+        "travel_date": "output_travel_date_268",
+        "cabin_class": "output_cabin_class_550",
+        "flight_candidates": 3480,
+        "min_fare": "output_min_fare_521",
+        "available_seats": "output_available_seats_980",
+        "fare_quote": "output_fare_quote_322"
+      },
+      "timestamp": "2026-10-03T19:37:04.023000+00:00",
+      "duration_ms": 1341,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "hold_flight_seat",
+      "input": {
+        "flight_number": "val_flight_number_22",
+        "seat_number": "val_seat_number_27",
+        "passenger_id": 1024
+      },
+      "output": {
+        "error": "Invalid tool argument caused downstream processing error: entity not found",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_724",
+        "destination": "output_destination_765",
+        "travel_date": "output_travel_date_268",
+        "cabin_class": "output_cabin_class_550",
+        "flight_candidates": 3480,
+        "min_fare": "output_min_fare_521",
+        "available_seats": "output_available_seats_980",
+        "fare_quote": "output_fare_quote_322"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_724",
+        "destination": "output_destination_765",
+        "travel_date": "output_travel_date_268",
+        "cabin_class": "output_cabin_class_550",
+        "flight_candidates": 3480,
+        "min_fare": "output_min_fare_521",
+        "available_seats": "output_available_seats_980",
+        "fare_quote": "output_fare_quote_322",
+        "execution_status": "failed",
+        "last_error": "Invalid tool argument caused downstream processing error: entity not found"
+      },
+      "timestamp": "2026-10-03T19:37:01.028000+00:00",
+      "duration_ms": 257,
+      "status": "failed",
+      "error": "Invalid tool argument caused downstream processing error: entity not found",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

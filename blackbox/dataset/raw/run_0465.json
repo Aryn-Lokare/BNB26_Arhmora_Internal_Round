@@ -1,0 +1,255 @@
+{
+  "run_id": "run_0465",
+  "task_type": "coding_assistant",
+  "agent_name": "coding_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-04T01:12:00.580000+00:00",
+  "end_time": "2026-10-04T01:12:03.480000+00:00",
+  "total_steps": 6,
+  "failure_type": "invalid_tool_output_handling",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Agent failed to extract fields from tool output, causing NullReferenceError",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_issue_description",
+      "input": {
+        "issue_text": "val_issue_text_47",
+        "stacktrace": "val_stacktrace_26"
+      },
+      "output": {
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590"
+      },
+      "timestamp": "2026-10-04T01:12:00.580000+00:00",
+      "duration_ms": 580,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "read_source_code_file",
+      "input": {
+        "target_file": "val_target_file_94",
+        "root_function": "val_root_function_19"
+      },
+      "output": {
+        "raw_output": "200 OK",
+        "parsed_as": null,
+        "extracted": {}
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590",
+        "code_snippet": "output_code_snippet_178",
+        "imports": "output_imports_356"
+      },
+      "timestamp": "2026-10-04T01:12:00.660000+00:00",
+      "duration_ms": 330,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "generate_code_diff",
+      "input": {
+        "code_snippet": "val_code_snippet_36",
+        "issue_text": "val_issue_text_73"
+      },
+      "output": {
+        "patch_diff": "output_patch_diff_822",
+        "functions_modified": "output_functions_modified_852"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590",
+        "code_snippet": "output_code_snippet_178",
+        "imports": "output_imports_356"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590",
+        "code_snippet": "output_code_snippet_178",
+        "imports": "output_imports_356",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T01:12:03.579000+00:00",
+      "duration_ms": 1193,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "run_unit_test_suite",
+      "input": {
+        "patch_diff": "val_patch_diff_38",
+        "target_file": "val_target_file_66"
+      },
+      "output": {
+        "tests_passed": "output_tests_passed_830",
+        "coverage_pct": "output_coverage_pct_409"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590",
+        "code_snippet": "output_code_snippet_178",
+        "imports": "output_imports_356",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590",
+        "code_snippet": "output_code_snippet_178",
+        "imports": "output_imports_356",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-04T01:12:03.244000+00:00",
+      "duration_ms": 811,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "create_git_pull_request",
+      "input": {
+        "patch_diff": "val_patch_diff_80",
+        "tests_passed": "val_tests_passed_47"
+      },
+      "output": {
+        "pr_number": "output_pr_number_989",
+        "pr_url": "output_pr_url_769"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590",
+        "code_snippet": "output_code_snippet_178",
+        "imports": "output_imports_356",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590",
+        "code_snippet": "output_code_snippet_178",
+        "imports": "output_imports_356",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-04T01:12:04.155000+00:00",
+      "duration_ms": 831,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "post_pr_summary",
+      "input": {
+        "pr_number": "val_pr_number_77",
+        "coverage_pct": "val_coverage_pct_44"
+      },
+      "output": {
+        "error": "Agent failed to extract fields from tool output, causing NullReferenceError",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590",
+        "code_snippet": "output_code_snippet_178",
+        "imports": "output_imports_356",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_720",
+        "root_function": "output_root_function_507",
+        "repro_steps": "output_repro_steps_590",
+        "code_snippet": "output_code_snippet_178",
+        "imports": "output_imports_356",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Agent failed to extract fields from tool output, causing NullReferenceError"
+      },
+      "timestamp": "2026-10-04T01:12:03.480000+00:00",
+      "duration_ms": 580,
+      "status": "failed",
+      "error": "Agent failed to extract fields from tool output, causing NullReferenceError",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

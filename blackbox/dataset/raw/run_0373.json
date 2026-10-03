@@ -1,0 +1,156 @@
+{
+  "run_id": "run_0373",
+  "task_type": "data_analysis",
+  "agent_name": "data_analysis_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T15:07:00.520000+00:00",
+  "end_time": "2026-10-03T15:07:04.824000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_llm_decision",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_analysis_plan",
+      "input": {
+        "analysis_question": "val_analysis_question_27"
+      },
+      "output": {
+        "plan_steps": "output_plan_steps_716",
+        "target_tables": "output_target_tables_665"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_716",
+        "target_tables": "output_target_tables_665"
+      },
+      "timestamp": "2026-10-03T15:07:00.520000+00:00",
+      "duration_ms": 520,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "inspect_db_schema",
+      "input": {
+        "target_tables": "val_target_tables_85"
+      },
+      "output": {
+        "schema_columns": "output_schema_columns_467",
+        "foreign_keys": "output_foreign_keys_384"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_716",
+        "target_tables": "output_target_tables_665"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_716",
+        "target_tables": "output_target_tables_665",
+        "schema_columns": "output_schema_columns_467",
+        "foreign_keys": "output_foreign_keys_384"
+      },
+      "timestamp": "2026-10-03T15:07:01.044000+00:00",
+      "duration_ms": 522,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "construct_sql_query",
+      "input": {
+        "plan_steps": "val_plan_steps_89",
+        "schema_columns": "val_schema_columns_64"
+      },
+      "output": {
+        "decision": "bypass_validation",
+        "reasoning": "Skipping prerequisite checks based on incorrect user assumption",
+        "route_to": "unsupported_path"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_716",
+        "target_tables": "output_target_tables_665",
+        "schema_columns": "output_schema_columns_467",
+        "foreign_keys": "output_foreign_keys_384"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_716",
+        "target_tables": "output_target_tables_665",
+        "schema_columns": "output_schema_columns_467",
+        "foreign_keys": "output_foreign_keys_384",
+        "sql_statement": "output_sql_statement_176"
+      },
+      "timestamp": "2026-10-03T15:07:01.029000+00:00",
+      "duration_ms": 343,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_database_query",
+      "input": {
+        "sql_statement": "val_sql_statement_42"
+      },
+      "output": {
+        "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_716",
+        "target_tables": "output_target_tables_665",
+        "schema_columns": "output_schema_columns_467",
+        "foreign_keys": "output_foreign_keys_384",
+        "sql_statement": "output_sql_statement_176"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_716",
+        "target_tables": "output_target_tables_665",
+        "schema_columns": "output_schema_columns_467",
+        "foreign_keys": "output_foreign_keys_384",
+        "sql_statement": "output_sql_statement_176",
+        "execution_status": "failed",
+        "last_error": "LLM made incorrect branch decision; prerequisite state missing downstream"
+      },
+      "timestamp": "2026-10-03T15:07:04.824000+00:00",
+      "duration_ms": 1206,
+      "status": "failed",
+      "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

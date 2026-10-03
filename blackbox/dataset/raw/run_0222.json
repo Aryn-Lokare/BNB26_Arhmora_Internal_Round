@@ -1,0 +1,207 @@
+{
+  "run_id": "run_0222",
+  "task_type": "calendar_scheduling",
+  "agent_name": "calendar_scheduling_agent_v3",
+  "status": "success",
+  "start_time": "2026-10-03T15:07:01.237000+00:00",
+  "end_time": "2026-10-03T15:07:06.815000+00:00",
+  "total_steps": 5,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "invitations_dispatched": "output_invitations_dispatched_684"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_meeting_intent",
+      "input": {
+        "prompt": "Execute action parse_meeting_intent for calendar_scheduling workflow"
+      },
+      "output": {
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423"
+      },
+      "timestamp": "2026-10-03T15:07:01.237000+00:00",
+      "duration_ms": 1237,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_calendar_freebusy",
+      "input": {
+        "attendees": "val_attendees_78",
+        "time_window": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "common_free_slots": "output_common_free_slots_119"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423",
+        "common_free_slots": "output_common_free_slots_119"
+      },
+      "timestamp": "2026-10-03T15:07:02.434000+00:00",
+      "duration_ms": 1217,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "select_optimal_slot",
+      "input": {
+        "common_free_slots": "val_common_free_slots_83",
+        "duration_mins": "val_duration_mins_97"
+      },
+      "output": {
+        "chosen_start": "output_chosen_start_439",
+        "chosen_end": "output_chosen_end_918"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423",
+        "common_free_slots": "output_common_free_slots_119"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423",
+        "common_free_slots": "output_common_free_slots_119",
+        "chosen_start": "output_chosen_start_439",
+        "chosen_end": "output_chosen_end_918"
+      },
+      "timestamp": "2026-10-03T15:07:01.518000+00:00",
+      "duration_ms": 506,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "schedule_calendar_event",
+      "input": {
+        "attendees": "val_attendees_18",
+        "chosen_start": "val_chosen_start_29",
+        "chosen_end": "val_chosen_end_45",
+        "meeting_title": "val_meeting_title_13"
+      },
+      "output": {
+        "event_id": 6556,
+        "meeting_link": "output_meeting_link_484"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423",
+        "common_free_slots": "output_common_free_slots_119",
+        "chosen_start": "output_chosen_start_439",
+        "chosen_end": "output_chosen_end_918"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423",
+        "common_free_slots": "output_common_free_slots_119",
+        "chosen_start": "output_chosen_start_439",
+        "chosen_end": "output_chosen_end_918",
+        "event_id": 6556,
+        "meeting_link": "output_meeting_link_484"
+      },
+      "timestamp": "2026-10-03T15:07:03.216000+00:00",
+      "duration_ms": 804,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "send_calendar_invitations",
+      "input": {
+        "event_id": 6556,
+        "attendees": "val_attendees_31"
+      },
+      "output": {
+        "invitations_dispatched": "output_invitations_dispatched_684"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423",
+        "common_free_slots": "output_common_free_slots_119",
+        "chosen_start": "output_chosen_start_439",
+        "chosen_end": "output_chosen_end_918",
+        "event_id": 6556,
+        "meeting_link": "output_meeting_link_484"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_842",
+        "duration_mins": "output_duration_mins_794",
+        "time_window": "output_time_window_423",
+        "common_free_slots": "output_common_free_slots_119",
+        "chosen_start": "output_chosen_start_439",
+        "chosen_end": "output_chosen_end_918",
+        "event_id": 6556,
+        "meeting_link": "output_meeting_link_484",
+        "invitations_dispatched": "output_invitations_dispatched_684"
+      },
+      "timestamp": "2026-10-03T15:07:06.815000+00:00",
+      "duration_ms": 1363,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

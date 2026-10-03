@@ -1,0 +1,253 @@
+{
+  "run_id": "run_0025",
+  "task_type": "customer_support",
+  "agent_name": "customer_support_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T16:30:01.002000+00:00",
+  "end_time": "2026-10-03T16:30:02.610000+00:00",
+  "total_steps": 6,
+  "failure_type": "invalid_data_transformation",
+  "failure_step_id": "step_05",
+  "final_output": {
+    "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "identify_customer",
+      "input": {
+        "user_query": "Execute action identify_customer for customer_support workflow"
+      },
+      "output": {
+        "customer_id": 8253,
+        "intent": "output_intent_404"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404"
+      },
+      "timestamp": "2026-10-03T16:30:01.002000+00:00",
+      "duration_ms": 1002,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_account_history",
+      "input": {
+        "customer_id": 8253
+      },
+      "output": {
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404",
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682"
+      },
+      "timestamp": "2026-10-03T16:30:02.570000+00:00",
+      "duration_ms": 1285,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_refund_eligibility",
+      "input": {
+        "order_id": 1024,
+        "customer_id": 8253
+      },
+      "output": {
+        "eligible": true,
+        "max_amount": 1154.13
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404",
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404",
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682",
+        "eligible": true,
+        "max_amount": 1154.13
+      },
+      "timestamp": "2026-10-03T16:30:04.053000+00:00",
+      "duration_ms": 1351,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "process_wallet_credit",
+      "input": {
+        "customer_id": 8253,
+        "amount": 603.6
+      },
+      "output": {
+        "transaction_id": 5335,
+        "credit_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404",
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682",
+        "eligible": true,
+        "max_amount": 1154.13
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404",
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682",
+        "eligible": true,
+        "max_amount": 1154.13,
+        "transaction_id": 5335,
+        "credit_status": "success"
+      },
+      "timestamp": "2026-10-03T16:30:01.132000+00:00",
+      "duration_ms": 283,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "log_ticket_resolution",
+      "input": {
+        "customer_id": 8253,
+        "transaction_id": 5335
+      },
+      "output": {
+        "transformed_value": "NaN",
+        "source_value": 150.0,
+        "units": "mismatched_timezone_and_currency"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404",
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682",
+        "eligible": true,
+        "max_amount": 1154.13,
+        "transaction_id": 5335,
+        "credit_status": "success"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404",
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682",
+        "eligible": true,
+        "max_amount": 1154.13,
+        "transaction_id": 5335,
+        "credit_status": "success",
+        "ticket_status": "success"
+      },
+      "timestamp": "2026-10-03T16:30:01.230000+00:00",
+      "duration_ms": 246,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "send_customer_email",
+      "input": {
+        "customer_id": 8253,
+        "ticket_status": "val_ticket_status_19"
+      },
+      "output": {
+        "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404",
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682",
+        "eligible": true,
+        "max_amount": 1154.13,
+        "transaction_id": 5335,
+        "credit_status": "success",
+        "ticket_status": "success"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 8253,
+        "intent": "output_intent_404",
+        "account_tier": "output_account_tier_412",
+        "recent_orders": "output_recent_orders_682",
+        "eligible": true,
+        "max_amount": 1154.13,
+        "transaction_id": 5335,
+        "credit_status": "success",
+        "ticket_status": "success",
+        "execution_status": "failed",
+        "last_error": "Downstream validation failed: expected numeric float, received 'NaN'"
+      },
+      "timestamp": "2026-10-03T16:30:02.610000+00:00",
+      "duration_ms": 435,
+      "status": "failed",
+      "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

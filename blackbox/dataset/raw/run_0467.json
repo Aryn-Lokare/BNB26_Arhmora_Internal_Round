@@ -1,0 +1,167 @@
+{
+  "run_id": "run_0467",
+  "task_type": "coding_assistant",
+  "agent_name": "coding_assistant_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-04T00:36:01.328000+00:00",
+  "end_time": "2026-10-04T00:36:00.748000+00:00",
+  "total_steps": 4,
+  "failure_type": "hallucinated_value",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_issue_description",
+      "input": {
+        "issue_text": "val_issue_text_59",
+        "stacktrace": "val_stacktrace_73"
+      },
+      "output": {
+        "target_file": "output_target_file_119",
+        "root_function": "output_root_function_983",
+        "repro_steps": "output_repro_steps_491"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_119",
+        "root_function": "output_root_function_983",
+        "repro_steps": "output_repro_steps_491"
+      },
+      "timestamp": "2026-10-04T00:36:01.328000+00:00",
+      "duration_ms": 1328,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "read_source_code_file",
+      "input": {
+        "target_file": "val_target_file_66",
+        "root_function": "val_root_function_15"
+      },
+      "output": {
+        "hallucinated_id": "FAKE_TOKEN_XYZ_9876",
+        "confidence": 0.99,
+        "verified": false
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_119",
+        "root_function": "output_root_function_983",
+        "repro_steps": "output_repro_steps_491"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_119",
+        "root_function": "output_root_function_983",
+        "repro_steps": "output_repro_steps_491",
+        "code_snippet": "output_code_snippet_329",
+        "imports": "output_imports_310"
+      },
+      "timestamp": "2026-10-04T00:36:01.734000+00:00",
+      "duration_ms": 867,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "generate_code_diff",
+      "input": {
+        "code_snippet": "val_code_snippet_33",
+        "issue_text": "val_issue_text_94"
+      },
+      "output": {
+        "patch_diff": "output_patch_diff_541",
+        "functions_modified": "output_functions_modified_645"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_119",
+        "root_function": "output_root_function_983",
+        "repro_steps": "output_repro_steps_491",
+        "code_snippet": "output_code_snippet_329",
+        "imports": "output_imports_310"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_119",
+        "root_function": "output_root_function_983",
+        "repro_steps": "output_repro_steps_491",
+        "code_snippet": "output_code_snippet_329",
+        "imports": "output_imports_310",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T00:36:02.568000+00:00",
+      "duration_ms": 856,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "run_unit_test_suite",
+      "input": {
+        "patch_diff": "val_patch_diff_94",
+        "target_file": "val_target_file_49"
+      },
+      "output": {
+        "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_119",
+        "root_function": "output_root_function_983",
+        "repro_steps": "output_repro_steps_491",
+        "code_snippet": "output_code_snippet_329",
+        "imports": "output_imports_310",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_119",
+        "root_function": "output_root_function_983",
+        "repro_steps": "output_repro_steps_491",
+        "code_snippet": "output_code_snippet_329",
+        "imports": "output_imports_310",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Hallucinated token does not exist in backend database; 401 Unauthorized"
+      },
+      "timestamp": "2026-10-04T00:36:00.748000+00:00",
+      "duration_ms": 187,
+      "status": "failed",
+      "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

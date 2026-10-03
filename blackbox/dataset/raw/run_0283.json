@@ -1,0 +1,173 @@
+{
+  "run_id": "run_0283",
+  "task_type": "email_assistant",
+  "agent_name": "email_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T12:54:00.120000+00:00",
+  "end_time": "2026-10-03T12:54:03.412000+00:00",
+  "total_steps": 4,
+  "failure_type": "wrong_order_of_operations",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Order of operations violation: action executed prior to authorization check",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_email_thread",
+      "input": {
+        "raw_email": "val_raw_email_78"
+      },
+      "output": {
+        "sender": "output_sender_433",
+        "subject": "output_subject_138",
+        "urgency": "output_urgency_571",
+        "required_action": "output_required_action_773"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_433",
+        "subject": "output_subject_138",
+        "urgency": "output_urgency_571",
+        "required_action": "output_required_action_773"
+      },
+      "timestamp": "2026-10-03T12:54:00.120000+00:00",
+      "duration_ms": 120,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "premature_search_related_correspondence",
+      "input": {
+        "sender": "val_sender_82",
+        "subject": "val_subject_75"
+      },
+      "output": {
+        "executed_unverified": true
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_433",
+        "subject": "output_subject_138",
+        "urgency": "output_urgency_571",
+        "required_action": "output_required_action_773"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_433",
+        "subject": "output_subject_138",
+        "urgency": "output_urgency_571",
+        "required_action": "output_required_action_773",
+        "previous_threads": "output_previous_threads_531",
+        "context_notes": "output_context_notes_373"
+      },
+      "timestamp": "2026-10-03T12:54:01.890000+00:00",
+      "duration_ms": 945,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "draft_email_response",
+      "input": {
+        "subject": "val_subject_99",
+        "context_notes": "val_context_notes_70",
+        "required_action": "val_required_action_85"
+      },
+      "output": {
+        "draft_body": "output_draft_body_122",
+        "recipients": "output_recipients_424"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_433",
+        "subject": "output_subject_138",
+        "urgency": "output_urgency_571",
+        "required_action": "output_required_action_773",
+        "previous_threads": "output_previous_threads_531",
+        "context_notes": "output_context_notes_373"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_433",
+        "subject": "output_subject_138",
+        "urgency": "output_urgency_571",
+        "required_action": "output_required_action_773",
+        "previous_threads": "output_previous_threads_531",
+        "context_notes": "output_context_notes_373",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T12:54:00.363000+00:00",
+      "duration_ms": 121,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_mailbox_label",
+      "input": {
+        "email_id": 334,
+        "folder": "val_folder_59"
+      },
+      "output": {
+        "error": "Order of operations violation: action executed prior to authorization check",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_433",
+        "subject": "output_subject_138",
+        "urgency": "output_urgency_571",
+        "required_action": "output_required_action_773",
+        "previous_threads": "output_previous_threads_531",
+        "context_notes": "output_context_notes_373",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_433",
+        "subject": "output_subject_138",
+        "urgency": "output_urgency_571",
+        "required_action": "output_required_action_773",
+        "previous_threads": "output_previous_threads_531",
+        "context_notes": "output_context_notes_373",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Order of operations violation: action executed prior to authorization check"
+      },
+      "timestamp": "2026-10-03T12:54:03.412000+00:00",
+      "duration_ms": 853,
+      "status": "failed",
+      "error": "Order of operations violation: action executed prior to authorization check",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

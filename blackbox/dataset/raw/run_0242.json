@@ -1,0 +1,202 @@
+{
+  "run_id": "run_0242",
+  "task_type": "calendar_scheduling",
+  "agent_name": "calendar_scheduling_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T23:42:00.281000+00:00",
+  "end_time": "2026-10-03T23:42:00.505000+00:00",
+  "total_steps": 5,
+  "failure_type": "wrong_order_of_operations",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Order of operations violation: action executed prior to authorization check",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_meeting_intent",
+      "input": {
+        "prompt": "Execute action parse_meeting_intent for calendar_scheduling workflow"
+      },
+      "output": {
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698"
+      },
+      "timestamp": "2026-10-03T23:42:00.281000+00:00",
+      "duration_ms": 281,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "premature_query_calendar_freebusy",
+      "input": {
+        "attendees": "val_attendees_69",
+        "time_window": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "executed_unverified": true
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698",
+        "common_free_slots": "output_common_free_slots_891"
+      },
+      "timestamp": "2026-10-03T23:42:01.762000+00:00",
+      "duration_ms": 881,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "select_optimal_slot",
+      "input": {
+        "common_free_slots": "val_common_free_slots_96",
+        "duration_mins": "val_duration_mins_85"
+      },
+      "output": {
+        "chosen_start": "output_chosen_start_888",
+        "chosen_end": "output_chosen_end_299"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698",
+        "common_free_slots": "output_common_free_slots_891"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698",
+        "common_free_slots": "output_common_free_slots_891",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T23:42:01.725000+00:00",
+      "duration_ms": 575,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "schedule_calendar_event",
+      "input": {
+        "attendees": "val_attendees_53",
+        "chosen_start": "val_chosen_start_96",
+        "chosen_end": "val_chosen_end_98",
+        "meeting_title": "val_meeting_title_33"
+      },
+      "output": {
+        "event_id": 6132,
+        "meeting_link": "output_meeting_link_660"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698",
+        "common_free_slots": "output_common_free_slots_891",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698",
+        "common_free_slots": "output_common_free_slots_891",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T23:42:04.576000+00:00",
+      "duration_ms": 1144,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "send_calendar_invitations",
+      "input": {
+        "event_id": 6132,
+        "attendees": "val_attendees_18"
+      },
+      "output": {
+        "error": "Order of operations violation: action executed prior to authorization check",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698",
+        "common_free_slots": "output_common_free_slots_891",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_361",
+        "duration_mins": "output_duration_mins_770",
+        "time_window": "output_time_window_698",
+        "common_free_slots": "output_common_free_slots_891",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Order of operations violation: action executed prior to authorization check"
+      },
+      "timestamp": "2026-10-03T23:42:00.505000+00:00",
+      "duration_ms": 101,
+      "status": "failed",
+      "error": "Order of operations violation: action executed prior to authorization check",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

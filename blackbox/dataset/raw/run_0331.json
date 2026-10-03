@@ -1,0 +1,205 @@
+{
+  "run_id": "run_0331",
+  "task_type": "document_processing",
+  "agent_name": "document_processing_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T15:17:01.315000+00:00",
+  "end_time": "2026-10-03T15:17:00.880000+00:00",
+  "total_steps": 4,
+  "failure_type": "invalid_tool_output_handling",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Agent failed to extract fields from tool output, causing NullReferenceError",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "classify_document_type",
+      "input": {
+        "file_bytes": "val_file_bytes_53"
+      },
+      "output": {
+        "doc_type": "output_doc_type_398",
+        "page_count": "output_page_count_477"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_398",
+        "page_count": "output_page_count_477"
+      },
+      "timestamp": "2026-10-03T15:17:01.315000+00:00",
+      "duration_ms": 1315,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "run_ocr_extraction",
+      "input": {
+        "file_bytes": "val_file_bytes_76",
+        "page_count": "val_page_count_85"
+      },
+      "output": {
+        "raw_text": "output_raw_text_773",
+        "bounding_boxes": "output_bounding_boxes_794"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_398",
+        "page_count": "output_page_count_477"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_398",
+        "page_count": "output_page_count_477",
+        "raw_text": "output_raw_text_773",
+        "bounding_boxes": "output_bounding_boxes_794"
+      },
+      "timestamp": "2026-10-03T15:17:00.192000+00:00",
+      "duration_ms": 96,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "extract_key_value_entities",
+      "input": {
+        "raw_text": "val_raw_text_17"
+      },
+      "output": {
+        "raw_output": "200 OK",
+        "parsed_as": null,
+        "extracted": {}
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_398",
+        "page_count": "output_page_count_477",
+        "raw_text": "output_raw_text_773",
+        "bounding_boxes": "output_bounding_boxes_794"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_398",
+        "page_count": "output_page_count_477",
+        "raw_text": "output_raw_text_773",
+        "bounding_boxes": "output_bounding_boxes_794",
+        "vendor_name": "output_vendor_name_343",
+        "invoice_date": "output_invoice_date_619",
+        "total_due": 992.06,
+        "line_items": [
+          {
+            "item_id": 7,
+            "score": 0.82
+          },
+          {
+            "item_id": 26,
+            "score": 0.98
+          },
+          {
+            "item_id": 82,
+            "score": 0.96
+          }
+        ]
+      },
+      "timestamp": "2026-10-03T15:17:01.128000+00:00",
+      "duration_ms": 376,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "validate_financial_totals",
+      "input": {
+        "line_items": "val_line_items_53",
+        "total_due": "val_total_due_34"
+      },
+      "output": {
+        "error": "Agent failed to extract fields from tool output, causing NullReferenceError",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_398",
+        "page_count": "output_page_count_477",
+        "raw_text": "output_raw_text_773",
+        "bounding_boxes": "output_bounding_boxes_794",
+        "vendor_name": "output_vendor_name_343",
+        "invoice_date": "output_invoice_date_619",
+        "total_due": 992.06,
+        "line_items": [
+          {
+            "item_id": 7,
+            "score": 0.82
+          },
+          {
+            "item_id": 26,
+            "score": 0.98
+          },
+          {
+            "item_id": 82,
+            "score": 0.96
+          }
+        ]
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_398",
+        "page_count": "output_page_count_477",
+        "raw_text": "output_raw_text_773",
+        "bounding_boxes": "output_bounding_boxes_794",
+        "vendor_name": "output_vendor_name_343",
+        "invoice_date": "output_invoice_date_619",
+        "total_due": 992.06,
+        "line_items": [
+          {
+            "item_id": 7,
+            "score": 0.82
+          },
+          {
+            "item_id": 26,
+            "score": 0.98
+          },
+          {
+            "item_id": 82,
+            "score": 0.96
+          }
+        ],
+        "execution_status": "failed",
+        "last_error": "Agent failed to extract fields from tool output, causing NullReferenceError"
+      },
+      "timestamp": "2026-10-03T15:17:00.880000+00:00",
+      "duration_ms": 220,
+      "status": "failed",
+      "error": "Agent failed to extract fields from tool output, causing NullReferenceError",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

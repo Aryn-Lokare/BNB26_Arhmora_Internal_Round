@@ -1,0 +1,311 @@
+{
+  "run_id": "run_0074",
+  "task_type": "ecommerce_order",
+  "agent_name": "ecommerce_order_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T17:58:00.330000+00:00",
+  "end_time": "2026-10-03T17:58:01.584000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_order_of_operations",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Order of operations violation: action executed prior to authorization check",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_order_payload",
+      "input": {
+        "checkout_payload": "val_checkout_payload_44"
+      },
+      "output": {
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397"
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397"
+      },
+      "timestamp": "2026-10-03T17:58:00.330000+00:00",
+      "duration_ms": 330,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "check_warehouse_stock",
+      "input": {
+        "item_list": "val_item_list_88"
+      },
+      "output": {
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354"
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397",
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354"
+      },
+      "timestamp": "2026-10-03T17:58:01.732000+00:00",
+      "duration_ms": 866,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "premature_reserve_inventory_units",
+      "input": {
+        "warehouse_id": 7850,
+        "item_list": "val_item_list_83"
+      },
+      "output": {
+        "executed_unverified": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397",
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397",
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354",
+        "reservation_id": 6123
+      },
+      "timestamp": "2026-10-03T17:58:01.221000+00:00",
+      "duration_ms": 407,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "create_shipping_label",
+      "input": {
+        "order_id": 8366,
+        "warehouse_id": 7850,
+        "shipping_speed": "val_shipping_speed_75"
+      },
+      "output": {
+        "tracking_number": "output_tracking_number_578",
+        "carrier": "output_carrier_610"
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397",
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354",
+        "reservation_id": 6123
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397",
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354",
+        "reservation_id": 6123,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T17:58:01.872000+00:00",
+      "duration_ms": 468,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "mark_order_dispatched",
+      "input": {
+        "order_id": 8366,
+        "tracking_number": "val_tracking_number_12"
+      },
+      "output": {
+        "order_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397",
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354",
+        "reservation_id": 6123,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397",
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354",
+        "reservation_id": 6123,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T17:58:03.555000+00:00",
+      "duration_ms": 711,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "send_dispatch_notification",
+      "input": {
+        "order_id": 8366,
+        "tracking_number": "val_tracking_number_74"
+      },
+      "output": {
+        "error": "Order of operations violation: action executed prior to authorization check",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397",
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354",
+        "reservation_id": 6123,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8366,
+        "item_list": [
+          {
+            "item_id": 19,
+            "score": 0.73
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_397",
+        "warehouse_id": 7850,
+        "stock_available": "output_stock_available_354",
+        "reservation_id": 6123,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Order of operations violation: action executed prior to authorization check"
+      },
+      "timestamp": "2026-10-03T17:58:01.584000+00:00",
+      "duration_ms": 264,
+      "status": "failed",
+      "error": "Order of operations violation: action executed prior to authorization check",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

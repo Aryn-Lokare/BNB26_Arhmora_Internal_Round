@@ -1,0 +1,175 @@
+{
+  "run_id": "run_0197",
+  "task_type": "payment_processing",
+  "agent_name": "payment_processing_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T17:25:00.744000+00:00",
+  "end_time": "2026-10-03T17:25:01.052000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_parameter",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Type error / out of bounds parameter encountered in downstream service call",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "verify_payment_parameters",
+      "input": {
+        "payment_request": "val_payment_request_11"
+      },
+      "output": {
+        "amount": 242.46,
+        "currency": "output_currency_382",
+        "customer_token": "output_customer_token_698",
+        "merchant_id": 2960
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 242.46,
+        "currency": "output_currency_382",
+        "customer_token": "output_customer_token_698",
+        "merchant_id": 2960
+      },
+      "timestamp": "2026-10-03T17:25:00.744000+00:00",
+      "duration_ms": 744,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "check_merchant_account_status",
+      "input": {
+        "merchant_id": 2960,
+        "rate_limit_ms": "infinite_string",
+        "pct": 9999
+      },
+      "output": {
+        "warning": "coerced_bad_type"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 242.46,
+        "currency": "output_currency_382",
+        "customer_token": "output_customer_token_698",
+        "merchant_id": 2960
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 242.46,
+        "currency": "output_currency_382",
+        "customer_token": "output_customer_token_698",
+        "merchant_id": 2960,
+        "merchant_active": "output_merchant_active_109",
+        "payout_schedule": "output_payout_schedule_143"
+      },
+      "timestamp": "2026-10-03T17:25:01.780000+00:00",
+      "duration_ms": 890,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "run_fraud_scoring",
+      "input": {
+        "customer_token": "val_customer_token_98",
+        "amount": 464.63,
+        "currency": "val_currency_86"
+      },
+      "output": {
+        "risk_score": "output_risk_score_258",
+        "fraud_verdict": "output_fraud_verdict_480"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 242.46,
+        "currency": "output_currency_382",
+        "customer_token": "output_customer_token_698",
+        "merchant_id": 2960,
+        "merchant_active": "output_merchant_active_109",
+        "payout_schedule": "output_payout_schedule_143"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 242.46,
+        "currency": "output_currency_382",
+        "customer_token": "output_customer_token_698",
+        "merchant_id": 2960,
+        "merchant_active": "output_merchant_active_109",
+        "payout_schedule": "output_payout_schedule_143",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T17:25:03.810000+00:00",
+      "duration_ms": 1270,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_card_charge",
+      "input": {
+        "customer_token": "val_customer_token_41",
+        "amount": 170.87,
+        "currency": "val_currency_21"
+      },
+      "output": {
+        "error": "Type error / out of bounds parameter encountered in downstream service call",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 242.46,
+        "currency": "output_currency_382",
+        "customer_token": "output_customer_token_698",
+        "merchant_id": 2960,
+        "merchant_active": "output_merchant_active_109",
+        "payout_schedule": "output_payout_schedule_143",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 242.46,
+        "currency": "output_currency_382",
+        "customer_token": "output_customer_token_698",
+        "merchant_id": 2960,
+        "merchant_active": "output_merchant_active_109",
+        "payout_schedule": "output_payout_schedule_143",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Type error / out of bounds parameter encountered in downstream service call"
+      },
+      "timestamp": "2026-10-03T17:25:01.052000+00:00",
+      "duration_ms": 263,
+      "status": "failed",
+      "error": "Type error / out of bounds parameter encountered in downstream service call",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

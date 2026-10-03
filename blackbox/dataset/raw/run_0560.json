@@ -1,0 +1,285 @@
+{
+  "run_id": "run_0560",
+  "task_type": "hr_assistant",
+  "agent_name": "hr_assistant_agent_v2",
+  "status": "success",
+  "start_time": "2026-10-03T17:03:00.138000+00:00",
+  "end_time": "2026-10-03T17:03:02.592000+00:00",
+  "total_steps": 6,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "confirmation_receipt": "output_confirmation_receipt_441"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_leave_application",
+      "input": {
+        "form_data": "val_form_data_68"
+      },
+      "output": {
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799"
+      },
+      "timestamp": "2026-10-03T17:03:00.138000+00:00",
+      "duration_ms": 138,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_pto_balance",
+      "input": {
+        "employee_id": 5153,
+        "leave_type": "val_leave_type_41"
+      },
+      "output": {
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799",
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902"
+      },
+      "timestamp": "2026-10-03T17:03:01.568000+00:00",
+      "duration_ms": 784,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_blackout_periods",
+      "input": {
+        "start_date": "2026-10-04T09:00:00Z",
+        "days_count": "val_days_count_51",
+        "dept_id": 9081
+      },
+      "output": {
+        "coverage_ok": "output_coverage_ok_815",
+        "blackout_conflict": "output_blackout_conflict_750"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799",
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799",
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902",
+        "coverage_ok": "output_coverage_ok_815",
+        "blackout_conflict": "output_blackout_conflict_750"
+      },
+      "timestamp": "2026-10-03T17:03:00.531000+00:00",
+      "duration_ms": 177,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "deduct_pto_balance",
+      "input": {
+        "employee_id": 5153,
+        "days_count": "val_days_count_36"
+      },
+      "output": {
+        "new_pto_balance": 692.25,
+        "approval_code": "output_approval_code_984"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799",
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902",
+        "coverage_ok": "output_coverage_ok_815",
+        "blackout_conflict": "output_blackout_conflict_750"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799",
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902",
+        "coverage_ok": "output_coverage_ok_815",
+        "blackout_conflict": "output_blackout_conflict_750",
+        "new_pto_balance": 692.25,
+        "approval_code": "output_approval_code_984"
+      },
+      "timestamp": "2026-10-03T17:03:02.472000+00:00",
+      "duration_ms": 618,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "calendar_sync_out_of_office",
+      "input": {
+        "employee_id": 5153,
+        "start_date": "2026-10-04T09:00:00Z",
+        "days_count": "val_days_count_61"
+      },
+      "output": {
+        "ooo_event_id": 6710
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799",
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902",
+        "coverage_ok": "output_coverage_ok_815",
+        "blackout_conflict": "output_blackout_conflict_750",
+        "new_pto_balance": 692.25,
+        "approval_code": "output_approval_code_984"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799",
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902",
+        "coverage_ok": "output_coverage_ok_815",
+        "blackout_conflict": "output_blackout_conflict_750",
+        "new_pto_balance": 692.25,
+        "approval_code": "output_approval_code_984",
+        "ooo_event_id": 6710
+      },
+      "timestamp": "2026-10-03T17:03:06+00:00",
+      "duration_ms": 1200,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "send_leave_confirmation",
+      "input": {
+        "employee_id": 5153,
+        "approval_code": "val_approval_code_21"
+      },
+      "output": {
+        "confirmation_receipt": "output_confirmation_receipt_441"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799",
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902",
+        "coverage_ok": "output_coverage_ok_815",
+        "blackout_conflict": "output_blackout_conflict_750",
+        "new_pto_balance": 692.25,
+        "approval_code": "output_approval_code_984",
+        "ooo_event_id": 6710
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 5153,
+        "leave_type": "output_leave_type_467",
+        "start_date": "output_start_date_938",
+        "days_count": "output_days_count_799",
+        "accrued_days": "output_accrued_days_383",
+        "used_days": "output_used_days_556",
+        "available_days": "output_available_days_902",
+        "coverage_ok": "output_coverage_ok_815",
+        "blackout_conflict": "output_blackout_conflict_750",
+        "new_pto_balance": 692.25,
+        "approval_code": "output_approval_code_984",
+        "ooo_event_id": 6710,
+        "confirmation_receipt": "output_confirmation_receipt_441"
+      },
+      "timestamp": "2026-10-03T17:03:02.592000+00:00",
+      "duration_ms": 432,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

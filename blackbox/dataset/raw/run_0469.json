@@ -1,0 +1,270 @@
+{
+  "run_id": "run_0469",
+  "task_type": "coding_assistant",
+  "agent_name": "coding_assistant_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T23:10:01.191000+00:00",
+  "end_time": "2026-10-03T23:10:05.880000+00:00",
+  "total_steps": 6,
+  "failure_type": "invalid_data_transformation",
+  "failure_step_id": "step_05",
+  "final_output": {
+    "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_issue_description",
+      "input": {
+        "issue_text": "val_issue_text_47",
+        "stacktrace": "val_stacktrace_53"
+      },
+      "output": {
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139"
+      },
+      "timestamp": "2026-10-03T23:10:01.191000+00:00",
+      "duration_ms": 1191,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "read_source_code_file",
+      "input": {
+        "target_file": "val_target_file_45",
+        "root_function": "val_root_function_56"
+      },
+      "output": {
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139",
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775"
+      },
+      "timestamp": "2026-10-03T23:10:02.680000+00:00",
+      "duration_ms": 1340,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "generate_code_diff",
+      "input": {
+        "code_snippet": "val_code_snippet_93",
+        "issue_text": "val_issue_text_87"
+      },
+      "output": {
+        "patch_diff": "output_patch_diff_112",
+        "functions_modified": "output_functions_modified_227"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139",
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139",
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775",
+        "patch_diff": "output_patch_diff_112",
+        "functions_modified": "output_functions_modified_227"
+      },
+      "timestamp": "2026-10-03T23:10:01.779000+00:00",
+      "duration_ms": 593,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "run_unit_test_suite",
+      "input": {
+        "patch_diff": "val_patch_diff_82",
+        "target_file": "val_target_file_94"
+      },
+      "output": {
+        "tests_passed": "output_tests_passed_428",
+        "coverage_pct": "output_coverage_pct_956"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139",
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775",
+        "patch_diff": "output_patch_diff_112",
+        "functions_modified": "output_functions_modified_227"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139",
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775",
+        "patch_diff": "output_patch_diff_112",
+        "functions_modified": "output_functions_modified_227",
+        "tests_passed": "output_tests_passed_428",
+        "coverage_pct": "output_coverage_pct_956"
+      },
+      "timestamp": "2026-10-03T23:10:02.832000+00:00",
+      "duration_ms": 708,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "create_git_pull_request",
+      "input": {
+        "patch_diff": "val_patch_diff_32",
+        "tests_passed": "val_tests_passed_66"
+      },
+      "output": {
+        "transformed_value": "NaN",
+        "source_value": 150.0,
+        "units": "mismatched_timezone_and_currency"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139",
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775",
+        "patch_diff": "output_patch_diff_112",
+        "functions_modified": "output_functions_modified_227",
+        "tests_passed": "output_tests_passed_428",
+        "coverage_pct": "output_coverage_pct_956"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139",
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775",
+        "patch_diff": "output_patch_diff_112",
+        "functions_modified": "output_functions_modified_227",
+        "tests_passed": "output_tests_passed_428",
+        "coverage_pct": "output_coverage_pct_956",
+        "pr_number": "output_pr_number_573",
+        "pr_url": "output_pr_url_117"
+      },
+      "timestamp": "2026-10-03T23:10:03.105000+00:00",
+      "duration_ms": 621,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "post_pr_summary",
+      "input": {
+        "pr_number": "val_pr_number_11",
+        "coverage_pct": "val_coverage_pct_69"
+      },
+      "output": {
+        "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139",
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775",
+        "patch_diff": "output_patch_diff_112",
+        "functions_modified": "output_functions_modified_227",
+        "tests_passed": "output_tests_passed_428",
+        "coverage_pct": "output_coverage_pct_956",
+        "pr_number": "output_pr_number_573",
+        "pr_url": "output_pr_url_117"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_684",
+        "root_function": "output_root_function_504",
+        "repro_steps": "output_repro_steps_139",
+        "code_snippet": "output_code_snippet_375",
+        "imports": "output_imports_775",
+        "patch_diff": "output_patch_diff_112",
+        "functions_modified": "output_functions_modified_227",
+        "tests_passed": "output_tests_passed_428",
+        "coverage_pct": "output_coverage_pct_956",
+        "pr_number": "output_pr_number_573",
+        "pr_url": "output_pr_url_117",
+        "execution_status": "failed",
+        "last_error": "Downstream validation failed: expected numeric float, received 'NaN'"
+      },
+      "timestamp": "2026-10-03T23:10:05.880000+00:00",
+      "duration_ms": 980,
+      "status": "failed",
+      "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

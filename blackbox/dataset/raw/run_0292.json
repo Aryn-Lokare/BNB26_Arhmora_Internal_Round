@@ -1,0 +1,272 @@
+{
+  "run_id": "run_0292",
+  "task_type": "email_assistant",
+  "agent_name": "email_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T23:01:00.186000+00:00",
+  "end_time": "2026-10-03T23:01:04.404000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_llm_decision",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_email_thread",
+      "input": {
+        "raw_email": "val_raw_email_92"
+      },
+      "output": {
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554"
+      },
+      "timestamp": "2026-10-03T23:01:00.186000+00:00",
+      "duration_ms": 186,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_related_correspondence",
+      "input": {
+        "sender": "val_sender_27",
+        "subject": "val_subject_10"
+      },
+      "output": {
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554",
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304"
+      },
+      "timestamp": "2026-10-03T23:01:02.784000+00:00",
+      "duration_ms": 1392,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "draft_email_response",
+      "input": {
+        "subject": "val_subject_49",
+        "context_notes": "val_context_notes_50",
+        "required_action": "val_required_action_83"
+      },
+      "output": {
+        "decision": "bypass_validation",
+        "reasoning": "Skipping prerequisite checks based on incorrect user assumption",
+        "route_to": "unsupported_path"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554",
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554",
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304",
+        "draft_body": "output_draft_body_184",
+        "recipients": "output_recipients_213"
+      },
+      "timestamp": "2026-10-03T23:01:04.098000+00:00",
+      "duration_ms": 1366,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_mailbox_label",
+      "input": {
+        "email_id": 2048,
+        "folder": "val_folder_76"
+      },
+      "output": {
+        "label_applied": "output_label_applied_830"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554",
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304",
+        "draft_body": "output_draft_body_184",
+        "recipients": "output_recipients_213"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554",
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304",
+        "draft_body": "output_draft_body_184",
+        "recipients": "output_recipients_213",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T23:01:01.612000+00:00",
+      "duration_ms": 403,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "queue_outbox_message",
+      "input": {
+        "draft_body": "val_draft_body_86",
+        "recipients": "val_recipients_97"
+      },
+      "output": {
+        "queue_id": 7722,
+        "scheduled_send": "output_scheduled_send_911"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554",
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304",
+        "draft_body": "output_draft_body_184",
+        "recipients": "output_recipients_213",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554",
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304",
+        "draft_body": "output_draft_body_184",
+        "recipients": "output_recipients_213",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T23:01:01.730000+00:00",
+      "duration_ms": 346,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "summarize_email_action",
+      "input": {
+        "queue_id": 7722
+      },
+      "output": {
+        "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554",
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304",
+        "draft_body": "output_draft_body_184",
+        "recipients": "output_recipients_213",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_756",
+        "subject": "output_subject_288",
+        "urgency": "output_urgency_745",
+        "required_action": "output_required_action_554",
+        "previous_threads": "output_previous_threads_510",
+        "context_notes": "output_context_notes_304",
+        "draft_body": "output_draft_body_184",
+        "recipients": "output_recipients_213",
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "LLM made incorrect branch decision; prerequisite state missing downstream"
+      },
+      "timestamp": "2026-10-03T23:01:04.404000+00:00",
+      "duration_ms": 734,
+      "status": "failed",
+      "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

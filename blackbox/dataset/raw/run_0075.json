@@ -1,0 +1,157 @@
+{
+  "run_id": "run_0075",
+  "task_type": "ecommerce_order",
+  "agent_name": "ecommerce_order_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T14:49:01.093000+00:00",
+  "end_time": "2026-10-03T14:49:03.620000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_condition",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_promo_code",
+      "input": {
+        "user_input": "val_user_input_86"
+      },
+      "output": {
+        "coupon_code": "output_coupon_code_963",
+        "cart_id": 8710
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_963",
+        "cart_id": 8710
+      },
+      "timestamp": "2026-10-03T14:49:01.093000+00:00",
+      "duration_ms": 1093,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_cart_subtotal",
+      "input": {
+        "cart_id": 8710
+      },
+      "output": {
+        "evaluated_condition": false,
+        "inverted": true,
+        "branch_taken": "fallback_abort"
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_963",
+        "cart_id": 8710
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_963",
+        "cart_id": 8710,
+        "subtotal": 59.4,
+        "eligible_categories": true
+      },
+      "timestamp": "2026-10-03T14:49:01.330000+00:00",
+      "duration_ms": 665,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_coupon_rules",
+      "input": {
+        "coupon_code": "val_coupon_code_65",
+        "subtotal": "val_subtotal_27"
+      },
+      "output": {
+        "discount_pct": "output_discount_pct_370",
+        "valid": 6992
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_963",
+        "cart_id": 8710,
+        "subtotal": 59.4,
+        "eligible_categories": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_963",
+        "cart_id": 8710,
+        "subtotal": 59.4,
+        "eligible_categories": true,
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T14:49:00.900000+00:00",
+      "duration_ms": 300,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_discount_to_cart",
+      "input": {
+        "cart_id": 8710,
+        "discount_pct": "val_discount_pct_15"
+      },
+      "output": {
+        "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_963",
+        "cart_id": 8710,
+        "subtotal": 59.4,
+        "eligible_categories": true,
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_963",
+        "cart_id": 8710,
+        "subtotal": 59.4,
+        "eligible_categories": true,
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Inverted condition caused agent to branch into unrecoverable failure state"
+      },
+      "timestamp": "2026-10-03T14:49:03.620000+00:00",
+      "duration_ms": 905,
+      "status": "failed",
+      "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

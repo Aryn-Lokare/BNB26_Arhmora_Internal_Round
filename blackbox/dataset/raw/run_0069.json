@@ -1,0 +1,202 @@
+{
+  "run_id": "run_0069",
+  "task_type": "ecommerce_order",
+  "agent_name": "ecommerce_order_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T14:16:00.312000+00:00",
+  "end_time": "2026-10-03T14:16:05.425000+00:00",
+  "total_steps": 5,
+  "failure_type": "stale_state",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Downstream action attempted using stale version/cache token",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_promo_code",
+      "input": {
+        "user_input": "val_user_input_13"
+      },
+      "output": {
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048
+      },
+      "timestamp": "2026-10-03T14:16:00.312000+00:00",
+      "duration_ms": 312,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_cart_subtotal",
+      "input": {
+        "cart_id": 4048
+      },
+      "output": {
+        "subtotal": 495.04,
+        "eligible_categories": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048,
+        "subtotal": 495.04,
+        "eligible_categories": true
+      },
+      "timestamp": "2026-10-03T14:16:02.204000+00:00",
+      "duration_ms": 1102,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_coupon_rules",
+      "input": {
+        "coupon_code": "val_coupon_code_25",
+        "subtotal": "val_subtotal_43"
+      },
+      "output": {
+        "balance": 0.0,
+        "version": "v1_deprecated_cache",
+        "is_stale": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048,
+        "subtotal": 495.04,
+        "eligible_categories": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048,
+        "subtotal": 495.04,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_893",
+        "valid": 5264
+      },
+      "timestamp": "2026-10-03T14:16:03.690000+00:00",
+      "duration_ms": 1230,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_discount_to_cart",
+      "input": {
+        "cart_id": 4048,
+        "discount_pct": "val_discount_pct_88"
+      },
+      "output": {
+        "new_total": 378.41
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048,
+        "subtotal": 495.04,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_893",
+        "valid": 5264
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048,
+        "subtotal": 495.04,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_893",
+        "valid": 5264,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T14:16:03.972000+00:00",
+      "duration_ms": 993,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "format_cart_summary",
+      "input": {
+        "cart_id": 4048,
+        "new_total": "val_new_total_25"
+      },
+      "output": {
+        "error": "Downstream action attempted using stale version/cache token",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048,
+        "subtotal": 495.04,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_893",
+        "valid": 5264,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_853",
+        "cart_id": 4048,
+        "subtotal": 495.04,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_893",
+        "valid": 5264,
+        "step_4_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream action attempted using stale version/cache token"
+      },
+      "timestamp": "2026-10-03T14:16:05.425000+00:00",
+      "duration_ms": 1085,
+      "status": "failed",
+      "error": "Downstream action attempted using stale version/cache token",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

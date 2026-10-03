@@ -1,0 +1,266 @@
+{
+  "run_id": "run_0449",
+  "task_type": "coding_assistant",
+  "agent_name": "coding_assistant_agent_v3",
+  "status": "success",
+  "start_time": "2026-10-03T14:56:00.212000+00:00",
+  "end_time": "2026-10-03T14:56:02.382000+00:00",
+  "total_steps": 6,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "review_comment": "output_review_comment_246"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_issue_description",
+      "input": {
+        "issue_text": "val_issue_text_47",
+        "stacktrace": "val_stacktrace_11"
+      },
+      "output": {
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322"
+      },
+      "timestamp": "2026-10-03T14:56:00.212000+00:00",
+      "duration_ms": 212,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "read_source_code_file",
+      "input": {
+        "target_file": "val_target_file_85",
+        "root_function": "val_root_function_25"
+      },
+      "output": {
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322",
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600"
+      },
+      "timestamp": "2026-10-03T14:56:01.318000+00:00",
+      "duration_ms": 659,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "generate_code_diff",
+      "input": {
+        "code_snippet": "val_code_snippet_10",
+        "issue_text": "val_issue_text_65"
+      },
+      "output": {
+        "patch_diff": "output_patch_diff_460",
+        "functions_modified": "output_functions_modified_776"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322",
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322",
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600",
+        "patch_diff": "output_patch_diff_460",
+        "functions_modified": "output_functions_modified_776"
+      },
+      "timestamp": "2026-10-03T14:56:02.118000+00:00",
+      "duration_ms": 706,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "run_unit_test_suite",
+      "input": {
+        "patch_diff": "val_patch_diff_16",
+        "target_file": "val_target_file_42"
+      },
+      "output": {
+        "tests_passed": "output_tests_passed_241",
+        "coverage_pct": "output_coverage_pct_458"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322",
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600",
+        "patch_diff": "output_patch_diff_460",
+        "functions_modified": "output_functions_modified_776"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322",
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600",
+        "patch_diff": "output_patch_diff_460",
+        "functions_modified": "output_functions_modified_776",
+        "tests_passed": "output_tests_passed_241",
+        "coverage_pct": "output_coverage_pct_458"
+      },
+      "timestamp": "2026-10-03T14:56:00.324000+00:00",
+      "duration_ms": 81,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "create_git_pull_request",
+      "input": {
+        "patch_diff": "val_patch_diff_74",
+        "tests_passed": "val_tests_passed_95"
+      },
+      "output": {
+        "pr_number": "output_pr_number_887",
+        "pr_url": "output_pr_url_674"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322",
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600",
+        "patch_diff": "output_patch_diff_460",
+        "functions_modified": "output_functions_modified_776",
+        "tests_passed": "output_tests_passed_241",
+        "coverage_pct": "output_coverage_pct_458"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322",
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600",
+        "patch_diff": "output_patch_diff_460",
+        "functions_modified": "output_functions_modified_776",
+        "tests_passed": "output_tests_passed_241",
+        "coverage_pct": "output_coverage_pct_458",
+        "pr_number": "output_pr_number_887",
+        "pr_url": "output_pr_url_674"
+      },
+      "timestamp": "2026-10-03T14:56:03.300000+00:00",
+      "duration_ms": 660,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "post_pr_summary",
+      "input": {
+        "pr_number": "val_pr_number_21",
+        "coverage_pct": "val_coverage_pct_44"
+      },
+      "output": {
+        "review_comment": "output_review_comment_246"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322",
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600",
+        "patch_diff": "output_patch_diff_460",
+        "functions_modified": "output_functions_modified_776",
+        "tests_passed": "output_tests_passed_241",
+        "coverage_pct": "output_coverage_pct_458",
+        "pr_number": "output_pr_number_887",
+        "pr_url": "output_pr_url_674"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_564",
+        "root_function": "output_root_function_141",
+        "repro_steps": "output_repro_steps_322",
+        "code_snippet": "output_code_snippet_154",
+        "imports": "output_imports_600",
+        "patch_diff": "output_patch_diff_460",
+        "functions_modified": "output_functions_modified_776",
+        "tests_passed": "output_tests_passed_241",
+        "coverage_pct": "output_coverage_pct_458",
+        "pr_number": "output_pr_number_887",
+        "pr_url": "output_pr_url_674",
+        "review_comment": "output_review_comment_246"
+      },
+      "timestamp": "2026-10-03T14:56:02.382000+00:00",
+      "duration_ms": 397,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

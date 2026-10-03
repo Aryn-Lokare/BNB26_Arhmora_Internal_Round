@@ -1,0 +1,265 @@
+{
+  "run_id": "run_0464",
+  "task_type": "coding_assistant",
+  "agent_name": "coding_assistant_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T19:23:00.362000+00:00",
+  "end_time": "2026-10-03T19:23:02.034000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_order_of_operations",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Order of operations violation: action executed prior to authorization check",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_issue_description",
+      "input": {
+        "issue_text": "val_issue_text_24",
+        "stacktrace": "val_stacktrace_66"
+      },
+      "output": {
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476"
+      },
+      "timestamp": "2026-10-03T19:23:00.362000+00:00",
+      "duration_ms": 362,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "read_source_code_file",
+      "input": {
+        "target_file": "val_target_file_34",
+        "root_function": "val_root_function_53"
+      },
+      "output": {
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476",
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159"
+      },
+      "timestamp": "2026-10-03T19:23:01.600000+00:00",
+      "duration_ms": 800,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "generate_code_diff",
+      "input": {
+        "code_snippet": "val_code_snippet_39",
+        "issue_text": "val_issue_text_21"
+      },
+      "output": {
+        "patch_diff": "output_patch_diff_702",
+        "functions_modified": "output_functions_modified_110"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476",
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476",
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159",
+        "patch_diff": "output_patch_diff_702",
+        "functions_modified": "output_functions_modified_110"
+      },
+      "timestamp": "2026-10-03T19:23:01.701000+00:00",
+      "duration_ms": 567,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "premature_run_unit_test_suite",
+      "input": {
+        "patch_diff": "val_patch_diff_62",
+        "target_file": "val_target_file_78"
+      },
+      "output": {
+        "executed_unverified": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476",
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159",
+        "patch_diff": "output_patch_diff_702",
+        "functions_modified": "output_functions_modified_110"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476",
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159",
+        "patch_diff": "output_patch_diff_702",
+        "functions_modified": "output_functions_modified_110",
+        "tests_passed": "output_tests_passed_681",
+        "coverage_pct": "output_coverage_pct_146"
+      },
+      "timestamp": "2026-10-03T19:23:02.180000+00:00",
+      "duration_ms": 545,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "create_git_pull_request",
+      "input": {
+        "patch_diff": "val_patch_diff_41",
+        "tests_passed": "val_tests_passed_17"
+      },
+      "output": {
+        "pr_number": "output_pr_number_178",
+        "pr_url": "output_pr_url_158"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476",
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159",
+        "patch_diff": "output_patch_diff_702",
+        "functions_modified": "output_functions_modified_110",
+        "tests_passed": "output_tests_passed_681",
+        "coverage_pct": "output_coverage_pct_146"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476",
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159",
+        "patch_diff": "output_patch_diff_702",
+        "functions_modified": "output_functions_modified_110",
+        "tests_passed": "output_tests_passed_681",
+        "coverage_pct": "output_coverage_pct_146",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T19:23:00.550000+00:00",
+      "duration_ms": 110,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "post_pr_summary",
+      "input": {
+        "pr_number": "val_pr_number_66",
+        "coverage_pct": "val_coverage_pct_33"
+      },
+      "output": {
+        "error": "Order of operations violation: action executed prior to authorization check",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476",
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159",
+        "patch_diff": "output_patch_diff_702",
+        "functions_modified": "output_functions_modified_110",
+        "tests_passed": "output_tests_passed_681",
+        "coverage_pct": "output_coverage_pct_146",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_220",
+        "root_function": "output_root_function_730",
+        "repro_steps": "output_repro_steps_476",
+        "code_snippet": "output_code_snippet_547",
+        "imports": "output_imports_159",
+        "patch_diff": "output_patch_diff_702",
+        "functions_modified": "output_functions_modified_110",
+        "tests_passed": "output_tests_passed_681",
+        "coverage_pct": "output_coverage_pct_146",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Order of operations violation: action executed prior to authorization check"
+      },
+      "timestamp": "2026-10-03T19:23:02.034000+00:00",
+      "duration_ms": 339,
+      "status": "failed",
+      "error": "Order of operations violation: action executed prior to authorization check",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

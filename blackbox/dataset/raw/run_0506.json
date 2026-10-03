@@ -1,0 +1,269 @@
+{
+  "run_id": "run_0506",
+  "task_type": "it_support",
+  "agent_name": "it_support_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T20:00:00.869000+00:00",
+  "end_time": "2026-10-03T20:00:03.684000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_condition",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "evaluate_access_request",
+      "input": {
+        "ticket_text": "val_ticket_text_29"
+      },
+      "output": {
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315"
+      },
+      "timestamp": "2026-10-03T20:00:00.869000+00:00",
+      "duration_ms": 869,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_ldap_directory",
+      "input": {
+        "username": "val_username_54"
+      },
+      "output": {
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315",
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930"
+      },
+      "timestamp": "2026-10-03T20:00:01.936000+00:00",
+      "duration_ms": 968,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_security_policy",
+      "input": {
+        "requested_group": "val_requested_group_36",
+        "security_clearance": "val_security_clearance_53"
+      },
+      "output": {
+        "evaluated_condition": false,
+        "inverted": true,
+        "branch_taken": "fallback_abort"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315",
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315",
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930",
+        "policy_satisfied": "output_policy_satisfied_816",
+        "mfa_enabled": "output_mfa_enabled_615"
+      },
+      "timestamp": "2026-10-03T20:00:02.013000+00:00",
+      "duration_ms": 671,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "assign_vpn_profile",
+      "input": {
+        "username": "val_username_44",
+        "requested_group": "val_requested_group_21"
+      },
+      "output": {
+        "cert_serial": "output_cert_serial_625",
+        "provision_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315",
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930",
+        "policy_satisfied": "output_policy_satisfied_816",
+        "mfa_enabled": "output_mfa_enabled_615"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315",
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930",
+        "policy_satisfied": "output_policy_satisfied_816",
+        "mfa_enabled": "output_mfa_enabled_615",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T20:00:04.836000+00:00",
+      "duration_ms": 1209,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "audit_log_access_grant",
+      "input": {
+        "username": "val_username_43",
+        "cert_serial": "val_cert_serial_37"
+      },
+      "output": {
+        "audit_id": 8662
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315",
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930",
+        "policy_satisfied": "output_policy_satisfied_816",
+        "mfa_enabled": "output_mfa_enabled_615",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315",
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930",
+        "policy_satisfied": "output_policy_satisfied_816",
+        "mfa_enabled": "output_mfa_enabled_615",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T20:00:02.555000+00:00",
+      "duration_ms": 511,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "notify_user_credentials",
+      "input": {
+        "username": "val_username_14",
+        "provision_status": "val_provision_status_24"
+      },
+      "output": {
+        "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315",
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930",
+        "policy_satisfied": "output_policy_satisfied_816",
+        "mfa_enabled": "output_mfa_enabled_615",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_650",
+        "requested_group": "output_requested_group_682",
+        "manager_approved": "output_manager_approved_315",
+        "employee_status": "success",
+        "dept": "output_dept_761",
+        "security_clearance": "output_security_clearance_930",
+        "policy_satisfied": "output_policy_satisfied_816",
+        "mfa_enabled": "output_mfa_enabled_615",
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Inverted condition caused agent to branch into unrecoverable failure state"
+      },
+      "timestamp": "2026-10-03T20:00:03.684000+00:00",
+      "duration_ms": 614,
+      "status": "failed",
+      "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

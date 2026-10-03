@@ -1,0 +1,254 @@
+{
+  "run_id": "run_0341",
+  "task_type": "document_processing",
+  "agent_name": "document_processing_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T11:11:00.876000+00:00",
+  "end_time": "2026-10-03T11:11:06.132000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_database_operation",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "classify_document_type",
+      "input": {
+        "file_bytes": "val_file_bytes_36"
+      },
+      "output": {
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991"
+      },
+      "timestamp": "2026-10-03T11:11:00.876000+00:00",
+      "duration_ms": 876,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "run_ocr_extraction",
+      "input": {
+        "file_bytes": "val_file_bytes_49",
+        "page_count": "val_page_count_65"
+      },
+      "output": {
+        "sql": "SELECT * FROM records WHERE 1=0",
+        "rows_returned": 0,
+        "query_cost": 0.01
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991",
+        "raw_text": "output_raw_text_937",
+        "bounding_boxes": "output_bounding_boxes_826"
+      },
+      "timestamp": "2026-10-03T11:11:01.002000+00:00",
+      "duration_ms": 501,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "extract_key_value_entities",
+      "input": {
+        "raw_text": "val_raw_text_30"
+      },
+      "output": {
+        "vendor_name": "output_vendor_name_718",
+        "invoice_date": "output_invoice_date_688",
+        "total_due": 1130.03,
+        "line_items": [
+          {
+            "item_id": 26,
+            "score": 0.85
+          },
+          {
+            "item_id": 88,
+            "score": 0.83
+          },
+          {
+            "item_id": 26,
+            "score": 0.7
+          }
+        ]
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991",
+        "raw_text": "output_raw_text_937",
+        "bounding_boxes": "output_bounding_boxes_826"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991",
+        "raw_text": "output_raw_text_937",
+        "bounding_boxes": "output_bounding_boxes_826",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T11:11:03.156000+00:00",
+      "duration_ms": 1052,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "validate_financial_totals",
+      "input": {
+        "line_items": "val_line_items_67",
+        "total_due": "val_total_due_18"
+      },
+      "output": {
+        "math_valid": 7541,
+        "discrepancy": "output_discrepancy_719"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991",
+        "raw_text": "output_raw_text_937",
+        "bounding_boxes": "output_bounding_boxes_826",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991",
+        "raw_text": "output_raw_text_937",
+        "bounding_boxes": "output_bounding_boxes_826",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T11:11:01.488000+00:00",
+      "duration_ms": 372,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "save_structured_doc_record",
+      "input": {
+        "vendor_name": "val_vendor_name_77",
+        "total_due": "val_total_due_52"
+      },
+      "output": {
+        "doc_id": 9043
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991",
+        "raw_text": "output_raw_text_937",
+        "bounding_boxes": "output_bounding_boxes_826",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991",
+        "raw_text": "output_raw_text_937",
+        "bounding_boxes": "output_bounding_boxes_826",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T11:11:02.925000+00:00",
+      "duration_ms": 585,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "emit_doc_summary",
+      "input": {
+        "doc_id": 9043
+      },
+      "output": {
+        "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991",
+        "raw_text": "output_raw_text_937",
+        "bounding_boxes": "output_bounding_boxes_826",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_233",
+        "page_count": "output_page_count_991",
+        "raw_text": "output_raw_text_937",
+        "bounding_boxes": "output_bounding_boxes_826",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero"
+      },
+      "timestamp": "2026-10-03T11:11:06.132000+00:00",
+      "duration_ms": 1022,
+      "status": "failed",
+      "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

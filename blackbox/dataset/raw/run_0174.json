@@ -1,0 +1,275 @@
+{
+  "run_id": "run_0174",
+  "task_type": "payment_processing",
+  "agent_name": "payment_processing_agent_v3",
+  "status": "success",
+  "start_time": "2026-10-03T17:54:00.992000+00:00",
+  "end_time": "2026-10-03T17:54:03.090000+00:00",
+  "total_steps": 6,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "receipt_text": "output_receipt_text_656"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "verify_payment_parameters",
+      "input": {
+        "payment_request": "val_payment_request_55"
+      },
+      "output": {
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783
+      },
+      "timestamp": "2026-10-03T17:54:00.992000+00:00",
+      "duration_ms": 992,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "check_merchant_account_status",
+      "input": {
+        "merchant_id": 2783
+      },
+      "output": {
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783,
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961"
+      },
+      "timestamp": "2026-10-03T17:54:00.878000+00:00",
+      "duration_ms": 439,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "run_fraud_scoring",
+      "input": {
+        "customer_token": "val_customer_token_27",
+        "amount": 849.45,
+        "currency": "val_currency_35"
+      },
+      "output": {
+        "risk_score": "output_risk_score_369",
+        "fraud_verdict": "output_fraud_verdict_851"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783,
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783,
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961",
+        "risk_score": "output_risk_score_369",
+        "fraud_verdict": "output_fraud_verdict_851"
+      },
+      "timestamp": "2026-10-03T17:54:01.962000+00:00",
+      "duration_ms": 654,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_card_charge",
+      "input": {
+        "customer_token": "val_customer_token_19",
+        "amount": 697.87,
+        "currency": "val_currency_12"
+      },
+      "output": {
+        "auth_code": "output_auth_code_969",
+        "charge_id": 9309
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783,
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961",
+        "risk_score": "output_risk_score_369",
+        "fraud_verdict": "output_fraud_verdict_851"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783,
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961",
+        "risk_score": "output_risk_score_369",
+        "fraud_verdict": "output_fraud_verdict_851",
+        "auth_code": "output_auth_code_969",
+        "charge_id": 9309
+      },
+      "timestamp": "2026-10-03T17:54:05.452000+00:00",
+      "duration_ms": 1363,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "record_ledger_entry",
+      "input": {
+        "charge_id": 9309,
+        "merchant_id": 2783,
+        "amount": 560.48
+      },
+      "output": {
+        "ledger_balance": 934.58
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783,
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961",
+        "risk_score": "output_risk_score_369",
+        "fraud_verdict": "output_fraud_verdict_851",
+        "auth_code": "output_auth_code_969",
+        "charge_id": 9309
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783,
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961",
+        "risk_score": "output_risk_score_369",
+        "fraud_verdict": "output_fraud_verdict_851",
+        "auth_code": "output_auth_code_969",
+        "charge_id": 9309,
+        "ledger_balance": 934.58
+      },
+      "timestamp": "2026-10-03T17:54:06.865000+00:00",
+      "duration_ms": 1373,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "compose_receipt",
+      "input": {
+        "charge_id": 9309,
+        "amount": 535.22
+      },
+      "output": {
+        "receipt_text": "output_receipt_text_656"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783,
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961",
+        "risk_score": "output_risk_score_369",
+        "fraud_verdict": "output_fraud_verdict_851",
+        "auth_code": "output_auth_code_969",
+        "charge_id": 9309,
+        "ledger_balance": 934.58
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 940.98,
+        "currency": "output_currency_598",
+        "customer_token": "output_customer_token_664",
+        "merchant_id": 2783,
+        "merchant_active": "output_merchant_active_183",
+        "payout_schedule": "output_payout_schedule_961",
+        "risk_score": "output_risk_score_369",
+        "fraud_verdict": "output_fraud_verdict_851",
+        "auth_code": "output_auth_code_969",
+        "charge_id": 9309,
+        "ledger_balance": 934.58,
+        "receipt_text": "output_receipt_text_656"
+      },
+      "timestamp": "2026-10-03T17:54:03.090000+00:00",
+      "duration_ms": 515,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

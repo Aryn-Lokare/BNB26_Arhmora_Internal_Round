@@ -1,0 +1,253 @@
+{
+  "run_id": "run_0342",
+  "task_type": "document_processing",
+  "agent_name": "document_processing_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-04T01:03:01.014000+00:00",
+  "end_time": "2026-10-04T01:03:03.144000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_tool_argument",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Invalid tool argument caused downstream processing error: entity not found",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "classify_document_type",
+      "input": {
+        "file_bytes": "val_file_bytes_54"
+      },
+      "output": {
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962"
+      },
+      "timestamp": "2026-10-04T01:03:01.014000+00:00",
+      "duration_ms": 1014,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "run_ocr_extraction",
+      "input": {
+        "file_bytes": "val_file_bytes_60",
+        "page_count": "INVALID_PAGE_COUNT_9999"
+      },
+      "output": {
+        "status": "accepted_with_bad_arg",
+        "warning": "Unchecked parameter format"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962",
+        "raw_text": "output_raw_text_943",
+        "bounding_boxes": "output_bounding_boxes_929"
+      },
+      "timestamp": "2026-10-04T01:03:01.378000+00:00",
+      "duration_ms": 689,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "extract_key_value_entities",
+      "input": {
+        "raw_text": "val_raw_text_63"
+      },
+      "output": {
+        "vendor_name": "output_vendor_name_355",
+        "invoice_date": "output_invoice_date_283",
+        "total_due": 1084.96,
+        "line_items": [
+          {
+            "item_id": 56,
+            "score": 0.83
+          },
+          {
+            "item_id": 85,
+            "score": 0.75
+          },
+          {
+            "item_id": 73,
+            "score": 0.73
+          }
+        ]
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962",
+        "raw_text": "output_raw_text_943",
+        "bounding_boxes": "output_bounding_boxes_929"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962",
+        "raw_text": "output_raw_text_943",
+        "bounding_boxes": "output_bounding_boxes_929",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T01:03:01.314000+00:00",
+      "duration_ms": 438,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "validate_financial_totals",
+      "input": {
+        "line_items": "val_line_items_40",
+        "total_due": "val_total_due_30"
+      },
+      "output": {
+        "math_valid": 5485,
+        "discrepancy": "output_discrepancy_743"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962",
+        "raw_text": "output_raw_text_943",
+        "bounding_boxes": "output_bounding_boxes_929",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962",
+        "raw_text": "output_raw_text_943",
+        "bounding_boxes": "output_bounding_boxes_929",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-04T01:03:00.676000+00:00",
+      "duration_ms": 169,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "save_structured_doc_record",
+      "input": {
+        "vendor_name": "val_vendor_name_47",
+        "total_due": "val_total_due_95"
+      },
+      "output": {
+        "doc_id": 2093
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962",
+        "raw_text": "output_raw_text_943",
+        "bounding_boxes": "output_bounding_boxes_929",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962",
+        "raw_text": "output_raw_text_943",
+        "bounding_boxes": "output_bounding_boxes_929",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-04T01:03:05.905000+00:00",
+      "duration_ms": 1181,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "emit_doc_summary",
+      "input": {
+        "doc_id": 2093
+      },
+      "output": {
+        "error": "Invalid tool argument caused downstream processing error: entity not found",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962",
+        "raw_text": "output_raw_text_943",
+        "bounding_boxes": "output_bounding_boxes_929",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_817",
+        "page_count": "output_page_count_962",
+        "raw_text": "output_raw_text_943",
+        "bounding_boxes": "output_bounding_boxes_929",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Invalid tool argument caused downstream processing error: entity not found"
+      },
+      "timestamp": "2026-10-04T01:03:03.144000+00:00",
+      "duration_ms": 524,
+      "status": "failed",
+      "error": "Invalid tool argument caused downstream processing error: entity not found",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}
