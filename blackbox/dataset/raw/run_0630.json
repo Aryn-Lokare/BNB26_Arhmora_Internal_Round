@@ -1,0 +1,266 @@
+{
+  "run_id": "run_0630",
+  "task_type": "research_assistant",
+  "agent_name": "research_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T19:22:01.176000+00:00",
+  "end_time": "2026-10-03T19:22:03.312000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_retrieval",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_search_keywords",
+      "input": {
+        "research_query": "Execute action formulate_search_keywords for research_assistant workflow"
+      },
+      "output": {
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902"
+      },
+      "timestamp": "2026-10-03T19:22:01.176000+00:00",
+      "duration_ms": 1176,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_academic_index",
+      "input": {
+        "keywords": "val_keywords_97",
+        "min_year": "val_min_year_64"
+      },
+      "output": {
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902",
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140"
+      },
+      "timestamp": "2026-10-03T19:22:00.552000+00:00",
+      "duration_ms": 276,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "fetch_paper_abstracts",
+      "input": {
+        "paper_ids": 4356
+      },
+      "output": {
+        "abstract_texts": "output_abstract_texts_110",
+        "author_institutions": "output_author_institutions_214"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902",
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902",
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140",
+        "abstract_texts": "output_abstract_texts_110",
+        "author_institutions": "output_author_institutions_214"
+      },
+      "timestamp": "2026-10-03T19:22:03.720000+00:00",
+      "duration_ms": 1240,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "extract_methodology_findings",
+      "input": {
+        "abstract_texts": "val_abstract_texts_89"
+      },
+      "output": {
+        "retrieved_records": [
+          {
+            "id": "MISMATCH_999",
+            "score": 0.12,
+            "content": "Unrelated topic"
+          }
+        ],
+        "top_match": "MISMATCH_999"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902",
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140",
+        "abstract_texts": "output_abstract_texts_110",
+        "author_institutions": "output_author_institutions_214"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902",
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140",
+        "abstract_texts": "output_abstract_texts_110",
+        "author_institutions": "output_author_institutions_214",
+        "benchmark_results": "output_benchmark_results_836",
+        "comparative_table": "output_comparative_table_383"
+      },
+      "timestamp": "2026-10-03T19:22:03.084000+00:00",
+      "duration_ms": 771,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "store_annotated_bibliography",
+      "input": {
+        "comparative_table": "val_comparative_table_65"
+      },
+      "output": {
+        "bibliography_id": 4943
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902",
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140",
+        "abstract_texts": "output_abstract_texts_110",
+        "author_institutions": "output_author_institutions_214",
+        "benchmark_results": "output_benchmark_results_836",
+        "comparative_table": "output_comparative_table_383"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902",
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140",
+        "abstract_texts": "output_abstract_texts_110",
+        "author_institutions": "output_author_institutions_214",
+        "benchmark_results": "output_benchmark_results_836",
+        "comparative_table": "output_comparative_table_383",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T19:22:03.310000+00:00",
+      "duration_ms": 662,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "draft_literature_review",
+      "input": {
+        "comparative_table": "val_comparative_table_38"
+      },
+      "output": {
+        "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902",
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140",
+        "abstract_texts": "output_abstract_texts_110",
+        "author_institutions": "output_author_institutions_214",
+        "benchmark_results": "output_benchmark_results_836",
+        "comparative_table": "output_comparative_table_383",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_374",
+        "inclusion_criteria": "output_inclusion_criteria_230",
+        "min_year": "output_min_year_902",
+        "paper_ids": 4356,
+        "citation_counts": "output_citation_counts_140",
+        "abstract_texts": "output_abstract_texts_110",
+        "author_institutions": "output_author_institutions_214",
+        "benchmark_results": "output_benchmark_results_836",
+        "comparative_table": "output_comparative_table_383",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Retrieved entity mismatch: downstream operations applied to wrong entity"
+      },
+      "timestamp": "2026-10-03T19:22:03.312000+00:00",
+      "duration_ms": 552,
+      "status": "failed",
+      "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "run_id": "run_0515",
+  "task_type": "it_support",
+  "agent_name": "it_support_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T23:53:01.338000+00:00",
+  "end_time": "2026-10-03T23:53:03.344000+00:00",
+  "total_steps": 4,
+  "failure_type": "stale_state",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Downstream action attempted using stale version/cache token",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "evaluate_access_request",
+      "input": {
+        "ticket_text": "val_ticket_text_68"
+      },
+      "output": {
+        "username": "output_username_545",
+        "requested_group": "output_requested_group_149",
+        "manager_approved": "output_manager_approved_575"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_545",
+        "requested_group": "output_requested_group_149",
+        "manager_approved": "output_manager_approved_575"
+      },
+      "timestamp": "2026-10-03T23:53:01.338000+00:00",
+      "duration_ms": 1338,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_ldap_directory",
+      "input": {
+        "username": "val_username_15"
+      },
+      "output": {
+        "employee_status": "success",
+        "dept": "output_dept_224",
+        "security_clearance": "output_security_clearance_988"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_545",
+        "requested_group": "output_requested_group_149",
+        "manager_approved": "output_manager_approved_575"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_545",
+        "requested_group": "output_requested_group_149",
+        "manager_approved": "output_manager_approved_575",
+        "employee_status": "success",
+        "dept": "output_dept_224",
+        "security_clearance": "output_security_clearance_988"
+      },
+      "timestamp": "2026-10-03T23:53:01.312000+00:00",
+      "duration_ms": 656,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_security_policy",
+      "input": {
+        "requested_group": "val_requested_group_68",
+        "security_clearance": "val_security_clearance_56"
+      },
+      "output": {
+        "balance": 0.0,
+        "version": "v1_deprecated_cache",
+        "is_stale": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_545",
+        "requested_group": "output_requested_group_149",
+        "manager_approved": "output_manager_approved_575",
+        "employee_status": "success",
+        "dept": "output_dept_224",
+        "security_clearance": "output_security_clearance_988"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_545",
+        "requested_group": "output_requested_group_149",
+        "manager_approved": "output_manager_approved_575",
+        "employee_status": "success",
+        "dept": "output_dept_224",
+        "security_clearance": "output_security_clearance_988",
+        "policy_satisfied": "output_policy_satisfied_151",
+        "mfa_enabled": "output_mfa_enabled_713"
+      },
+      "timestamp": "2026-10-03T23:53:03.246000+00:00",
+      "duration_ms": 1082,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "assign_vpn_profile",
+      "input": {
+        "username": "val_username_42",
+        "requested_group": "val_requested_group_64"
+      },
+      "output": {
+        "error": "Downstream action attempted using stale version/cache token",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_545",
+        "requested_group": "output_requested_group_149",
+        "manager_approved": "output_manager_approved_575",
+        "employee_status": "success",
+        "dept": "output_dept_224",
+        "security_clearance": "output_security_clearance_988",
+        "policy_satisfied": "output_policy_satisfied_151",
+        "mfa_enabled": "output_mfa_enabled_713"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_545",
+        "requested_group": "output_requested_group_149",
+        "manager_approved": "output_manager_approved_575",
+        "employee_status": "success",
+        "dept": "output_dept_224",
+        "security_clearance": "output_security_clearance_988",
+        "policy_satisfied": "output_policy_satisfied_151",
+        "mfa_enabled": "output_mfa_enabled_713",
+        "execution_status": "failed",
+        "last_error": "Downstream action attempted using stale version/cache token"
+      },
+      "timestamp": "2026-10-03T23:53:03.344000+00:00",
+      "duration_ms": 836,
+      "status": "failed",
+      "error": "Downstream action attempted using stale version/cache token",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

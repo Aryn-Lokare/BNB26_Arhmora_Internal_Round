@@ -1,0 +1,259 @@
+{
+  "run_id": "run_0327",
+  "task_type": "document_processing",
+  "agent_name": "document_processing_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T16:57:00.641000+00:00",
+  "end_time": "2026-10-03T16:57:04.296000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_retrieval",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "classify_document_type",
+      "input": {
+        "file_bytes": "val_file_bytes_25"
+      },
+      "output": {
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630"
+      },
+      "timestamp": "2026-10-03T16:57:00.641000+00:00",
+      "duration_ms": 641,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "run_ocr_extraction",
+      "input": {
+        "file_bytes": "val_file_bytes_73",
+        "page_count": "val_page_count_56"
+      },
+      "output": {
+        "retrieved_records": [
+          {
+            "id": "MISMATCH_999",
+            "score": 0.12,
+            "content": "Unrelated topic"
+          }
+        ],
+        "top_match": "MISMATCH_999"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630",
+        "raw_text": "output_raw_text_629",
+        "bounding_boxes": "output_bounding_boxes_877"
+      },
+      "timestamp": "2026-10-03T16:57:02.070000+00:00",
+      "duration_ms": 1035,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "extract_key_value_entities",
+      "input": {
+        "raw_text": "val_raw_text_38"
+      },
+      "output": {
+        "vendor_name": "output_vendor_name_148",
+        "invoice_date": "output_invoice_date_384",
+        "total_due": 1106.15,
+        "line_items": [
+          {
+            "item_id": 58,
+            "score": 0.79
+          },
+          {
+            "item_id": 51,
+            "score": 0.76
+          },
+          {
+            "item_id": 11,
+            "score": 0.96
+          }
+        ]
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630",
+        "raw_text": "output_raw_text_629",
+        "bounding_boxes": "output_bounding_boxes_877"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630",
+        "raw_text": "output_raw_text_629",
+        "bounding_boxes": "output_bounding_boxes_877",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T16:57:00.507000+00:00",
+      "duration_ms": 169,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "validate_financial_totals",
+      "input": {
+        "line_items": "val_line_items_38",
+        "total_due": "val_total_due_98"
+      },
+      "output": {
+        "math_valid": 7943,
+        "discrepancy": "output_discrepancy_176"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630",
+        "raw_text": "output_raw_text_629",
+        "bounding_boxes": "output_bounding_boxes_877",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630",
+        "raw_text": "output_raw_text_629",
+        "bounding_boxes": "output_bounding_boxes_877",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T16:57:00.524000+00:00",
+      "duration_ms": 131,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "save_structured_doc_record",
+      "input": {
+        "vendor_name": "val_vendor_name_35",
+        "total_due": "val_total_due_31"
+      },
+      "output": {
+        "doc_id": 6394
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630",
+        "raw_text": "output_raw_text_629",
+        "bounding_boxes": "output_bounding_boxes_877",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630",
+        "raw_text": "output_raw_text_629",
+        "bounding_boxes": "output_bounding_boxes_877",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T16:57:02.955000+00:00",
+      "duration_ms": 591,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "emit_doc_summary",
+      "input": {
+        "doc_id": 6394
+      },
+      "output": {
+        "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630",
+        "raw_text": "output_raw_text_629",
+        "bounding_boxes": "output_bounding_boxes_877",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_796",
+        "page_count": "output_page_count_630",
+        "raw_text": "output_raw_text_629",
+        "bounding_boxes": "output_bounding_boxes_877",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Retrieved entity mismatch: downstream operations applied to wrong entity"
+      },
+      "timestamp": "2026-10-03T16:57:04.296000+00:00",
+      "duration_ms": 716,
+      "status": "failed",
+      "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

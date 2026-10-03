@@ -1,0 +1,274 @@
+{
+  "run_id": "run_0118",
+  "task_type": "travel_booking",
+  "agent_name": "travel_booking_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T19:11:01.341000+00:00",
+  "end_time": "2026-10-03T19:11:06.048000+00:00",
+  "total_steps": 6,
+  "failure_type": "invalid_data_transformation",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_flight_preferences",
+      "input": {
+        "user_prompt": "Execute action extract_flight_preferences for travel_booking workflow"
+      },
+      "output": {
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417"
+      },
+      "timestamp": "2026-10-03T19:11:01.341000+00:00",
+      "duration_ms": 1341,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_flight_routes",
+      "input": {
+        "origin": "val_origin_75",
+        "destination": "val_destination_36",
+        "travel_date": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417",
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649"
+      },
+      "timestamp": "2026-10-03T19:11:00.482000+00:00",
+      "duration_ms": 241,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "check_seat_inventory",
+      "input": {
+        "flight_number": "val_flight_number_60",
+        "cabin_class": "val_cabin_class_85"
+      },
+      "output": {
+        "transformed_value": "NaN",
+        "source_value": 150.0,
+        "units": "mismatched_timezone_and_currency"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417",
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417",
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649",
+        "available_seats": "output_available_seats_749",
+        "fare_quote": "output_fare_quote_881"
+      },
+      "timestamp": "2026-10-03T19:11:02.247000+00:00",
+      "duration_ms": 749,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "hold_flight_seat",
+      "input": {
+        "flight_number": "val_flight_number_18",
+        "seat_number": "val_seat_number_49",
+        "passenger_id": 9081
+      },
+      "output": {
+        "hold_id": 4909,
+        "expiry": "output_expiry_159"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417",
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649",
+        "available_seats": "output_available_seats_749",
+        "fare_quote": "output_fare_quote_881"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417",
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649",
+        "available_seats": "output_available_seats_749",
+        "fare_quote": "output_fare_quote_881",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T19:11:05.588000+00:00",
+      "duration_ms": 1397,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "store_pending_booking",
+      "input": {
+        "hold_id": 4909,
+        "fare_quote": "val_fare_quote_65"
+      },
+      "output": {
+        "booking_reference": "output_booking_reference_218"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417",
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649",
+        "available_seats": "output_available_seats_749",
+        "fare_quote": "output_fare_quote_881",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417",
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649",
+        "available_seats": "output_available_seats_749",
+        "fare_quote": "output_fare_quote_881",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T19:11:02.900000+00:00",
+      "duration_ms": 580,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "present_flight_itinerary",
+      "input": {
+        "booking_reference": "val_booking_reference_88",
+        "fare_quote": "val_fare_quote_87"
+      },
+      "output": {
+        "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417",
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649",
+        "available_seats": "output_available_seats_749",
+        "fare_quote": "output_fare_quote_881",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_256",
+        "destination": "output_destination_384",
+        "travel_date": "output_travel_date_185",
+        "cabin_class": "output_cabin_class_417",
+        "flight_candidates": 3545,
+        "min_fare": "output_min_fare_649",
+        "available_seats": "output_available_seats_749",
+        "fare_quote": "output_fare_quote_881",
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream validation failed: expected numeric float, received 'NaN'"
+      },
+      "timestamp": "2026-10-03T19:11:06.048000+00:00",
+      "duration_ms": 1008,
+      "status": "failed",
+      "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

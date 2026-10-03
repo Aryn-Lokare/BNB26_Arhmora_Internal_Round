@@ -1,0 +1,254 @@
+{
+  "run_id": "run_0332",
+  "task_type": "document_processing",
+  "agent_name": "document_processing_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T19:40:00.767000+00:00",
+  "end_time": "2026-10-03T19:40:04.872000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_llm_decision",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "classify_document_type",
+      "input": {
+        "file_bytes": "val_file_bytes_88"
+      },
+      "output": {
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528"
+      },
+      "timestamp": "2026-10-03T19:40:00.767000+00:00",
+      "duration_ms": 767,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "run_ocr_extraction",
+      "input": {
+        "file_bytes": "val_file_bytes_30",
+        "page_count": "val_page_count_23"
+      },
+      "output": {
+        "decision": "bypass_validation",
+        "reasoning": "Skipping prerequisite checks based on incorrect user assumption",
+        "route_to": "unsupported_path"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528",
+        "raw_text": "output_raw_text_565",
+        "bounding_boxes": "output_bounding_boxes_997"
+      },
+      "timestamp": "2026-10-03T19:40:01.506000+00:00",
+      "duration_ms": 753,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "extract_key_value_entities",
+      "input": {
+        "raw_text": "val_raw_text_73"
+      },
+      "output": {
+        "vendor_name": "output_vendor_name_324",
+        "invoice_date": "output_invoice_date_103",
+        "total_due": 784.58,
+        "line_items": [
+          {
+            "item_id": 30,
+            "score": 0.84
+          },
+          {
+            "item_id": 28,
+            "score": 0.77
+          },
+          {
+            "item_id": 95,
+            "score": 0.92
+          }
+        ]
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528",
+        "raw_text": "output_raw_text_565",
+        "bounding_boxes": "output_bounding_boxes_997"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528",
+        "raw_text": "output_raw_text_565",
+        "bounding_boxes": "output_bounding_boxes_997",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T19:40:00.498000+00:00",
+      "duration_ms": 166,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "validate_financial_totals",
+      "input": {
+        "line_items": "val_line_items_58",
+        "total_due": "val_total_due_36"
+      },
+      "output": {
+        "math_valid": 7558,
+        "discrepancy": "output_discrepancy_288"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528",
+        "raw_text": "output_raw_text_565",
+        "bounding_boxes": "output_bounding_boxes_997",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528",
+        "raw_text": "output_raw_text_565",
+        "bounding_boxes": "output_bounding_boxes_997",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T19:40:03.032000+00:00",
+      "duration_ms": 758,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "save_structured_doc_record",
+      "input": {
+        "vendor_name": "val_vendor_name_56",
+        "total_due": "val_total_due_11"
+      },
+      "output": {
+        "doc_id": 2208
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528",
+        "raw_text": "output_raw_text_565",
+        "bounding_boxes": "output_bounding_boxes_997",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528",
+        "raw_text": "output_raw_text_565",
+        "bounding_boxes": "output_bounding_boxes_997",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T19:40:00.465000+00:00",
+      "duration_ms": 93,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "emit_doc_summary",
+      "input": {
+        "doc_id": 2208
+      },
+      "output": {
+        "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528",
+        "raw_text": "output_raw_text_565",
+        "bounding_boxes": "output_bounding_boxes_997",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_406",
+        "page_count": "output_page_count_528",
+        "raw_text": "output_raw_text_565",
+        "bounding_boxes": "output_bounding_boxes_997",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "LLM made incorrect branch decision; prerequisite state missing downstream"
+      },
+      "timestamp": "2026-10-03T19:40:04.872000+00:00",
+      "duration_ms": 812,
+      "status": "failed",
+      "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

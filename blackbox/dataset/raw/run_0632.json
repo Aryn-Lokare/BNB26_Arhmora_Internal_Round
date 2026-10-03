@@ -1,0 +1,261 @@
+{
+  "run_id": "run_0632",
+  "task_type": "research_assistant",
+  "agent_name": "research_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-04T01:40:00.531000+00:00",
+  "end_time": "2026-10-04T01:40:02.322000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_agent_handoff",
+  "failure_step_id": "step_05",
+  "final_output": {
+    "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_search_keywords",
+      "input": {
+        "research_query": "Execute action formulate_search_keywords for research_assistant workflow"
+      },
+      "output": {
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103"
+      },
+      "timestamp": "2026-10-04T01:40:00.531000+00:00",
+      "duration_ms": 531,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_academic_index",
+      "input": {
+        "keywords": "val_keywords_95",
+        "min_year": "val_min_year_49"
+      },
+      "output": {
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103",
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693"
+      },
+      "timestamp": "2026-10-04T01:40:01.138000+00:00",
+      "duration_ms": 569,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "fetch_paper_abstracts",
+      "input": {
+        "paper_ids": 8130
+      },
+      "output": {
+        "abstract_texts": "output_abstract_texts_556",
+        "author_institutions": "output_author_institutions_318"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103",
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103",
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693",
+        "abstract_texts": "output_abstract_texts_556",
+        "author_institutions": "output_author_institutions_318"
+      },
+      "timestamp": "2026-10-04T01:40:03.924000+00:00",
+      "duration_ms": 1308,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "extract_methodology_findings",
+      "input": {
+        "abstract_texts": "val_abstract_texts_22"
+      },
+      "output": {
+        "benchmark_results": "output_benchmark_results_967",
+        "comparative_table": "output_comparative_table_183"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103",
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693",
+        "abstract_texts": "output_abstract_texts_556",
+        "author_institutions": "output_author_institutions_318"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103",
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693",
+        "abstract_texts": "output_abstract_texts_556",
+        "author_institutions": "output_author_institutions_318",
+        "benchmark_results": "output_benchmark_results_967",
+        "comparative_table": "output_comparative_table_183"
+      },
+      "timestamp": "2026-10-04T01:40:02.220000+00:00",
+      "duration_ms": 555,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "store_annotated_bibliography",
+      "input": {
+        "comparative_table": "val_comparative_table_66"
+      },
+      "output": {
+        "handoff_target": "legacy_deprecated_agent",
+        "protocol": "v0"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103",
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693",
+        "abstract_texts": "output_abstract_texts_556",
+        "author_institutions": "output_author_institutions_318",
+        "benchmark_results": "output_benchmark_results_967",
+        "comparative_table": "output_comparative_table_183"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103",
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693",
+        "abstract_texts": "output_abstract_texts_556",
+        "author_institutions": "output_author_institutions_318",
+        "benchmark_results": "output_benchmark_results_967",
+        "comparative_table": "output_comparative_table_183",
+        "bibliography_id": 8250
+      },
+      "timestamp": "2026-10-04T01:40:04.580000+00:00",
+      "duration_ms": 916,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "draft_literature_review",
+      "input": {
+        "comparative_table": "val_comparative_table_59"
+      },
+      "output": {
+        "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103",
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693",
+        "abstract_texts": "output_abstract_texts_556",
+        "author_institutions": "output_author_institutions_318",
+        "benchmark_results": "output_benchmark_results_967",
+        "comparative_table": "output_comparative_table_183",
+        "bibliography_id": 8250
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_386",
+        "inclusion_criteria": "output_inclusion_criteria_209",
+        "min_year": "output_min_year_103",
+        "paper_ids": 8130,
+        "citation_counts": "output_citation_counts_693",
+        "abstract_texts": "output_abstract_texts_556",
+        "author_institutions": "output_author_institutions_318",
+        "benchmark_results": "output_benchmark_results_967",
+        "comparative_table": "output_comparative_table_183",
+        "bibliography_id": 8250,
+        "execution_status": "failed",
+        "last_error": "Handoff to incompatible sub-agent resulted in dropped execution context"
+      },
+      "timestamp": "2026-10-04T01:40:02.322000+00:00",
+      "duration_ms": 387,
+      "status": "failed",
+      "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

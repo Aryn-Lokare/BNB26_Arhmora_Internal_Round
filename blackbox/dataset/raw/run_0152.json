@@ -1,0 +1,225 @@
+{
+  "run_id": "run_0152",
+  "task_type": "hotel_booking",
+  "agent_name": "hotel_booking_agent_v3",
+  "status": "success",
+  "start_time": "2026-10-03T12:37:00.500000+00:00",
+  "end_time": "2026-10-03T12:37:01.485000+00:00",
+  "total_steps": 5,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "confirmation_card": "output_confirmation_card_303"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_hotel_criteria",
+      "input": {
+        "query": "Execute action parse_hotel_criteria for hotel_booking workflow"
+      },
+      "output": {
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109"
+      },
+      "timestamp": "2026-10-03T12:37:00.500000+00:00",
+      "duration_ms": 500,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_available_hotels",
+      "input": {
+        "city": "val_city_63",
+        "checkin_date": "2026-10-04T09:00:00Z",
+        "nights": "val_nights_94"
+      },
+      "output": {
+        "hotel_ids": 2654,
+        "price_range": "output_price_range_778"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109",
+        "hotel_ids": 2654,
+        "price_range": "output_price_range_778"
+      },
+      "timestamp": "2026-10-03T12:37:01.392000+00:00",
+      "duration_ms": 696,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_room_allocation",
+      "input": {
+        "hotel_id": 512,
+        "room_type": "val_room_type_89",
+        "nights": "val_nights_87"
+      },
+      "output": {
+        "available": "output_available_817",
+        "nightly_rate": 207.74
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109",
+        "hotel_ids": 2654,
+        "price_range": "output_price_range_778"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109",
+        "hotel_ids": 2654,
+        "price_range": "output_price_range_778",
+        "available": "output_available_817",
+        "nightly_rate": 207.74
+      },
+      "timestamp": "2026-10-03T12:37:03.435000+00:00",
+      "duration_ms": 1145,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "commit_hotel_reservation",
+      "input": {
+        "hotel_id": 334,
+        "guest_name": "val_guest_name_89",
+        "total_price": 133.9
+      },
+      "output": {
+        "confirmation_num": "output_confirmation_num_216",
+        "voucher": "output_voucher_903"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109",
+        "hotel_ids": 2654,
+        "price_range": "output_price_range_778",
+        "available": "output_available_817",
+        "nightly_rate": 207.74
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109",
+        "hotel_ids": 2654,
+        "price_range": "output_price_range_778",
+        "available": "output_available_817",
+        "nightly_rate": 207.74,
+        "confirmation_num": "output_confirmation_num_216",
+        "voucher": "output_voucher_903"
+      },
+      "timestamp": "2026-10-03T12:37:01.176000+00:00",
+      "duration_ms": 294,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "generate_booking_confirmation",
+      "input": {
+        "confirmation_num": "val_confirmation_num_73"
+      },
+      "output": {
+        "confirmation_card": "output_confirmation_card_303"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109",
+        "hotel_ids": 2654,
+        "price_range": "output_price_range_778",
+        "available": "output_available_817",
+        "nightly_rate": 207.74,
+        "confirmation_num": "output_confirmation_num_216",
+        "voucher": "output_voucher_903"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_811",
+        "checkin_date": "output_checkin_date_802",
+        "nights": "output_nights_745",
+        "guests": "output_guests_109",
+        "hotel_ids": 2654,
+        "price_range": "output_price_range_778",
+        "available": "output_available_817",
+        "nightly_rate": 207.74,
+        "confirmation_num": "output_confirmation_num_216",
+        "voucher": "output_voucher_903",
+        "confirmation_card": "output_confirmation_card_303"
+      },
+      "timestamp": "2026-10-03T12:37:01.485000+00:00",
+      "duration_ms": 297,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

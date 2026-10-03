@@ -1,0 +1,269 @@
+{
+  "run_id": "run_0499",
+  "task_type": "it_support",
+  "agent_name": "it_support_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-04T00:23:00.518000+00:00",
+  "end_time": "2026-10-04T00:23:04.728000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_parameter",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Type error / out of bounds parameter encountered in downstream service call",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "evaluate_access_request",
+      "input": {
+        "ticket_text": "val_ticket_text_31"
+      },
+      "output": {
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384"
+      },
+      "timestamp": "2026-10-04T00:23:00.518000+00:00",
+      "duration_ms": 518,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_ldap_directory",
+      "input": {
+        "username": "val_username_65"
+      },
+      "output": {
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384",
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552"
+      },
+      "timestamp": "2026-10-04T00:23:00.744000+00:00",
+      "duration_ms": 372,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_security_policy",
+      "input": {
+        "requested_group": "val_requested_group_98",
+        "security_clearance": "val_security_clearance_42",
+        "rate_limit_ms": "infinite_string",
+        "pct": 9999
+      },
+      "output": {
+        "warning": "coerced_bad_type"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384",
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384",
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552",
+        "policy_satisfied": "output_policy_satisfied_801",
+        "mfa_enabled": "output_mfa_enabled_223"
+      },
+      "timestamp": "2026-10-04T00:23:03.249000+00:00",
+      "duration_ms": 1083,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "assign_vpn_profile",
+      "input": {
+        "username": "val_username_65",
+        "requested_group": "val_requested_group_93"
+      },
+      "output": {
+        "cert_serial": "output_cert_serial_456",
+        "provision_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384",
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552",
+        "policy_satisfied": "output_policy_satisfied_801",
+        "mfa_enabled": "output_mfa_enabled_223"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384",
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552",
+        "policy_satisfied": "output_policy_satisfied_801",
+        "mfa_enabled": "output_mfa_enabled_223",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-04T00:23:04.888000+00:00",
+      "duration_ms": 1222,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "audit_log_access_grant",
+      "input": {
+        "username": "val_username_13",
+        "cert_serial": "val_cert_serial_56"
+      },
+      "output": {
+        "audit_id": 8636
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384",
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552",
+        "policy_satisfied": "output_policy_satisfied_801",
+        "mfa_enabled": "output_mfa_enabled_223",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384",
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552",
+        "policy_satisfied": "output_policy_satisfied_801",
+        "mfa_enabled": "output_mfa_enabled_223",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-04T00:23:02.220000+00:00",
+      "duration_ms": 444,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "notify_user_credentials",
+      "input": {
+        "username": "val_username_64",
+        "provision_status": "val_provision_status_37"
+      },
+      "output": {
+        "error": "Type error / out of bounds parameter encountered in downstream service call",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384",
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552",
+        "policy_satisfied": "output_policy_satisfied_801",
+        "mfa_enabled": "output_mfa_enabled_223",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_748",
+        "requested_group": "output_requested_group_953",
+        "manager_approved": "output_manager_approved_384",
+        "employee_status": "success",
+        "dept": "output_dept_673",
+        "security_clearance": "output_security_clearance_552",
+        "policy_satisfied": "output_policy_satisfied_801",
+        "mfa_enabled": "output_mfa_enabled_223",
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Type error / out of bounds parameter encountered in downstream service call"
+      },
+      "timestamp": "2026-10-04T00:23:04.728000+00:00",
+      "duration_ms": 788,
+      "status": "failed",
+      "error": "Type error / out of bounds parameter encountered in downstream service call",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

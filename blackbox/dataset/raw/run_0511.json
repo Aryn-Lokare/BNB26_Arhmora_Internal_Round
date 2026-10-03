@@ -1,0 +1,263 @@
+{
+  "run_id": "run_0511",
+  "task_type": "it_support",
+  "agent_name": "it_support_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T16:44:00.515000+00:00",
+  "end_time": "2026-10-03T16:44:01.356000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_api_response_handling",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Downstream parser crashed attempting to index non-existent response attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "evaluate_access_request",
+      "input": {
+        "ticket_text": "val_ticket_text_70"
+      },
+      "output": {
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951"
+      },
+      "timestamp": "2026-10-03T16:44:00.515000+00:00",
+      "duration_ms": 515,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_ldap_directory",
+      "input": {
+        "username": "val_username_41"
+      },
+      "output": {
+        "code": 404,
+        "body": {
+          "message": "Not Found"
+        },
+        "treated_as_success": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951",
+        "employee_status": "success",
+        "dept": "output_dept_881",
+        "security_clearance": "output_security_clearance_198"
+      },
+      "timestamp": "2026-10-03T16:44:02.058000+00:00",
+      "duration_ms": 1029,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_security_policy",
+      "input": {
+        "requested_group": "val_requested_group_26",
+        "security_clearance": "val_security_clearance_50"
+      },
+      "output": {
+        "policy_satisfied": "output_policy_satisfied_881",
+        "mfa_enabled": "output_mfa_enabled_236"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951",
+        "employee_status": "success",
+        "dept": "output_dept_881",
+        "security_clearance": "output_security_clearance_198"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951",
+        "employee_status": "success",
+        "dept": "output_dept_881",
+        "security_clearance": "output_security_clearance_198",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T16:44:02.619000+00:00",
+      "duration_ms": 873,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "assign_vpn_profile",
+      "input": {
+        "username": "val_username_51",
+        "requested_group": "val_requested_group_46"
+      },
+      "output": {
+        "cert_serial": "output_cert_serial_939",
+        "provision_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951",
+        "employee_status": "success",
+        "dept": "output_dept_881",
+        "security_clearance": "output_security_clearance_198",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951",
+        "employee_status": "success",
+        "dept": "output_dept_881",
+        "security_clearance": "output_security_clearance_198",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T16:44:03.592000+00:00",
+      "duration_ms": 898,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "audit_log_access_grant",
+      "input": {
+        "username": "val_username_86",
+        "cert_serial": "val_cert_serial_60"
+      },
+      "output": {
+        "audit_id": 9750
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951",
+        "employee_status": "success",
+        "dept": "output_dept_881",
+        "security_clearance": "output_security_clearance_198",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951",
+        "employee_status": "success",
+        "dept": "output_dept_881",
+        "security_clearance": "output_security_clearance_198",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T16:44:04.745000+00:00",
+      "duration_ms": 949,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "notify_user_credentials",
+      "input": {
+        "username": "val_username_54",
+        "provision_status": "val_provision_status_72"
+      },
+      "output": {
+        "error": "Downstream parser crashed attempting to index non-existent response attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951",
+        "employee_status": "success",
+        "dept": "output_dept_881",
+        "security_clearance": "output_security_clearance_198",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_784",
+        "requested_group": "output_requested_group_485",
+        "manager_approved": "output_manager_approved_951",
+        "employee_status": "success",
+        "dept": "output_dept_881",
+        "security_clearance": "output_security_clearance_198",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream parser crashed attempting to index non-existent response attributes"
+      },
+      "timestamp": "2026-10-03T16:44:01.356000+00:00",
+      "duration_ms": 226,
+      "status": "failed",
+      "error": "Downstream parser crashed attempting to index non-existent response attributes",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

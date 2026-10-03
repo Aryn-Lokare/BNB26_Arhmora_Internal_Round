@@ -1,0 +1,273 @@
+{
+  "run_id": "run_0286",
+  "task_type": "email_assistant",
+  "agent_name": "email_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T19:21:00.449000+00:00",
+  "end_time": "2026-10-03T19:21:03.432000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_database_operation",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_email_thread",
+      "input": {
+        "raw_email": "val_raw_email_12"
+      },
+      "output": {
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983"
+      },
+      "timestamp": "2026-10-03T19:21:00.449000+00:00",
+      "duration_ms": 449,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_related_correspondence",
+      "input": {
+        "sender": "val_sender_83",
+        "subject": "val_subject_73"
+      },
+      "output": {
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983",
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776"
+      },
+      "timestamp": "2026-10-03T19:21:00.924000+00:00",
+      "duration_ms": 462,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "draft_email_response",
+      "input": {
+        "subject": "val_subject_44",
+        "context_notes": "val_context_notes_91",
+        "required_action": "val_required_action_78"
+      },
+      "output": {
+        "draft_body": "output_draft_body_928",
+        "recipients": "output_recipients_729"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983",
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983",
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776",
+        "draft_body": "output_draft_body_928",
+        "recipients": "output_recipients_729"
+      },
+      "timestamp": "2026-10-03T19:21:03.111000+00:00",
+      "duration_ms": 1037,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_mailbox_label",
+      "input": {
+        "email_id": 334,
+        "folder": "val_folder_90"
+      },
+      "output": {
+        "sql": "SELECT * FROM records WHERE 1=0",
+        "rows_returned": 0,
+        "query_cost": 0.01
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983",
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776",
+        "draft_body": "output_draft_body_928",
+        "recipients": "output_recipients_729"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983",
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776",
+        "draft_body": "output_draft_body_928",
+        "recipients": "output_recipients_729",
+        "label_applied": "output_label_applied_161"
+      },
+      "timestamp": "2026-10-03T19:21:03.872000+00:00",
+      "duration_ms": 968,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "queue_outbox_message",
+      "input": {
+        "draft_body": "val_draft_body_35",
+        "recipients": "val_recipients_56"
+      },
+      "output": {
+        "queue_id": 8577,
+        "scheduled_send": "output_scheduled_send_251"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983",
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776",
+        "draft_body": "output_draft_body_928",
+        "recipients": "output_recipients_729",
+        "label_applied": "output_label_applied_161"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983",
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776",
+        "draft_body": "output_draft_body_928",
+        "recipients": "output_recipients_729",
+        "label_applied": "output_label_applied_161",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T19:21:05.745000+00:00",
+      "duration_ms": 1149,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "summarize_email_action",
+      "input": {
+        "queue_id": 8577
+      },
+      "output": {
+        "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983",
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776",
+        "draft_body": "output_draft_body_928",
+        "recipients": "output_recipients_729",
+        "label_applied": "output_label_applied_161",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_742",
+        "subject": "output_subject_820",
+        "urgency": "output_urgency_628",
+        "required_action": "output_required_action_983",
+        "previous_threads": "output_previous_threads_318",
+        "context_notes": "output_context_notes_776",
+        "draft_body": "output_draft_body_928",
+        "recipients": "output_recipients_729",
+        "label_applied": "output_label_applied_161",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero"
+      },
+      "timestamp": "2026-10-03T19:21:03.432000+00:00",
+      "duration_ms": 572,
+      "status": "failed",
+      "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

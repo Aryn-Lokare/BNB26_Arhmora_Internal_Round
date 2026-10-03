@@ -1,0 +1,154 @@
+{
+  "run_id": "run_0067",
+  "task_type": "ecommerce_order",
+  "agent_name": "ecommerce_order_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T17:35:00.799000+00:00",
+  "end_time": "2026-10-03T17:35:03.296000+00:00",
+  "total_steps": 4,
+  "failure_type": "missing_information",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Downstream request rejected due to missing mandatory schema attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_promo_code",
+      "input": {
+        "user_input": "val_user_input_67"
+      },
+      "output": {
+        "coupon_code": "output_coupon_code_143",
+        "cart_id": 6776
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_143",
+        "cart_id": 6776
+      },
+      "timestamp": "2026-10-03T17:35:00.799000+00:00",
+      "duration_ms": 799,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_cart_subtotal",
+      "input": {},
+      "output": {
+        "status": "partial_payload",
+        "missing_required": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_143",
+        "cart_id": 6776
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_143",
+        "cart_id": 6776,
+        "subtotal": 365.74,
+        "eligible_categories": true
+      },
+      "timestamp": "2026-10-03T17:35:02.678000+00:00",
+      "duration_ms": 1339,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_coupon_rules",
+      "input": {
+        "coupon_code": "val_coupon_code_19",
+        "subtotal": "val_subtotal_95"
+      },
+      "output": {
+        "discount_pct": "output_discount_pct_752",
+        "valid": 7655
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_143",
+        "cart_id": 6776,
+        "subtotal": 365.74,
+        "eligible_categories": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_143",
+        "cart_id": 6776,
+        "subtotal": 365.74,
+        "eligible_categories": true,
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T17:35:00.591000+00:00",
+      "duration_ms": 197,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_discount_to_cart",
+      "input": {
+        "cart_id": 6776,
+        "discount_pct": "val_discount_pct_96"
+      },
+      "output": {
+        "error": "Downstream request rejected due to missing mandatory schema attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_143",
+        "cart_id": 6776,
+        "subtotal": 365.74,
+        "eligible_categories": true,
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_143",
+        "cart_id": 6776,
+        "subtotal": 365.74,
+        "eligible_categories": true,
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream request rejected due to missing mandatory schema attributes"
+      },
+      "timestamp": "2026-10-03T17:35:03.296000+00:00",
+      "duration_ms": 824,
+      "status": "failed",
+      "error": "Downstream request rejected due to missing mandatory schema attributes",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

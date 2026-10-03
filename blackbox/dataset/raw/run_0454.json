@@ -1,0 +1,172 @@
+{
+  "run_id": "run_0454",
+  "task_type": "coding_assistant",
+  "agent_name": "coding_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T20:19:00.327000+00:00",
+  "end_time": "2026-10-03T20:19:01.824000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_api_response_handling",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Downstream parser crashed attempting to index non-existent response attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_issue_description",
+      "input": {
+        "issue_text": "val_issue_text_76",
+        "stacktrace": "val_stacktrace_22"
+      },
+      "output": {
+        "target_file": "output_target_file_353",
+        "root_function": "output_root_function_309",
+        "repro_steps": "output_repro_steps_206"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_353",
+        "root_function": "output_root_function_309",
+        "repro_steps": "output_repro_steps_206"
+      },
+      "timestamp": "2026-10-03T20:19:00.327000+00:00",
+      "duration_ms": 327,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "read_source_code_file",
+      "input": {
+        "target_file": "val_target_file_13",
+        "root_function": "val_root_function_74"
+      },
+      "output": {
+        "code_snippet": "output_code_snippet_554",
+        "imports": "output_imports_500"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_353",
+        "root_function": "output_root_function_309",
+        "repro_steps": "output_repro_steps_206"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_353",
+        "root_function": "output_root_function_309",
+        "repro_steps": "output_repro_steps_206",
+        "code_snippet": "output_code_snippet_554",
+        "imports": "output_imports_500"
+      },
+      "timestamp": "2026-10-03T20:19:02.100000+00:00",
+      "duration_ms": 1050,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "generate_code_diff",
+      "input": {
+        "code_snippet": "val_code_snippet_25",
+        "issue_text": "val_issue_text_48"
+      },
+      "output": {
+        "code": 404,
+        "body": {
+          "message": "Not Found"
+        },
+        "treated_as_success": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_353",
+        "root_function": "output_root_function_309",
+        "repro_steps": "output_repro_steps_206",
+        "code_snippet": "output_code_snippet_554",
+        "imports": "output_imports_500"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_353",
+        "root_function": "output_root_function_309",
+        "repro_steps": "output_repro_steps_206",
+        "code_snippet": "output_code_snippet_554",
+        "imports": "output_imports_500",
+        "patch_diff": "output_patch_diff_514",
+        "functions_modified": "output_functions_modified_595"
+      },
+      "timestamp": "2026-10-03T20:19:00.579000+00:00",
+      "duration_ms": 193,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "run_unit_test_suite",
+      "input": {
+        "patch_diff": "val_patch_diff_40",
+        "target_file": "val_target_file_79"
+      },
+      "output": {
+        "error": "Downstream parser crashed attempting to index non-existent response attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_353",
+        "root_function": "output_root_function_309",
+        "repro_steps": "output_repro_steps_206",
+        "code_snippet": "output_code_snippet_554",
+        "imports": "output_imports_500",
+        "patch_diff": "output_patch_diff_514",
+        "functions_modified": "output_functions_modified_595"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_353",
+        "root_function": "output_root_function_309",
+        "repro_steps": "output_repro_steps_206",
+        "code_snippet": "output_code_snippet_554",
+        "imports": "output_imports_500",
+        "patch_diff": "output_patch_diff_514",
+        "functions_modified": "output_functions_modified_595",
+        "execution_status": "failed",
+        "last_error": "Downstream parser crashed attempting to index non-existent response attributes"
+      },
+      "timestamp": "2026-10-03T20:19:01.824000+00:00",
+      "duration_ms": 456,
+      "status": "failed",
+      "error": "Downstream parser crashed attempting to index non-existent response attributes",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

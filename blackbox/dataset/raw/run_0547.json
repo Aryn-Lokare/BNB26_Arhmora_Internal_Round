@@ -1,0 +1,244 @@
+{
+  "run_id": "run_0547",
+  "task_type": "inventory_management",
+  "agent_name": "inventory_management_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T23:01:00.159000+00:00",
+  "end_time": "2026-10-03T23:01:04.236000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_order_of_operations",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Order of operations violation: action executed prior to authorization check",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "inspect_depletion_velocity",
+      "input": {
+        "product_id": 1024
+      },
+      "output": {
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314"
+      },
+      "timestamp": "2026-10-03T23:01:00.159000+00:00",
+      "duration_ms": 159,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_current_shelf_quantity",
+      "input": {
+        "product_id": 512
+      },
+      "output": {
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314",
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524"
+      },
+      "timestamp": "2026-10-03T23:01:01.360000+00:00",
+      "duration_ms": 680,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "calculate_reorder_quantity",
+      "input": {
+        "units_on_hand": "val_units_on_hand_63",
+        "daily_burn_rate": "val_daily_burn_rate_32",
+        "safety_stock": "val_safety_stock_32"
+      },
+      "output": {
+        "recommended_order_units": "output_recommended_order_units_631"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314",
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314",
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524",
+        "recommended_order_units": "output_recommended_order_units_631"
+      },
+      "timestamp": "2026-10-03T23:01:01.206000+00:00",
+      "duration_ms": 402,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "premature_submit_purchase_order",
+      "input": {
+        "product_id": 2048,
+        "recommended_order_units": "val_recommended_order_units_56",
+        "supplier_id": 1024
+      },
+      "output": {
+        "executed_unverified": true
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314",
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524",
+        "recommended_order_units": "output_recommended_order_units_631"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314",
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524",
+        "recommended_order_units": "output_recommended_order_units_631",
+        "po_number": "output_po_number_905",
+        "eta_days": "output_eta_days_266"
+      },
+      "timestamp": "2026-10-03T23:01:01.560000+00:00",
+      "duration_ms": 390,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "update_procurement_ledger",
+      "input": {
+        "po_number": "val_po_number_73",
+        "product_id": 2048
+      },
+      "output": {
+        "ledger_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314",
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524",
+        "recommended_order_units": "output_recommended_order_units_631",
+        "po_number": "output_po_number_905",
+        "eta_days": "output_eta_days_266"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314",
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524",
+        "recommended_order_units": "output_recommended_order_units_631",
+        "po_number": "output_po_number_905",
+        "eta_days": "output_eta_days_266",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T23:01:00.705000+00:00",
+      "duration_ms": 141,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "broadcast_restock_schedule",
+      "input": {
+        "po_number": "val_po_number_61",
+        "eta_days": "val_eta_days_90"
+      },
+      "output": {
+        "error": "Order of operations violation: action executed prior to authorization check",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314",
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524",
+        "recommended_order_units": "output_recommended_order_units_631",
+        "po_number": "output_po_number_905",
+        "eta_days": "output_eta_days_266",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 735.64,
+        "safety_stock": "output_safety_stock_314",
+        "units_on_hand": "output_units_on_hand_732",
+        "units_in_transit": "output_units_in_transit_524",
+        "recommended_order_units": "output_recommended_order_units_631",
+        "po_number": "output_po_number_905",
+        "eta_days": "output_eta_days_266",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Order of operations violation: action executed prior to authorization check"
+      },
+      "timestamp": "2026-10-03T23:01:04.236000+00:00",
+      "duration_ms": 706,
+      "status": "failed",
+      "error": "Order of operations violation: action executed prior to authorization check",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

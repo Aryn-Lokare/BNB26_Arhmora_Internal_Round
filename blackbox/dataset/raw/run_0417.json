@@ -1,0 +1,143 @@
+{
+  "run_id": "run_0417",
+  "task_type": "database_assistant",
+  "agent_name": "database_assistant_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T22:30:00.301000+00:00",
+  "end_time": "2026-10-03T22:30:04.300000+00:00",
+  "total_steps": 4,
+  "failure_type": "wrong_state_update",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "State update dropped critical context keys required by subsequent steps",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "analyze_slow_query_log",
+      "input": {
+        "query_string": "Execute action analyze_slow_query_log for database_assistant workflow"
+      },
+      "output": {
+        "filter_predicates": "output_filter_predicates_506",
+        "table_name": "output_table_name_886"
+      },
+      "state_before": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization"
+      },
+      "state_after": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_506",
+        "table_name": "output_table_name_886"
+      },
+      "timestamp": "2026-10-03T22:30:00.301000+00:00",
+      "duration_ms": 301,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "explain_query_execution_plan",
+      "input": {
+        "query_string": "Execute action explain_query_execution_plan for database_assistant workflow"
+      },
+      "output": {
+        "total_cost": 279.39,
+        "scan_type": "output_scan_type_436",
+        "bottleneck": "output_bottleneck_166"
+      },
+      "state_before": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_506",
+        "table_name": "output_table_name_886"
+      },
+      "state_after": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_506",
+        "table_name": "output_table_name_886",
+        "total_cost": 279.39,
+        "scan_type": "output_scan_type_436",
+        "bottleneck": "output_bottleneck_166"
+      },
+      "timestamp": "2026-10-03T22:30:01.934000+00:00",
+      "duration_ms": 967,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "fetch_table_existing_indexes",
+      "input": {
+        "table_name": "val_table_name_53"
+      },
+      "output": {
+        "corrupted_keys": [
+          "all_context_cleared"
+        ],
+        "reset": true
+      },
+      "state_before": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_506",
+        "table_name": "output_table_name_886",
+        "total_cost": 279.39,
+        "scan_type": "output_scan_type_436",
+        "bottleneck": "output_bottleneck_166"
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "timestamp": "2026-10-03T22:30:02.187000+00:00",
+      "duration_ms": 729,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "recommend_index_ddl",
+      "input": {
+        "table_name": "val_table_name_37",
+        "filter_predicates": "val_filter_predicates_99",
+        "current_indexes": "val_current_indexes_70"
+      },
+      "output": {
+        "error": "State update dropped critical context keys required by subsequent steps",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "execution_status": "failed",
+        "last_error": "State update dropped critical context keys required by subsequent steps"
+      },
+      "timestamp": "2026-10-03T22:30:04.300000+00:00",
+      "duration_ms": 1075,
+      "status": "failed",
+      "error": "State update dropped critical context keys required by subsequent steps",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

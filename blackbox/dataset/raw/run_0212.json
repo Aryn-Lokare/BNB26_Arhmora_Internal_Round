@@ -1,0 +1,267 @@
+{
+  "run_id": "run_0212",
+  "task_type": "payment_processing",
+  "agent_name": "payment_processing_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T18:24:01.050000+00:00",
+  "end_time": "2026-10-03T18:24:04.320000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_condition",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "verify_payment_parameters",
+      "input": {
+        "payment_request": "val_payment_request_27"
+      },
+      "output": {
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694
+      },
+      "timestamp": "2026-10-03T18:24:01.050000+00:00",
+      "duration_ms": 1050,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "check_merchant_account_status",
+      "input": {
+        "merchant_id": 7694
+      },
+      "output": {
+        "evaluated_condition": false,
+        "inverted": true,
+        "branch_taken": "fallback_abort"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694,
+        "merchant_active": "output_merchant_active_522",
+        "payout_schedule": "output_payout_schedule_327"
+      },
+      "timestamp": "2026-10-03T18:24:00.220000+00:00",
+      "duration_ms": 110,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "run_fraud_scoring",
+      "input": {
+        "customer_token": "val_customer_token_36",
+        "amount": 86.18,
+        "currency": "val_currency_66"
+      },
+      "output": {
+        "risk_score": "output_risk_score_987",
+        "fraud_verdict": "output_fraud_verdict_731"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694,
+        "merchant_active": "output_merchant_active_522",
+        "payout_schedule": "output_payout_schedule_327"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694,
+        "merchant_active": "output_merchant_active_522",
+        "payout_schedule": "output_payout_schedule_327",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T18:24:01.485000+00:00",
+      "duration_ms": 495,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_card_charge",
+      "input": {
+        "customer_token": "val_customer_token_98",
+        "amount": 325.53,
+        "currency": "val_currency_68"
+      },
+      "output": {
+        "auth_code": "output_auth_code_352",
+        "charge_id": 8005
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694,
+        "merchant_active": "output_merchant_active_522",
+        "payout_schedule": "output_payout_schedule_327",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694,
+        "merchant_active": "output_merchant_active_522",
+        "payout_schedule": "output_payout_schedule_327",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T18:24:04.332000+00:00",
+      "duration_ms": 1083,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "record_ledger_entry",
+      "input": {
+        "charge_id": 8005,
+        "merchant_id": 7694,
+        "amount": 705.18
+      },
+      "output": {
+        "ledger_balance": 487.43
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694,
+        "merchant_active": "output_merchant_active_522",
+        "payout_schedule": "output_payout_schedule_327",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694,
+        "merchant_active": "output_merchant_active_522",
+        "payout_schedule": "output_payout_schedule_327",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T18:24:04.545000+00:00",
+      "duration_ms": 909,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "compose_receipt",
+      "input": {
+        "charge_id": 8005,
+        "amount": 590.64
+      },
+      "output": {
+        "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694,
+        "merchant_active": "output_merchant_active_522",
+        "payout_schedule": "output_payout_schedule_327",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 238.35,
+        "currency": "output_currency_331",
+        "customer_token": "output_customer_token_133",
+        "merchant_id": 7694,
+        "merchant_active": "output_merchant_active_522",
+        "payout_schedule": "output_payout_schedule_327",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Inverted condition caused agent to branch into unrecoverable failure state"
+      },
+      "timestamp": "2026-10-03T18:24:04.320000+00:00",
+      "duration_ms": 720,
+      "status": "failed",
+      "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

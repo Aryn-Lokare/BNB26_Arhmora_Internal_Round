@@ -1,0 +1,146 @@
+{
+  "overall_test": {
+    "total_traces_evaluated": 149,
+    "failed_traces_count": 98,
+    "success_traces_count": 51,
+    "top1_accuracy_pct": 90.82,
+    "top3_accuracy_pct": 98.98,
+    "mean_reciprocal_rank": 0.9481,
+    "precision": 0.5394,
+    "recall": 0.9082,
+    "f1_score": 0.6768,
+    "baseline_random_top1_pct": 19.03,
+    "generalization": {
+      "known_failures": {
+        "total": 39,
+        "top1_acc_pct": 92.31,
+        "top3_acc_pct": 97.44
+      },
+      "unseen_failures": {
+        "total": 59,
+        "top1_acc_pct": 89.83,
+        "top3_acc_pct": 100.0
+      }
+    },
+    "success_runs_false_alarm_rate": 37.25,
+    "by_failure_type": {
+      "wrong_order_of_operations": {
+        "total": 19,
+        "top1_acc_pct": 89.47,
+        "top3_acc_pct": 100.0
+      },
+      "wrong_state_update": {
+        "total": 5,
+        "top1_acc_pct": 80.0,
+        "top3_acc_pct": 100.0
+      },
+      "hallucinated_value": {
+        "total": 20,
+        "top1_acc_pct": 85.0,
+        "top3_acc_pct": 100.0
+      },
+      "stale_state": {
+        "total": 20,
+        "top1_acc_pct": 95.0,
+        "top3_acc_pct": 100.0
+      },
+      "wrong_tool_argument": {
+        "total": 3,
+        "top1_acc_pct": 100.0,
+        "top3_acc_pct": 100.0
+      },
+      "wrong_agent_handoff": {
+        "total": 7,
+        "top1_acc_pct": 85.71,
+        "top3_acc_pct": 85.71
+      },
+      "invalid_tool_output_handling": {
+        "total": 6,
+        "top1_acc_pct": 100.0,
+        "top3_acc_pct": 100.0
+      },
+      "incorrect_api_response_handling": {
+        "total": 2,
+        "top1_acc_pct": 100.0,
+        "top3_acc_pct": 100.0
+      },
+      "incorrect_retrieval": {
+        "total": 3,
+        "top1_acc_pct": 100.0,
+        "top3_acc_pct": 100.0
+      },
+      "incorrect_llm_decision": {
+        "total": 2,
+        "top1_acc_pct": 100.0,
+        "top3_acc_pct": 100.0
+      },
+      "incorrect_database_operation": {
+        "total": 2,
+        "top1_acc_pct": 100.0,
+        "top3_acc_pct": 100.0
+      },
+      "missing_information": {
+        "total": 3,
+        "top1_acc_pct": 100.0,
+        "top3_acc_pct": 100.0
+      },
+      "invalid_data_transformation": {
+        "total": 4,
+        "top1_acc_pct": 75.0,
+        "top3_acc_pct": 100.0
+      },
+      "incorrect_parameter": {
+        "total": 1,
+        "top1_acc_pct": 100.0,
+        "top3_acc_pct": 100.0
+      },
+      "incorrect_condition": {
+        "total": 1,
+        "top1_acc_pct": 100.0,
+        "top3_acc_pct": 100.0
+      }
+    }
+  },
+  "unseen_test": {
+    "total_traces_evaluated": 59,
+    "failed_traces_count": 59,
+    "success_traces_count": 0,
+    "top1_accuracy_pct": 89.83,
+    "top3_accuracy_pct": 100.0,
+    "mean_reciprocal_rank": 0.9435,
+    "precision": 0.7067,
+    "recall": 0.8983,
+    "f1_score": 0.791,
+    "baseline_random_top1_pct": 18.56,
+    "generalization": {
+      "known_failures": {
+        "total": 0,
+        "top1_acc_pct": 0.0,
+        "top3_acc_pct": 0.0
+      },
+      "unseen_failures": {
+        "total": 59,
+        "top1_acc_pct": 89.83,
+        "top3_acc_pct": 100.0
+      }
+    },
+    "success_runs_false_alarm_rate": 0.0,
+    "by_failure_type": {
+      "stale_state": {
+        "total": 20,
+        "top1_acc_pct": 95.0,
+        "top3_acc_pct": 100.0
+      },
+      "hallucinated_value": {
+        "total": 20,
+        "top1_acc_pct": 85.0,
+        "top3_acc_pct": 100.0
+      },
+      "wrong_order_of_operations": {
+        "total": 19,
+        "top1_acc_pct": 89.47,
+        "top3_acc_pct": 100.0
+      }
+    }
+  }
+}

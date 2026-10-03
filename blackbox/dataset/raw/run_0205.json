@@ -1,0 +1,174 @@
+{
+  "run_id": "run_0205",
+  "task_type": "payment_processing",
+  "agent_name": "payment_processing_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T22:30:00.884000+00:00",
+  "end_time": "2026-10-03T22:30:00.720000+00:00",
+  "total_steps": 4,
+  "failure_type": "wrong_agent_handoff",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "verify_payment_parameters",
+      "input": {
+        "payment_request": "val_payment_request_67"
+      },
+      "output": {
+        "amount": 915.77,
+        "currency": "output_currency_689",
+        "customer_token": "output_customer_token_616",
+        "merchant_id": 2475
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 915.77,
+        "currency": "output_currency_689",
+        "customer_token": "output_customer_token_616",
+        "merchant_id": 2475
+      },
+      "timestamp": "2026-10-03T22:30:00.884000+00:00",
+      "duration_ms": 884,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "check_merchant_account_status",
+      "input": {
+        "merchant_id": 2475
+      },
+      "output": {
+        "handoff_target": "legacy_deprecated_agent",
+        "protocol": "v0"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 915.77,
+        "currency": "output_currency_689",
+        "customer_token": "output_customer_token_616",
+        "merchant_id": 2475
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 915.77,
+        "currency": "output_currency_689",
+        "customer_token": "output_customer_token_616",
+        "merchant_id": 2475,
+        "merchant_active": "output_merchant_active_396",
+        "payout_schedule": "output_payout_schedule_905"
+      },
+      "timestamp": "2026-10-03T22:30:01.068000+00:00",
+      "duration_ms": 534,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "run_fraud_scoring",
+      "input": {
+        "customer_token": "val_customer_token_28",
+        "amount": 147.27,
+        "currency": "val_currency_20"
+      },
+      "output": {
+        "risk_score": "output_risk_score_587",
+        "fraud_verdict": "output_fraud_verdict_685"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 915.77,
+        "currency": "output_currency_689",
+        "customer_token": "output_customer_token_616",
+        "merchant_id": 2475,
+        "merchant_active": "output_merchant_active_396",
+        "payout_schedule": "output_payout_schedule_905"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 915.77,
+        "currency": "output_currency_689",
+        "customer_token": "output_customer_token_616",
+        "merchant_id": 2475,
+        "merchant_active": "output_merchant_active_396",
+        "payout_schedule": "output_payout_schedule_905",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T22:30:02.661000+00:00",
+      "duration_ms": 887,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_card_charge",
+      "input": {
+        "customer_token": "val_customer_token_80",
+        "amount": 394.25,
+        "currency": "val_currency_20"
+      },
+      "output": {
+        "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 915.77,
+        "currency": "output_currency_689",
+        "customer_token": "output_customer_token_616",
+        "merchant_id": 2475,
+        "merchant_active": "output_merchant_active_396",
+        "payout_schedule": "output_payout_schedule_905",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 915.77,
+        "currency": "output_currency_689",
+        "customer_token": "output_customer_token_616",
+        "merchant_id": 2475,
+        "merchant_active": "output_merchant_active_396",
+        "payout_schedule": "output_payout_schedule_905",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Handoff to incompatible sub-agent resulted in dropped execution context"
+      },
+      "timestamp": "2026-10-03T22:30:00.720000+00:00",
+      "duration_ms": 180,
+      "status": "failed",
+      "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

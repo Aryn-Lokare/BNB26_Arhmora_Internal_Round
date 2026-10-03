@@ -1,0 +1,220 @@
+{
+  "run_id": "run_0512",
+  "task_type": "it_support",
+  "agent_name": "it_support_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T13:03:00.561000+00:00",
+  "end_time": "2026-10-03T13:03:05.196000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_state_update",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "State update dropped critical context keys required by subsequent steps",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "evaluate_access_request",
+      "input": {
+        "ticket_text": "val_ticket_text_57"
+      },
+      "output": {
+        "username": "output_username_470",
+        "requested_group": "output_requested_group_448",
+        "manager_approved": "output_manager_approved_613"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_470",
+        "requested_group": "output_requested_group_448",
+        "manager_approved": "output_manager_approved_613"
+      },
+      "timestamp": "2026-10-03T13:03:00.561000+00:00",
+      "duration_ms": 561,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_ldap_directory",
+      "input": {
+        "username": "val_username_88"
+      },
+      "output": {
+        "employee_status": "success",
+        "dept": "output_dept_713",
+        "security_clearance": "output_security_clearance_869"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_470",
+        "requested_group": "output_requested_group_448",
+        "manager_approved": "output_manager_approved_613"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_470",
+        "requested_group": "output_requested_group_448",
+        "manager_approved": "output_manager_approved_613",
+        "employee_status": "success",
+        "dept": "output_dept_713",
+        "security_clearance": "output_security_clearance_869"
+      },
+      "timestamp": "2026-10-03T13:03:00.166000+00:00",
+      "duration_ms": 83,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_security_policy",
+      "input": {
+        "requested_group": "val_requested_group_19",
+        "security_clearance": "val_security_clearance_92"
+      },
+      "output": {
+        "policy_satisfied": "output_policy_satisfied_335",
+        "mfa_enabled": "output_mfa_enabled_241"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_470",
+        "requested_group": "output_requested_group_448",
+        "manager_approved": "output_manager_approved_613",
+        "employee_status": "success",
+        "dept": "output_dept_713",
+        "security_clearance": "output_security_clearance_869"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_470",
+        "requested_group": "output_requested_group_448",
+        "manager_approved": "output_manager_approved_613",
+        "employee_status": "success",
+        "dept": "output_dept_713",
+        "security_clearance": "output_security_clearance_869",
+        "policy_satisfied": "output_policy_satisfied_335",
+        "mfa_enabled": "output_mfa_enabled_241"
+      },
+      "timestamp": "2026-10-03T13:03:02.685000+00:00",
+      "duration_ms": 895,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "assign_vpn_profile",
+      "input": {
+        "username": "val_username_34",
+        "requested_group": "val_requested_group_15"
+      },
+      "output": {
+        "corrupted_keys": [
+          "all_context_cleared"
+        ],
+        "reset": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_470",
+        "requested_group": "output_requested_group_448",
+        "manager_approved": "output_manager_approved_613",
+        "employee_status": "success",
+        "dept": "output_dept_713",
+        "security_clearance": "output_security_clearance_869",
+        "policy_satisfied": "output_policy_satisfied_335",
+        "mfa_enabled": "output_mfa_enabled_241"
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "timestamp": "2026-10-03T13:03:04.412000+00:00",
+      "duration_ms": 1103,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "audit_log_access_grant",
+      "input": {
+        "username": "val_username_65",
+        "cert_serial": "val_cert_serial_21"
+      },
+      "output": {
+        "audit_id": 6563
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T13:03:03.490000+00:00",
+      "duration_ms": 698,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "notify_user_credentials",
+      "input": {
+        "username": "val_username_93",
+        "provision_status": "val_provision_status_33"
+      },
+      "output": {
+        "error": "State update dropped critical context keys required by subsequent steps",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "State update dropped critical context keys required by subsequent steps"
+      },
+      "timestamp": "2026-10-03T13:03:05.196000+00:00",
+      "duration_ms": 866,
+      "status": "failed",
+      "error": "State update dropped critical context keys required by subsequent steps",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

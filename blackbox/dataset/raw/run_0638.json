@@ -1,0 +1,248 @@
+{
+  "run_id": "run_0638",
+  "task_type": "research_assistant",
+  "agent_name": "research_assistant_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T12:56:00.637000+00:00",
+  "end_time": "2026-10-03T12:56:06.162000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_tool_argument",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Invalid tool argument caused downstream processing error: entity not found",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_search_keywords",
+      "input": {
+        "research_query": "Execute action formulate_search_keywords for research_assistant workflow"
+      },
+      "output": {
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121"
+      },
+      "timestamp": "2026-10-03T12:56:00.637000+00:00",
+      "duration_ms": 637,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_academic_index",
+      "input": {
+        "keywords": "INVALID_KEYWORDS_9999",
+        "min_year": "val_min_year_17"
+      },
+      "output": {
+        "status": "accepted_with_bad_arg",
+        "warning": "Unchecked parameter format"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121",
+        "paper_ids": 7452,
+        "citation_counts": "output_citation_counts_238"
+      },
+      "timestamp": "2026-10-03T12:56:02.210000+00:00",
+      "duration_ms": 1105,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "fetch_paper_abstracts",
+      "input": {
+        "paper_ids": 7452
+      },
+      "output": {
+        "abstract_texts": "output_abstract_texts_580",
+        "author_institutions": "output_author_institutions_259"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121",
+        "paper_ids": 7452,
+        "citation_counts": "output_citation_counts_238"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121",
+        "paper_ids": 7452,
+        "citation_counts": "output_citation_counts_238",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T12:56:01.266000+00:00",
+      "duration_ms": 422,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "extract_methodology_findings",
+      "input": {
+        "abstract_texts": "val_abstract_texts_40"
+      },
+      "output": {
+        "benchmark_results": "output_benchmark_results_982",
+        "comparative_table": "output_comparative_table_723"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121",
+        "paper_ids": 7452,
+        "citation_counts": "output_citation_counts_238",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121",
+        "paper_ids": 7452,
+        "citation_counts": "output_citation_counts_238",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T12:56:01.400000+00:00",
+      "duration_ms": 350,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "store_annotated_bibliography",
+      "input": {
+        "comparative_table": "val_comparative_table_83"
+      },
+      "output": {
+        "bibliography_id": 5575
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121",
+        "paper_ids": 7452,
+        "citation_counts": "output_citation_counts_238",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121",
+        "paper_ids": 7452,
+        "citation_counts": "output_citation_counts_238",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T12:56:04.160000+00:00",
+      "duration_ms": 832,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "draft_literature_review",
+      "input": {
+        "comparative_table": "val_comparative_table_41"
+      },
+      "output": {
+        "error": "Invalid tool argument caused downstream processing error: entity not found",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121",
+        "paper_ids": 7452,
+        "citation_counts": "output_citation_counts_238",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_625",
+        "inclusion_criteria": "output_inclusion_criteria_932",
+        "min_year": "output_min_year_121",
+        "paper_ids": 7452,
+        "citation_counts": "output_citation_counts_238",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Invalid tool argument caused downstream processing error: entity not found"
+      },
+      "timestamp": "2026-10-03T12:56:06.162000+00:00",
+      "duration_ms": 1027,
+      "status": "failed",
+      "error": "Invalid tool argument caused downstream processing error: entity not found",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

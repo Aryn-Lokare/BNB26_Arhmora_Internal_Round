@@ -1,0 +1,286 @@
+{
+  "run_id": "run_0385",
+  "task_type": "data_analysis",
+  "agent_name": "data_analysis_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T21:57:01.377000+00:00",
+  "end_time": "2026-10-03T21:57:00.978000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_parameter",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Type error / out of bounds parameter encountered in downstream service call",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_analysis_plan",
+      "input": {
+        "analysis_question": "val_analysis_question_39"
+      },
+      "output": {
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444"
+      },
+      "timestamp": "2026-10-03T21:57:01.377000+00:00",
+      "duration_ms": 1377,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "inspect_db_schema",
+      "input": {
+        "target_tables": "val_target_tables_71"
+      },
+      "output": {
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444",
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622"
+      },
+      "timestamp": "2026-10-03T21:57:01.904000+00:00",
+      "duration_ms": 952,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "construct_sql_query",
+      "input": {
+        "plan_steps": "val_plan_steps_92",
+        "schema_columns": "val_schema_columns_16"
+      },
+      "output": {
+        "sql_statement": "output_sql_statement_411"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444",
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444",
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622",
+        "sql_statement": "output_sql_statement_411"
+      },
+      "timestamp": "2026-10-03T21:57:02.862000+00:00",
+      "duration_ms": 954,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_database_query",
+      "input": {
+        "sql_statement": "val_sql_statement_44",
+        "rate_limit_ms": "infinite_string",
+        "pct": 9999
+      },
+      "output": {
+        "warning": "coerced_bad_type"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444",
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622",
+        "sql_statement": "output_sql_statement_411"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444",
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622",
+        "sql_statement": "output_sql_statement_411",
+        "query_result_rows": [
+          {
+            "item_id": 36,
+            "score": 0.97
+          },
+          {
+            "item_id": 92,
+            "score": 0.82
+          }
+        ],
+        "row_count": "output_row_count_427"
+      },
+      "timestamp": "2026-10-03T21:57:01.220000+00:00",
+      "duration_ms": 305,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "tool_call",
+      "action": "compute_aggregate_metrics",
+      "input": {
+        "query_result_rows": "Execute action compute_aggregate_metrics for data_analysis workflow"
+      },
+      "output": {
+        "metric_summary": "output_metric_summary_286"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444",
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622",
+        "sql_statement": "output_sql_statement_411",
+        "query_result_rows": [
+          {
+            "item_id": 36,
+            "score": 0.97
+          },
+          {
+            "item_id": 92,
+            "score": 0.82
+          }
+        ],
+        "row_count": "output_row_count_427"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444",
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622",
+        "sql_statement": "output_sql_statement_411",
+        "query_result_rows": [
+          {
+            "item_id": 36,
+            "score": 0.97
+          },
+          {
+            "item_id": 92,
+            "score": 0.82
+          }
+        ],
+        "row_count": "output_row_count_427",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T21:57:00.885000+00:00",
+      "duration_ms": 177,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "synthesize_analytical_answer",
+      "input": {
+        "metric_summary": "val_metric_summary_10"
+      },
+      "output": {
+        "error": "Type error / out of bounds parameter encountered in downstream service call",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444",
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622",
+        "sql_statement": "output_sql_statement_411",
+        "query_result_rows": [
+          {
+            "item_id": 36,
+            "score": 0.97
+          },
+          {
+            "item_id": 92,
+            "score": 0.82
+          }
+        ],
+        "row_count": "output_row_count_427",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_327",
+        "target_tables": "output_target_tables_444",
+        "schema_columns": "output_schema_columns_162",
+        "foreign_keys": "output_foreign_keys_622",
+        "sql_statement": "output_sql_statement_411",
+        "query_result_rows": [
+          {
+            "item_id": 36,
+            "score": 0.97
+          },
+          {
+            "item_id": 92,
+            "score": 0.82
+          }
+        ],
+        "row_count": "output_row_count_427",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Type error / out of bounds parameter encountered in downstream service call"
+      },
+      "timestamp": "2026-10-03T21:57:00.978000+00:00",
+      "duration_ms": 163,
+      "status": "failed",
+      "error": "Type error / out of bounds parameter encountered in downstream service call",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

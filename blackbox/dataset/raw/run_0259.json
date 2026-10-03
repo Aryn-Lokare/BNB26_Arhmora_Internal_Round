@@ -1,0 +1,271 @@
+{
+  "run_id": "run_0259",
+  "task_type": "email_assistant",
+  "agent_name": "email_assistant_agent_v3",
+  "status": "success",
+  "start_time": "2026-10-03T11:26:01.223000+00:00",
+  "end_time": "2026-10-03T11:26:05.028000+00:00",
+  "total_steps": 6,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "assistant_summary": "output_assistant_summary_820"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_email_thread",
+      "input": {
+        "raw_email": "val_raw_email_11"
+      },
+      "output": {
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323"
+      },
+      "timestamp": "2026-10-03T11:26:01.223000+00:00",
+      "duration_ms": 1223,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_related_correspondence",
+      "input": {
+        "sender": "val_sender_55",
+        "subject": "val_subject_47"
+      },
+      "output": {
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323",
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763"
+      },
+      "timestamp": "2026-10-03T11:26:00.702000+00:00",
+      "duration_ms": 351,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "draft_email_response",
+      "input": {
+        "subject": "val_subject_12",
+        "context_notes": "val_context_notes_71",
+        "required_action": "val_required_action_95"
+      },
+      "output": {
+        "draft_body": "output_draft_body_412",
+        "recipients": "output_recipients_265"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323",
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323",
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763",
+        "draft_body": "output_draft_body_412",
+        "recipients": "output_recipients_265"
+      },
+      "timestamp": "2026-10-03T11:26:00.795000+00:00",
+      "duration_ms": 265,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_mailbox_label",
+      "input": {
+        "email_id": 334,
+        "folder": "val_folder_84"
+      },
+      "output": {
+        "label_applied": "output_label_applied_124"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323",
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763",
+        "draft_body": "output_draft_body_412",
+        "recipients": "output_recipients_265"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323",
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763",
+        "draft_body": "output_draft_body_412",
+        "recipients": "output_recipients_265",
+        "label_applied": "output_label_applied_124"
+      },
+      "timestamp": "2026-10-03T11:26:04.080000+00:00",
+      "duration_ms": 1020,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "queue_outbox_message",
+      "input": {
+        "draft_body": "val_draft_body_69",
+        "recipients": "val_recipients_27"
+      },
+      "output": {
+        "queue_id": 7641,
+        "scheduled_send": "output_scheduled_send_289"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323",
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763",
+        "draft_body": "output_draft_body_412",
+        "recipients": "output_recipients_265",
+        "label_applied": "output_label_applied_124"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323",
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763",
+        "draft_body": "output_draft_body_412",
+        "recipients": "output_recipients_265",
+        "label_applied": "output_label_applied_124",
+        "queue_id": 7641,
+        "scheduled_send": "output_scheduled_send_289"
+      },
+      "timestamp": "2026-10-03T11:26:05.055000+00:00",
+      "duration_ms": 1011,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "summarize_email_action",
+      "input": {
+        "queue_id": 7641
+      },
+      "output": {
+        "assistant_summary": "output_assistant_summary_820"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323",
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763",
+        "draft_body": "output_draft_body_412",
+        "recipients": "output_recipients_265",
+        "label_applied": "output_label_applied_124",
+        "queue_id": 7641,
+        "scheduled_send": "output_scheduled_send_289"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_809",
+        "subject": "output_subject_849",
+        "urgency": "output_urgency_516",
+        "required_action": "output_required_action_323",
+        "previous_threads": "output_previous_threads_344",
+        "context_notes": "output_context_notes_763",
+        "draft_body": "output_draft_body_412",
+        "recipients": "output_recipients_265",
+        "label_applied": "output_label_applied_124",
+        "queue_id": 7641,
+        "scheduled_send": "output_scheduled_send_289",
+        "assistant_summary": "output_assistant_summary_820"
+      },
+      "timestamp": "2026-10-03T11:26:05.028000+00:00",
+      "duration_ms": 838,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

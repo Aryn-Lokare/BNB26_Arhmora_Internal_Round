@@ -1,0 +1,261 @@
+{
+  "run_id": "run_0508",
+  "task_type": "it_support",
+  "agent_name": "it_support_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T15:14:00.413000+00:00",
+  "end_time": "2026-10-03T15:14:05.406000+00:00",
+  "total_steps": 6,
+  "failure_type": "hallucinated_value",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "evaluate_access_request",
+      "input": {
+        "ticket_text": "val_ticket_text_69"
+      },
+      "output": {
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870"
+      },
+      "timestamp": "2026-10-03T15:14:00.413000+00:00",
+      "duration_ms": 413,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_ldap_directory",
+      "input": {
+        "username": "val_username_66"
+      },
+      "output": {
+        "hallucinated_id": "FAKE_TOKEN_XYZ_9876",
+        "confidence": 0.99,
+        "verified": false
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870",
+        "employee_status": "success",
+        "dept": "output_dept_928",
+        "security_clearance": "output_security_clearance_731"
+      },
+      "timestamp": "2026-10-03T15:14:00.248000+00:00",
+      "duration_ms": 124,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_security_policy",
+      "input": {
+        "requested_group": "val_requested_group_85",
+        "security_clearance": "val_security_clearance_83"
+      },
+      "output": {
+        "policy_satisfied": "output_policy_satisfied_811",
+        "mfa_enabled": "output_mfa_enabled_545"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870",
+        "employee_status": "success",
+        "dept": "output_dept_928",
+        "security_clearance": "output_security_clearance_731"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870",
+        "employee_status": "success",
+        "dept": "output_dept_928",
+        "security_clearance": "output_security_clearance_731",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T15:14:03.042000+00:00",
+      "duration_ms": 1014,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "assign_vpn_profile",
+      "input": {
+        "username": "val_username_70",
+        "requested_group": "val_requested_group_41"
+      },
+      "output": {
+        "cert_serial": "output_cert_serial_358",
+        "provision_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870",
+        "employee_status": "success",
+        "dept": "output_dept_928",
+        "security_clearance": "output_security_clearance_731",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870",
+        "employee_status": "success",
+        "dept": "output_dept_928",
+        "security_clearance": "output_security_clearance_731",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T15:14:03.588000+00:00",
+      "duration_ms": 897,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "audit_log_access_grant",
+      "input": {
+        "username": "val_username_86",
+        "cert_serial": "val_cert_serial_53"
+      },
+      "output": {
+        "audit_id": 8906
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870",
+        "employee_status": "success",
+        "dept": "output_dept_928",
+        "security_clearance": "output_security_clearance_731",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870",
+        "employee_status": "success",
+        "dept": "output_dept_928",
+        "security_clearance": "output_security_clearance_731",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T15:14:04.220000+00:00",
+      "duration_ms": 844,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "notify_user_credentials",
+      "input": {
+        "username": "val_username_48",
+        "provision_status": "val_provision_status_15"
+      },
+      "output": {
+        "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870",
+        "employee_status": "success",
+        "dept": "output_dept_928",
+        "security_clearance": "output_security_clearance_731",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_659",
+        "requested_group": "output_requested_group_290",
+        "manager_approved": "output_manager_approved_870",
+        "employee_status": "success",
+        "dept": "output_dept_928",
+        "security_clearance": "output_security_clearance_731",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Hallucinated token does not exist in backend database; 401 Unauthorized"
+      },
+      "timestamp": "2026-10-03T15:14:05.406000+00:00",
+      "duration_ms": 901,
+      "status": "failed",
+      "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

@@ -1,0 +1,252 @@
+{
+  "run_id": "run_0586",
+  "task_type": "hr_assistant",
+  "agent_name": "hr_assistant_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-04T01:39:00.386000+00:00",
+  "end_time": "2026-10-04T01:39:01.116000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_state_update",
+  "failure_step_id": "step_05",
+  "final_output": {
+    "error": "State update dropped critical context keys required by subsequent steps",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_leave_application",
+      "input": {
+        "form_data": "val_form_data_24"
+      },
+      "output": {
+        "employee_id": 4229,
+        "leave_type": "output_leave_type_749",
+        "start_date": "output_start_date_428",
+        "days_count": "output_days_count_399"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 4229,
+        "leave_type": "output_leave_type_749",
+        "start_date": "output_start_date_428",
+        "days_count": "output_days_count_399"
+      },
+      "timestamp": "2026-10-04T01:39:00.386000+00:00",
+      "duration_ms": 386,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_pto_balance",
+      "input": {
+        "employee_id": 4229,
+        "leave_type": "val_leave_type_87"
+      },
+      "output": {
+        "accrued_days": "output_accrued_days_918",
+        "used_days": "output_used_days_606",
+        "available_days": "output_available_days_116"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 4229,
+        "leave_type": "output_leave_type_749",
+        "start_date": "output_start_date_428",
+        "days_count": "output_days_count_399"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 4229,
+        "leave_type": "output_leave_type_749",
+        "start_date": "output_start_date_428",
+        "days_count": "output_days_count_399",
+        "accrued_days": "output_accrued_days_918",
+        "used_days": "output_used_days_606",
+        "available_days": "output_available_days_116"
+      },
+      "timestamp": "2026-10-04T01:39:00.500000+00:00",
+      "duration_ms": 250,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_blackout_periods",
+      "input": {
+        "start_date": "2026-10-04T09:00:00Z",
+        "days_count": "val_days_count_85",
+        "dept_id": 9081
+      },
+      "output": {
+        "coverage_ok": "output_coverage_ok_273",
+        "blackout_conflict": "output_blackout_conflict_473"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 4229,
+        "leave_type": "output_leave_type_749",
+        "start_date": "output_start_date_428",
+        "days_count": "output_days_count_399",
+        "accrued_days": "output_accrued_days_918",
+        "used_days": "output_used_days_606",
+        "available_days": "output_available_days_116"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 4229,
+        "leave_type": "output_leave_type_749",
+        "start_date": "output_start_date_428",
+        "days_count": "output_days_count_399",
+        "accrued_days": "output_accrued_days_918",
+        "used_days": "output_used_days_606",
+        "available_days": "output_available_days_116",
+        "coverage_ok": "output_coverage_ok_273",
+        "blackout_conflict": "output_blackout_conflict_473"
+      },
+      "timestamp": "2026-10-04T01:39:04.059000+00:00",
+      "duration_ms": 1353,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "deduct_pto_balance",
+      "input": {
+        "employee_id": 4229,
+        "days_count": "val_days_count_75"
+      },
+      "output": {
+        "new_pto_balance": 372.28,
+        "approval_code": "output_approval_code_632"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 4229,
+        "leave_type": "output_leave_type_749",
+        "start_date": "output_start_date_428",
+        "days_count": "output_days_count_399",
+        "accrued_days": "output_accrued_days_918",
+        "used_days": "output_used_days_606",
+        "available_days": "output_available_days_116",
+        "coverage_ok": "output_coverage_ok_273",
+        "blackout_conflict": "output_blackout_conflict_473"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 4229,
+        "leave_type": "output_leave_type_749",
+        "start_date": "output_start_date_428",
+        "days_count": "output_days_count_399",
+        "accrued_days": "output_accrued_days_918",
+        "used_days": "output_used_days_606",
+        "available_days": "output_available_days_116",
+        "coverage_ok": "output_coverage_ok_273",
+        "blackout_conflict": "output_blackout_conflict_473",
+        "new_pto_balance": 372.28,
+        "approval_code": "output_approval_code_632"
+      },
+      "timestamp": "2026-10-04T01:39:02.388000+00:00",
+      "duration_ms": 597,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "calendar_sync_out_of_office",
+      "input": {
+        "employee_id": 4229,
+        "start_date": "2026-10-04T09:00:00Z",
+        "days_count": "val_days_count_50"
+      },
+      "output": {
+        "corrupted_keys": [
+          "all_context_cleared"
+        ],
+        "reset": true
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 4229,
+        "leave_type": "output_leave_type_749",
+        "start_date": "output_start_date_428",
+        "days_count": "output_days_count_399",
+        "accrued_days": "output_accrued_days_918",
+        "used_days": "output_used_days_606",
+        "available_days": "output_available_days_116",
+        "coverage_ok": "output_coverage_ok_273",
+        "blackout_conflict": "output_blackout_conflict_473",
+        "new_pto_balance": 372.28,
+        "approval_code": "output_approval_code_632"
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "timestamp": "2026-10-04T01:39:00.640000+00:00",
+      "duration_ms": 128,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "send_leave_confirmation",
+      "input": {
+        "employee_id": 4229,
+        "approval_code": "val_approval_code_99"
+      },
+      "output": {
+        "error": "State update dropped critical context keys required by subsequent steps",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "execution_status": "failed",
+        "last_error": "State update dropped critical context keys required by subsequent steps"
+      },
+      "timestamp": "2026-10-04T01:39:01.116000+00:00",
+      "duration_ms": 186,
+      "status": "failed",
+      "error": "State update dropped critical context keys required by subsequent steps",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

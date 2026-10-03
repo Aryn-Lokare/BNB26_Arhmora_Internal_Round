@@ -1,0 +1,250 @@
+{
+  "run_id": "run_0343",
+  "task_type": "document_processing",
+  "agent_name": "document_processing_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T18:37:00.747000+00:00",
+  "end_time": "2026-10-03T18:37:06.432000+00:00",
+  "total_steps": 6,
+  "failure_type": "invalid_data_transformation",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "classify_document_type",
+      "input": {
+        "file_bytes": "val_file_bytes_62"
+      },
+      "output": {
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268"
+      },
+      "timestamp": "2026-10-03T18:37:00.747000+00:00",
+      "duration_ms": 747,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "run_ocr_extraction",
+      "input": {
+        "file_bytes": "val_file_bytes_36",
+        "page_count": "val_page_count_74"
+      },
+      "output": {
+        "transformed_value": "NaN",
+        "source_value": 150.0,
+        "units": "mismatched_timezone_and_currency"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268",
+        "raw_text": "output_raw_text_145",
+        "bounding_boxes": "output_bounding_boxes_573"
+      },
+      "timestamp": "2026-10-03T18:37:01.194000+00:00",
+      "duration_ms": 597,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "extract_key_value_entities",
+      "input": {
+        "raw_text": "val_raw_text_19"
+      },
+      "output": {
+        "vendor_name": "output_vendor_name_754",
+        "invoice_date": "output_invoice_date_811",
+        "total_due": 826.97,
+        "line_items": [
+          {
+            "item_id": 49,
+            "score": 0.8
+          },
+          {
+            "item_id": 52,
+            "score": 0.95
+          }
+        ]
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268",
+        "raw_text": "output_raw_text_145",
+        "bounding_boxes": "output_bounding_boxes_573"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268",
+        "raw_text": "output_raw_text_145",
+        "bounding_boxes": "output_bounding_boxes_573",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T18:37:00.402000+00:00",
+      "duration_ms": 134,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "validate_financial_totals",
+      "input": {
+        "line_items": "val_line_items_14",
+        "total_due": "val_total_due_11"
+      },
+      "output": {
+        "math_valid": 5105,
+        "discrepancy": "output_discrepancy_217"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268",
+        "raw_text": "output_raw_text_145",
+        "bounding_boxes": "output_bounding_boxes_573",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268",
+        "raw_text": "output_raw_text_145",
+        "bounding_boxes": "output_bounding_boxes_573",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T18:37:03.568000+00:00",
+      "duration_ms": 892,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "save_structured_doc_record",
+      "input": {
+        "vendor_name": "val_vendor_name_51",
+        "total_due": "val_total_due_95"
+      },
+      "output": {
+        "doc_id": 8606
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268",
+        "raw_text": "output_raw_text_145",
+        "bounding_boxes": "output_bounding_boxes_573",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268",
+        "raw_text": "output_raw_text_145",
+        "bounding_boxes": "output_bounding_boxes_573",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T18:37:01.795000+00:00",
+      "duration_ms": 359,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "emit_doc_summary",
+      "input": {
+        "doc_id": 8606
+      },
+      "output": {
+        "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268",
+        "raw_text": "output_raw_text_145",
+        "bounding_boxes": "output_bounding_boxes_573",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_561",
+        "page_count": "output_page_count_268",
+        "raw_text": "output_raw_text_145",
+        "bounding_boxes": "output_bounding_boxes_573",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream validation failed: expected numeric float, received 'NaN'"
+      },
+      "timestamp": "2026-10-03T18:37:06.432000+00:00",
+      "duration_ms": 1072,
+      "status": "failed",
+      "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

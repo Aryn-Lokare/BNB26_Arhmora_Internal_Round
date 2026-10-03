@@ -1,0 +1,167 @@
+{
+  "run_id": "run_0458",
+  "task_type": "coding_assistant",
+  "agent_name": "coding_assistant_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T11:49:01.102000+00:00",
+  "end_time": "2026-10-03T11:49:01.256000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_parameter",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Type error / out of bounds parameter encountered in downstream service call",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_issue_description",
+      "input": {
+        "issue_text": "val_issue_text_96",
+        "stacktrace": "val_stacktrace_70"
+      },
+      "output": {
+        "target_file": "output_target_file_431",
+        "root_function": "output_root_function_878",
+        "repro_steps": "output_repro_steps_337"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_431",
+        "root_function": "output_root_function_878",
+        "repro_steps": "output_repro_steps_337"
+      },
+      "timestamp": "2026-10-03T11:49:01.102000+00:00",
+      "duration_ms": 1102,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "read_source_code_file",
+      "input": {
+        "target_file": "val_target_file_23",
+        "root_function": "val_root_function_32",
+        "rate_limit_ms": "infinite_string",
+        "pct": 9999
+      },
+      "output": {
+        "warning": "coerced_bad_type"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_431",
+        "root_function": "output_root_function_878",
+        "repro_steps": "output_repro_steps_337"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_431",
+        "root_function": "output_root_function_878",
+        "repro_steps": "output_repro_steps_337",
+        "code_snippet": "output_code_snippet_845",
+        "imports": "output_imports_493"
+      },
+      "timestamp": "2026-10-03T11:49:01.128000+00:00",
+      "duration_ms": 564,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "generate_code_diff",
+      "input": {
+        "code_snippet": "val_code_snippet_18",
+        "issue_text": "val_issue_text_17"
+      },
+      "output": {
+        "patch_diff": "output_patch_diff_726",
+        "functions_modified": "output_functions_modified_356"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_431",
+        "root_function": "output_root_function_878",
+        "repro_steps": "output_repro_steps_337",
+        "code_snippet": "output_code_snippet_845",
+        "imports": "output_imports_493"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_431",
+        "root_function": "output_root_function_878",
+        "repro_steps": "output_repro_steps_337",
+        "code_snippet": "output_code_snippet_845",
+        "imports": "output_imports_493",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T11:49:02.820000+00:00",
+      "duration_ms": 940,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "run_unit_test_suite",
+      "input": {
+        "patch_diff": "val_patch_diff_14",
+        "target_file": "val_target_file_19"
+      },
+      "output": {
+        "error": "Type error / out of bounds parameter encountered in downstream service call",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_431",
+        "root_function": "output_root_function_878",
+        "repro_steps": "output_repro_steps_337",
+        "code_snippet": "output_code_snippet_845",
+        "imports": "output_imports_493",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_431",
+        "root_function": "output_root_function_878",
+        "repro_steps": "output_repro_steps_337",
+        "code_snippet": "output_code_snippet_845",
+        "imports": "output_imports_493",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Type error / out of bounds parameter encountered in downstream service call"
+      },
+      "timestamp": "2026-10-03T11:49:01.256000+00:00",
+      "duration_ms": 314,
+      "status": "failed",
+      "error": "Type error / out of bounds parameter encountered in downstream service call",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

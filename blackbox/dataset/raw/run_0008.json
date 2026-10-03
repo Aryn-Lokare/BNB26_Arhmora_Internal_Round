@@ -1,0 +1,159 @@
+{
+  "run_id": "run_0008",
+  "task_type": "customer_support",
+  "agent_name": "customer_support_agent_v2",
+  "status": "success",
+  "start_time": "2026-10-03T21:21:00.856000+00:00",
+  "end_time": "2026-10-03T21:21:05.068000+00:00",
+  "total_steps": 4,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "transaction_id": 8618,
+    "credit_status": "success"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "identify_customer",
+      "input": {
+        "user_query": "Execute action identify_customer for customer_support workflow"
+      },
+      "output": {
+        "customer_id": 3851,
+        "intent": "output_intent_730"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 3851,
+        "intent": "output_intent_730"
+      },
+      "timestamp": "2026-10-03T21:21:00.856000+00:00",
+      "duration_ms": 856,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_account_history",
+      "input": {
+        "customer_id": 3851
+      },
+      "output": {
+        "account_tier": "output_account_tier_515",
+        "recent_orders": "output_recent_orders_661"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 3851,
+        "intent": "output_intent_730"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 3851,
+        "intent": "output_intent_730",
+        "account_tier": "output_account_tier_515",
+        "recent_orders": "output_recent_orders_661"
+      },
+      "timestamp": "2026-10-03T21:21:02.490000+00:00",
+      "duration_ms": 1245,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_refund_eligibility",
+      "input": {
+        "order_id": 512,
+        "customer_id": 3851
+      },
+      "output": {
+        "eligible": true,
+        "max_amount": 291.71
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 3851,
+        "intent": "output_intent_730",
+        "account_tier": "output_account_tier_515",
+        "recent_orders": "output_recent_orders_661"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 3851,
+        "intent": "output_intent_730",
+        "account_tier": "output_account_tier_515",
+        "recent_orders": "output_recent_orders_661",
+        "eligible": true,
+        "max_amount": 291.71
+      },
+      "timestamp": "2026-10-03T21:21:00.240000+00:00",
+      "duration_ms": 80,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "process_wallet_credit",
+      "input": {
+        "customer_id": 3851,
+        "amount": 630.6
+      },
+      "output": {
+        "transaction_id": 8618,
+        "credit_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 3851,
+        "intent": "output_intent_730",
+        "account_tier": "output_account_tier_515",
+        "recent_orders": "output_recent_orders_661",
+        "eligible": true,
+        "max_amount": 291.71
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "refund_request",
+        "customer_id": 3851,
+        "intent": "output_intent_730",
+        "account_tier": "output_account_tier_515",
+        "recent_orders": "output_recent_orders_661",
+        "eligible": true,
+        "max_amount": 291.71,
+        "transaction_id": 8618,
+        "credit_status": "success"
+      },
+      "timestamp": "2026-10-03T21:21:05.068000+00:00",
+      "duration_ms": 1267,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

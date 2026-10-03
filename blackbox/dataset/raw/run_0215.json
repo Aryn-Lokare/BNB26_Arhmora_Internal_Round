@@ -1,0 +1,177 @@
+{
+  "run_id": "run_0215",
+  "task_type": "payment_processing",
+  "agent_name": "payment_processing_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T22:10:00.185000+00:00",
+  "end_time": "2026-10-03T22:10:04.396000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_api_response_handling",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Downstream parser crashed attempting to index non-existent response attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "verify_payment_parameters",
+      "input": {
+        "payment_request": "val_payment_request_63"
+      },
+      "output": {
+        "amount": 404.27,
+        "currency": "output_currency_847",
+        "customer_token": "output_customer_token_887",
+        "merchant_id": 8311
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 404.27,
+        "currency": "output_currency_847",
+        "customer_token": "output_customer_token_887",
+        "merchant_id": 8311
+      },
+      "timestamp": "2026-10-03T22:10:00.185000+00:00",
+      "duration_ms": 185,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "check_merchant_account_status",
+      "input": {
+        "merchant_id": 8311
+      },
+      "output": {
+        "code": 404,
+        "body": {
+          "message": "Not Found"
+        },
+        "treated_as_success": true
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 404.27,
+        "currency": "output_currency_847",
+        "customer_token": "output_customer_token_887",
+        "merchant_id": 8311
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 404.27,
+        "currency": "output_currency_847",
+        "customer_token": "output_customer_token_887",
+        "merchant_id": 8311,
+        "merchant_active": "output_merchant_active_220",
+        "payout_schedule": "output_payout_schedule_234"
+      },
+      "timestamp": "2026-10-03T22:10:01.342000+00:00",
+      "duration_ms": 671,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "run_fraud_scoring",
+      "input": {
+        "customer_token": "val_customer_token_10",
+        "amount": 600.87,
+        "currency": "val_currency_42"
+      },
+      "output": {
+        "risk_score": "output_risk_score_112",
+        "fraud_verdict": "output_fraud_verdict_569"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 404.27,
+        "currency": "output_currency_847",
+        "customer_token": "output_customer_token_887",
+        "merchant_id": 8311,
+        "merchant_active": "output_merchant_active_220",
+        "payout_schedule": "output_payout_schedule_234"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 404.27,
+        "currency": "output_currency_847",
+        "customer_token": "output_customer_token_887",
+        "merchant_id": 8311,
+        "merchant_active": "output_merchant_active_220",
+        "payout_schedule": "output_payout_schedule_234",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T22:10:01.485000+00:00",
+      "duration_ms": 495,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_card_charge",
+      "input": {
+        "customer_token": "val_customer_token_73",
+        "amount": 527.74,
+        "currency": "val_currency_10"
+      },
+      "output": {
+        "error": "Downstream parser crashed attempting to index non-existent response attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 404.27,
+        "currency": "output_currency_847",
+        "customer_token": "output_customer_token_887",
+        "merchant_id": 8311,
+        "merchant_active": "output_merchant_active_220",
+        "payout_schedule": "output_payout_schedule_234",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 404.27,
+        "currency": "output_currency_847",
+        "customer_token": "output_customer_token_887",
+        "merchant_id": 8311,
+        "merchant_active": "output_merchant_active_220",
+        "payout_schedule": "output_payout_schedule_234",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream parser crashed attempting to index non-existent response attributes"
+      },
+      "timestamp": "2026-10-03T22:10:04.396000+00:00",
+      "duration_ms": 1099,
+      "status": "failed",
+      "error": "Downstream parser crashed attempting to index non-existent response attributes",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

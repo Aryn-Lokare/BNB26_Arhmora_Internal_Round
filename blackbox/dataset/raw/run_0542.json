@@ -1,0 +1,246 @@
+{
+  "run_id": "run_0542",
+  "task_type": "inventory_management",
+  "agent_name": "inventory_management_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T23:06:00.962000+00:00",
+  "end_time": "2026-10-03T23:06:00.582000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_condition",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "inspect_depletion_velocity",
+      "input": {
+        "product_id": 512
+      },
+      "output": {
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856"
+      },
+      "timestamp": "2026-10-03T23:06:00.962000+00:00",
+      "duration_ms": 962,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_current_shelf_quantity",
+      "input": {
+        "product_id": 512
+      },
+      "output": {
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856",
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286"
+      },
+      "timestamp": "2026-10-03T23:06:00.782000+00:00",
+      "duration_ms": 391,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "calculate_reorder_quantity",
+      "input": {
+        "units_on_hand": "val_units_on_hand_53",
+        "daily_burn_rate": "val_daily_burn_rate_68",
+        "safety_stock": "val_safety_stock_77"
+      },
+      "output": {
+        "recommended_order_units": "output_recommended_order_units_899"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856",
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856",
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286",
+        "recommended_order_units": "output_recommended_order_units_899"
+      },
+      "timestamp": "2026-10-03T23:06:03.774000+00:00",
+      "duration_ms": 1258,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "submit_purchase_order",
+      "input": {
+        "product_id": 1024,
+        "recommended_order_units": "val_recommended_order_units_61",
+        "supplier_id": 334
+      },
+      "output": {
+        "evaluated_condition": false,
+        "inverted": true,
+        "branch_taken": "fallback_abort"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856",
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286",
+        "recommended_order_units": "output_recommended_order_units_899"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856",
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286",
+        "recommended_order_units": "output_recommended_order_units_899",
+        "po_number": "output_po_number_400",
+        "eta_days": "output_eta_days_106"
+      },
+      "timestamp": "2026-10-03T23:06:03.860000+00:00",
+      "duration_ms": 965,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "update_procurement_ledger",
+      "input": {
+        "po_number": "val_po_number_59",
+        "product_id": 1024
+      },
+      "output": {
+        "ledger_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856",
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286",
+        "recommended_order_units": "output_recommended_order_units_899",
+        "po_number": "output_po_number_400",
+        "eta_days": "output_eta_days_106"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856",
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286",
+        "recommended_order_units": "output_recommended_order_units_899",
+        "po_number": "output_po_number_400",
+        "eta_days": "output_eta_days_106",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T23:06:06.785000+00:00",
+      "duration_ms": 1357,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "broadcast_restock_schedule",
+      "input": {
+        "po_number": "val_po_number_38",
+        "eta_days": "val_eta_days_51"
+      },
+      "output": {
+        "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856",
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286",
+        "recommended_order_units": "output_recommended_order_units_899",
+        "po_number": "output_po_number_400",
+        "eta_days": "output_eta_days_106",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 585.57,
+        "safety_stock": "output_safety_stock_856",
+        "units_on_hand": "output_units_on_hand_174",
+        "units_in_transit": "output_units_in_transit_286",
+        "recommended_order_units": "output_recommended_order_units_899",
+        "po_number": "output_po_number_400",
+        "eta_days": "output_eta_days_106",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Inverted condition caused agent to branch into unrecoverable failure state"
+      },
+      "timestamp": "2026-10-03T23:06:00.582000+00:00",
+      "duration_ms": 97,
+      "status": "failed",
+      "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

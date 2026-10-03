@@ -1,0 +1,229 @@
+{
+  "run_id": "run_0156",
+  "task_type": "hotel_booking",
+  "agent_name": "hotel_booking_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T20:27:00.139000+00:00",
+  "end_time": "2026-10-03T20:27:03.860000+00:00",
+  "total_steps": 5,
+  "failure_type": "incorrect_condition",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_hotel_criteria",
+      "input": {
+        "query": "Execute action parse_hotel_criteria for hotel_booking workflow"
+      },
+      "output": {
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844"
+      },
+      "timestamp": "2026-10-03T20:27:00.139000+00:00",
+      "duration_ms": 139,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_available_hotels",
+      "input": {
+        "city": "val_city_71",
+        "checkin_date": "2026-10-04T09:00:00Z",
+        "nights": "val_nights_72"
+      },
+      "output": {
+        "hotel_ids": 2850,
+        "price_range": "output_price_range_521"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844",
+        "hotel_ids": 2850,
+        "price_range": "output_price_range_521"
+      },
+      "timestamp": "2026-10-03T20:27:00.694000+00:00",
+      "duration_ms": 347,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_room_allocation",
+      "input": {
+        "hotel_id": 1024,
+        "room_type": "val_room_type_18",
+        "nights": "val_nights_43"
+      },
+      "output": {
+        "available": "output_available_770",
+        "nightly_rate": 411.37
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844",
+        "hotel_ids": 2850,
+        "price_range": "output_price_range_521"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844",
+        "hotel_ids": 2850,
+        "price_range": "output_price_range_521",
+        "available": "output_available_770",
+        "nightly_rate": 411.37
+      },
+      "timestamp": "2026-10-03T20:27:02.946000+00:00",
+      "duration_ms": 982,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "commit_hotel_reservation",
+      "input": {
+        "hotel_id": 334,
+        "guest_name": "val_guest_name_82",
+        "total_price": 232.19
+      },
+      "output": {
+        "evaluated_condition": false,
+        "inverted": true,
+        "branch_taken": "fallback_abort"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844",
+        "hotel_ids": 2850,
+        "price_range": "output_price_range_521",
+        "available": "output_available_770",
+        "nightly_rate": 411.37
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844",
+        "hotel_ids": 2850,
+        "price_range": "output_price_range_521",
+        "available": "output_available_770",
+        "nightly_rate": 411.37,
+        "confirmation_num": "output_confirmation_num_785",
+        "voucher": "output_voucher_994"
+      },
+      "timestamp": "2026-10-03T20:27:04.616000+00:00",
+      "duration_ms": 1154,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "generate_booking_confirmation",
+      "input": {
+        "confirmation_num": "val_confirmation_num_76"
+      },
+      "output": {
+        "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844",
+        "hotel_ids": 2850,
+        "price_range": "output_price_range_521",
+        "available": "output_available_770",
+        "nightly_rate": 411.37,
+        "confirmation_num": "output_confirmation_num_785",
+        "voucher": "output_voucher_994"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_983",
+        "checkin_date": "output_checkin_date_800",
+        "nights": "output_nights_958",
+        "guests": "output_guests_844",
+        "hotel_ids": 2850,
+        "price_range": "output_price_range_521",
+        "available": "output_available_770",
+        "nightly_rate": 411.37,
+        "confirmation_num": "output_confirmation_num_785",
+        "voucher": "output_voucher_994",
+        "execution_status": "failed",
+        "last_error": "Inverted condition caused agent to branch into unrecoverable failure state"
+      },
+      "timestamp": "2026-10-03T20:27:03.860000+00:00",
+      "duration_ms": 772,
+      "status": "failed",
+      "error": "Inverted condition caused agent to branch into unrecoverable failure state",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}
