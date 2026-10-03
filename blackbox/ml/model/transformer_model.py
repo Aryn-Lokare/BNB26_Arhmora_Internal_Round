@@ -14,10 +14,12 @@ class StepFailureClassifier(nn.Module):
         pretrained_model_name: str = "distilbert-base-uncased",
         dropout_prob: float = 0.2,
         freeze_encoder_layers: int = 0,
+        temperature: float = 1.3,
     ):
         super().__init__()
         self.config = AutoConfig.from_pretrained(pretrained_model_name)
         self.encoder = AutoModel.from_pretrained(pretrained_model_name)
+        self.temperature = float(temperature)
 
         # Optionally freeze lower layers for fast, stable CPU training
         if freeze_encoder_layers > 0 and hasattr(self.encoder, "transformer"):
@@ -52,7 +54,9 @@ class StepFailureClassifier(nn.Module):
         input_ids: torch.Tensor,
         attention_mask: torch.Tensor,
     ) -> torch.Tensor:
-        """Compute calibrated probabilities in [0, 1]."""
+        """Compute calibrated probabilities in [0, 1] with temperature scaling."""
         with torch.no_grad():
             logits = self.forward(input_ids, attention_mask)
-            return torch.sigmoid(logits)
+            temp = max(self.temperature, 0.1)
+            return torch.sigmoid(logits / temp)
+

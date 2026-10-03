@@ -37,3 +37,6 @@ _query_*.py
 .DS_Store
 Thumbs.db
 blackbox/ml/model/checkpoints/best_model.pt
+node_modules/
+**/node_modules/
+frontend/blackbox/package-lock.json
