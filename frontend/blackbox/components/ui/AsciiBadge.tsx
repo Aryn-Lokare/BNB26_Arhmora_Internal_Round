@@ -8,11 +8,13 @@ export type BadgeVariant =
   | "neutral"
   | "accent";
 
+export type BadgeSize = "sm" | "md" | "lg";
+
 export interface AsciiBadgeProps {
   status?: string;
   variant?: BadgeVariant;
   label?: string;
-  size?: "sm" | "md" | "lg" | (string & {});
+  size?: BadgeSize | string;
   className?: string;
 }
 
@@ -58,15 +60,17 @@ export function AsciiBadge({
     neutral: "border-hairline text-ink/70 bg-canvas",
   };
 
-  const sizeStyles: Record<"sm" | "md" | "lg", string> = {
+  const sizeStyles: Record<BadgeSize, string> = {
     sm: "text-[10px] px-1.5 py-0.5",
     md: "text-[11px] px-2 py-0.5",
     lg: "text-xs px-2.5 py-1",
   };
 
+  const sizeClass = (sizeStyles as Record<string, string>)[size] || sizeStyles.md;
+
   return (
     <span
-      className={`inline-flex items-center gap-1.5 font-mono tracking-tight border rounded-[3px] select-none ${sizeStyles[size]} ${variantStyles[calculatedVariant]} ${className}`}
+      className={`inline-flex items-center gap-1.5 font-mono tracking-tight border rounded-[3px] select-none ${sizeClass} ${variantStyles[calculatedVariant]} ${className}`}
     >
       <span className="opacity-80 text-[10px]">{prefix}</span>
       <span>{text}</span>
