@@ -20,6 +20,8 @@ env/
 *.db
 *.sqlite3
 llm_cache.db
+traces/
+*.trace.json
 
 # Scratch inspection files
 _inspect_*.py

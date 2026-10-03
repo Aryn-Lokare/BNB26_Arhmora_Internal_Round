@@ -11,10 +11,12 @@ Public API
 """
 from __future__ import annotations
 
+import json
 import traceback
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 
 import agent
 import db
@@ -25,9 +27,24 @@ from tasks import check, gold_answer
 @dataclass
 class RunRecord:
     run_id: str
-    outcome: str
+    outcome: str  # "success" or "fail"
     final_answer: str | None
     step_count: int
+    trace_json: dict | None = None
+
+    def to_dict(self) -> dict:
+        """Return the complete structured trace as a JSON-serializable dictionary."""
+        if self.trace_json:
+            return self.trace_json
+        return get_run_trace_json(self.run_id)
+
+    def save_json(self, path: str | None = None) -> str:
+        """Save this structured trace JSON directly to disk."""
+        target = Path(path or f"traces/{self.run_id}.json")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with open(target, "w", encoding="utf-8") as f:
+            json.dump(self.to_dict(), f, indent=2, default=str)
+        return str(target)
 
 
 # ------------------------------------------------------------------ checkpoint helpers
@@ -86,6 +103,7 @@ def record_run(
     injected_step: int | None = None,
     fault_type: str | None = None,
     copied_steps: list[dict] | None = None,
+    save_json: bool | str | Path = False,
 ) -> RunRecord:
     """Persist a completed run and its steps to Neon Postgres atomically."""
 
@@ -139,6 +157,42 @@ def record_run(
             _build_state_snapshot(final_state, trace, idx, base_state=base_state),
         ))
 
+    # -- build structured trace dict --------------------------------------
+    created_at_dt = datetime.now(timezone.utc)
+    trace_dict = {
+        "id": run_id,
+        "task_id": task_id,
+        "task_text": task_text,
+        "gold_answer": gold_str,
+        "final_answer": final_ans,
+        "outcome": outcome,
+        "llm_calls": agent.STATS["llm"],
+        "cached_calls": agent.STATS["cached"],
+        "split": split,
+        "injected_step": injected_step,
+        "fault_type": fault_type,
+        "parent_run_id": parent_run_id,
+        "forked_at_step": forked_at_step,
+        "patch": patch,
+        "created_at": created_at_dt.isoformat(),
+        "step_count": len(step_rows),
+        "steps": [
+            {
+                "step_idx": sr[1],
+                "node": sr[2],
+                "input": sr[3].obj if hasattr(sr[3], "obj") else sr[3],
+                "output": sr[4].obj if hasattr(sr[4], "obj") else sr[4],
+                "error": sr[5],
+                "latency_ms": sr[6],
+                "tokens": sr[7],
+                "retries": sr[8],
+                "checkpoint_id": sr[9],
+                "state_snapshot": sr[10].obj if hasattr(sr[10], "obj") else sr[10],
+            }
+            for sr in step_rows
+        ],
+    }
+
     # -- atomic write to Neon ---------------------------------------------
     conn = db.connect()
     try:
@@ -156,7 +210,7 @@ def record_run(
                     injected_step, fault_type, parent_run_id, forked_at_step,
                     db.jsonb(patch) if patch is not None else None,
                     agent.STATS["llm"], agent.STATS["cached"],
-                    split, datetime.now(timezone.utc),
+                    split, created_at_dt,
                 ),
             )
             with conn.cursor() as cur:
@@ -170,12 +224,39 @@ def record_run(
     finally:
         conn.close()
 
-    return RunRecord(
+    rec = RunRecord(
         run_id=run_id,
         outcome=outcome,
         final_answer=final_ans,
         step_count=len(step_rows),
+        trace_json=trace_dict,
     )
+
+    if save_json:
+        target_path = save_json if isinstance(save_json, (str, Path)) else None
+        rec.save_json(target_path)
+
+    return rec
+
+
+def get_run_trace_json(run_id: str) -> dict:
+    """Fetch a recorded run from Neon Postgres as a structured JSON trace."""
+    conn = db.connect()
+    try:
+        run = conn.execute("SELECT * FROM runs WHERE id = %s", (run_id,)).fetchone()
+        if not run:
+            raise ValueError(f"Run {run_id!r} not found in database")
+        steps = conn.execute(
+            "SELECT step_idx, node, input, output, error, latency_ms, tokens, retries, checkpoint_id, state_snapshot "
+            "FROM steps WHERE run_id = %s ORDER BY step_idx",
+            (run_id,),
+        ).fetchall()
+    finally:
+        conn.close()
+
+    run_dict = dict(run)
+    run_dict["steps"] = [dict(s) for s in steps]
+    return run_dict
 
 
 # ------------------------------------------------------------------ convenience wrapper
@@ -188,6 +269,7 @@ def run_and_record(
     thread_id: str | None = None,
     hint: str = "",
     split: str | None = None,
+    save_json: bool | str | Path = False,
 ) -> RunRecord:
     """Execute a task on the graph, then record the full run atomically.
 
@@ -200,6 +282,7 @@ def run_and_record(
     thread_id  : optional; auto-generated if omitted
     hint       : optional guidance string
     split      : optional data-split label ('train', 'test', 'unseen')
+    save_json  : if True or a file path, also writes the structured trace JSON to disk
     """
     run_id = thread_id or f"run-{uuid.uuid4().hex[:12]}"
 
@@ -234,4 +317,5 @@ def run_and_record(
         cfg=cfg,
         graph=graph,
         split=split,
+        save_json=save_json,
     )

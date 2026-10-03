@@ -34,6 +34,24 @@ class ReplayResult:
     steps_executed: int
     total_steps: int
     compute_saved_pct: float
+    trace_json: dict | None = None
+
+    def to_dict(self) -> dict:
+        """Return the complete structured trace as a JSON-serializable dictionary."""
+        if self.trace_json:
+            return self.trace_json
+        from recorder import get_run_trace_json
+        return get_run_trace_json(self.run_id)
+
+    def save_json(self, path: str | None = None) -> str:
+        """Save this structured trace JSON directly to disk."""
+        import json
+        from pathlib import Path
+        target = Path(path or f"traces/{self.run_id}.json")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with open(target, "w", encoding="utf-8") as f:
+            json.dump(self.to_dict(), f, indent=2, default=str)
+        return str(target)
 
 
 # ------------------------------------------------------------------ fork helper
@@ -190,6 +208,7 @@ def replay_run(
         steps_executed=steps_executed,
         total_steps=total_steps,
         compute_saved_pct=compute_saved_pct,
+        trace_json=record.trace_json,
     )
 
 

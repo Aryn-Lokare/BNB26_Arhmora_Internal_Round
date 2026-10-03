@@ -242,6 +242,54 @@ def test_crash_recording():
         agent.llm = _original_llm
 
 
+def test_structured_json_trace():
+    """Verify that runs produce a complete structured JSON trace with success/fail label and steps."""
+    agent.llm = fake_llm
+    graph = agent.build_graph()
+    run_id = f"test-trace-{uuid.uuid4().hex[:8]}"
+
+    try:
+        # Run with save_json=True
+        rec = run_and_record(graph, 0, TASK, GOOD_SQL, thread_id=run_id, save_json=True)
+
+        # 1. Verify in-memory structured trace
+        trace = rec.to_dict()
+        assert trace["id"] == run_id
+        assert trace["outcome"] == "success"
+        assert trace["final_answer"] is not None
+        assert "steps" in trace and len(trace["steps"]) == rec.step_count
+        for step in trace["steps"]:
+            assert "step_idx" in step
+            assert "node" in step
+            assert "input" in step
+            assert "output" in step
+            assert "state_snapshot" in step
+
+        # 2. Verify saved JSON file on disk
+        from pathlib import Path
+        trace_file = Path(f"traces/{run_id}.json")
+        assert trace_file.exists(), f"trace file {trace_file} was not written"
+        with open(trace_file, "r", encoding="utf-8") as f:
+            disk_data = json.load(f)
+        assert disk_data["id"] == run_id
+        assert disk_data["outcome"] == "success"
+        assert len(disk_data["steps"]) == rec.step_count
+
+        # Clean up trace file
+        if trace_file.exists():
+            trace_file.unlink()
+
+        print("  [PASS] test_structured_json_trace PASSED")
+        return True
+    except Exception:
+        traceback.print_exc()
+        print("  [FAIL] test_structured_json_trace FAILED")
+        return False
+    finally:
+        cleanup_run(run_id)
+        agent.llm = _original_llm
+
+
 # ------------------------------------------------------------------ runner
 def main():
     print("=" * 60)
@@ -253,6 +301,7 @@ def main():
         test_reconstruction,
         test_failed_run,
         test_crash_recording,
+        test_structured_json_trace,
     ]
 
     results = []
@@ -273,3 +322,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
