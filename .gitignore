@@ -1,0 +1,36 @@
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# SQLite & local caches
+*.db
+*.sqlite3
+llm_cache.db
+
+# Scratch inspection files
+_inspect_*.py
+_query_*.py
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

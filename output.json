@@ -1,0 +1,322 @@
+{
+  "project": "Black Box: A Flight Recorder for AI Agents",
+  "version": "0.1.0",
+  "generated_at": "2026-10-03T13:25:24.824387+00:00",
+  "environment": {
+    "database": "Neon Postgres",
+    "agent_framework": "LangGraph",
+    "llm_provider": "Groq / Scripted Mocks"
+  },
+  "milestones": {
+    "M1": {
+      "id": "M1",
+      "name": "Environment and Agent",
+      "status": "completed",
+      "prd_section": "5.1, 9 (M1)",
+      "features_covered": [
+        "Test-subject LangGraph agent",
+        "Postgres checkpointer",
+        "Neon read-only role"
+      ],
+      "deliverables": [
+        "agent.py",
+        "tasks.py",
+        "db.py",
+        "config.py",
+        "smoke_test.py"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion": "Neon schema and roles applied",
+          "satisfied": true
+        },
+        {
+          "criterion": "LangGraph agent executes SQL tasks",
+          "satisfied": true
+        },
+        {
+          "criterion": "PostgresSaver stores per-step checkpoints",
+          "satisfied": true
+        },
+        {
+          "criterion": "Fault hook corrupts target step",
+          "satisfied": true
+        }
+      ],
+      "verification": {
+        "status": "completed",
+        "timestamp": "2026-10-03T13:20:57.079160+00:00",
+        "tests": [
+          {
+            "name": "smoke_test.main",
+            "description": "Verify LangGraph agent, Neon read-only tools, checkpointing, and fault hook",
+            "status": "passed",
+            "error": null
+          }
+        ],
+        "summary": "M1 environment, database connection, LangGraph agent, and Postgres checkpointer verified."
+      }
+    },
+    "M2": {
+      "id": "M2",
+      "name": "Flight Recorder",
+      "status": "completed",
+      "prd_section": "5.2 (F1), 9 (M2)",
+      "features_covered": [
+        "F1: Execution Data Logging",
+        "Run Reconstruction Engine"
+      ],
+      "deliverables": [
+        "recorder.py",
+        "reconstruct.py",
+        "record_clean_runs.py",
+        "test_recorder.py"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion": "Record every step (node, input, output, error, latency, checkpoint_id, state_snapshot)",
+          "satisfied": true
+        },
+        {
+          "criterion": "Label each run as success or fail against gold SQL",
+          "satisfied": true
+        },
+        {
+          "criterion": "Atomic writes to Neon runs and steps tables",
+          "satisfied": true
+        },
+        {
+          "criterion": "Any run can be reconstructed step by step from DB",
+          "satisfied": true
+        },
+        {
+          "criterion": "Crash-safe recording under runtime exceptions",
+          "satisfied": true
+        }
+      ],
+      "verification": {
+        "status": "completed",
+        "timestamp": "2026-10-03T13:21:19.046529+00:00",
+        "tests": [
+          {
+            "name": "test_clean_run_offline",
+            "status": "passed"
+          },
+          {
+            "name": "test_reconstruction",
+            "status": "passed"
+          },
+          {
+            "name": "test_failed_run",
+            "status": "passed"
+          },
+          {
+            "name": "test_crash_recording",
+            "status": "passed"
+          }
+        ],
+        "summary": "M2 Flight Recorder records runs and steps atomically to Neon Postgres with 100% reconstruction fidelity."
+      }
+    },
+    "M3": {
+      "id": "M3",
+      "name": "Checkpointed Replay & Alternative Execution",
+      "status": "completed",
+      "prd_section": "5.2 (F4, F5), 9 (M3)",
+      "features_covered": [
+        "F4: Checkpointed Replay",
+        "F5: Alternative Execution",
+        "Asynchronous Replay Jobs Queue"
+      ],
+      "deliverables": [
+        "replay.py",
+        "test_replay.py"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion": "Restore state just before step k in a new thread",
+          "satisfied": true
+        },
+        {
+          "criterion": "Steps before k are not re-executed in replay",
+          "satisfied": true
+        },
+        {
+          "criterion": "Support state patches (tool args override, guidance hints)",
+          "satisfied": true
+        },
+        {
+          "criterion": "Record linked replay run with parent_run_id, forked_at_step, and patch",
+          "satisfied": true
+        },
+        {
+          "criterion": "Asynchronous replay_jobs queue worker with status updates",
+          "satisfied": true
+        },
+        {
+          "criterion": "Compute saved percentage calculated and logged",
+          "satisfied": true
+        }
+      ],
+      "verification": {
+        "status": "completed",
+        "timestamp": "2026-10-03T13:23:45.000000+00:00",
+        "tests": [
+          {
+            "name": "test_checkpointed_replay_offline",
+            "status": "passed"
+          },
+          {
+            "name": "test_patch_override",
+            "status": "passed"
+          },
+          {
+            "name": "test_replay_job_queue",
+            "status": "passed"
+          },
+          {
+            "name": "test_replay_reconstruction",
+            "status": "passed"
+          }
+        ],
+        "summary": "M3 Checkpointed Replay enables forking from step k, applying patches/hints, and processing asynchronous replay jobs."
+      }
+    },
+    "M4": {
+      "id": "M4",
+      "name": "Fault Injection & Data Generation",
+      "status": "pending",
+      "prd_section": "5.3, 9 (M4)",
+      "features_covered": [
+        "5 Fault Types",
+        "Dataset Generation",
+        "Train/Test/Unseen Splits"
+      ],
+      "deliverables": [
+        "fault_injector.py",
+        "generate_dataset.py"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion": "Generate hundreds of labeled runs across 5 fault types",
+          "satisfied": false
+        },
+        {
+          "criterion": "Assign task-based train/test/unseen splits",
+          "satisfied": false
+        }
+      ]
+    },
+    "M5": {
+      "id": "M5",
+      "name": "Failure Diagnosis Model & Explanations",
+      "status": "pending",
+      "prd_section": "5.2 (F2, F3), 7, 9 (M5)",
+      "features_covered": [
+        "F2: Failure Diagnosis",
+        "F3: Failure Explanation"
+      ],
+      "deliverables": [
+        "features.py",
+        "model.py",
+        "diagnose.py"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion": "Train XGBoost classifier on per-step features",
+          "satisfied": false
+        },
+        {
+          "criterion": "Rank steps of failed runs in under 2 seconds",
+          "satisfied": false
+        },
+        {
+          "criterion": "Produce at least 3 feature contribution evidence items",
+          "satisfied": false
+        }
+      ]
+    },
+    "M6": {
+      "id": "M6",
+      "name": "Model Evaluation Pipeline",
+      "status": "pending",
+      "prd_section": "5.2 (F7), 8, 9 (M6)",
+      "features_covered": [
+        "F7: Model Evaluation"
+      ],
+      "deliverables": [
+        "evaluate.py"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion": "Report Top-1 and Top-3 localization accuracy",
+          "satisfied": false
+        },
+        {
+          "criterion": "Report generalization to unseen fault types",
+          "satisfied": false
+        },
+        {
+          "criterion": "Compare against random and heuristic baselines",
+          "satisfied": false
+        },
+        {
+          "criterion": "Calculate fix success rate and compute saved",
+          "satisfied": false
+        }
+      ]
+    },
+    "M7": {
+      "id": "M7",
+      "name": "Next.js Dashboard & API",
+      "status": "pending",
+      "prd_section": "6, 9 (M7)",
+      "features_covered": [
+        "Dashboard UI",
+        "Node.js / Express API"
+      ],
+      "deliverables": [
+        "frontend/",
+        "api/"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion": "Run list, execution timeline, and suspect highlight",
+          "satisfied": false
+        },
+        {
+          "criterion": "Evidence panel and replay submission form",
+          "satisfied": false
+        },
+        {
+          "criterion": "Step-aligned diff view and metrics dashboard",
+          "satisfied": false
+        }
+      ]
+    },
+    "M8": {
+      "id": "M8",
+      "name": "End-to-End Demo",
+      "status": "pending",
+      "prd_section": "9 (M8)",
+      "features_covered": [
+        "End-to-end failure diagnosis and replay walkthrough"
+      ],
+      "deliverables": [
+        "demo_walkthrough.md"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion": "Walkthrough of failed run, diagnosis, replay fix, and diff view",
+          "satisfied": false
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_milestones": 8,
+    "completed_milestones": 3,
+    "pending_milestones": 5,
+    "completion_percentage": 37.5
+  }
+}
