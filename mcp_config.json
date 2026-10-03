@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "blackbox": {
+      "command": "python",
+      "args": ["mcp_server.py"],
+      "cwd": "n:/bnb/blackbox-worker",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}
