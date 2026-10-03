@@ -1,0 +1,175 @@
+{
+  "run_id": "run_0282",
+  "task_type": "email_assistant",
+  "agent_name": "email_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T16:16:00.794000+00:00",
+  "end_time": "2026-10-03T16:16:02.240000+00:00",
+  "total_steps": 4,
+  "failure_type": "invalid_data_transformation",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_email_thread",
+      "input": {
+        "raw_email": "val_raw_email_84"
+      },
+      "output": {
+        "sender": "output_sender_127",
+        "subject": "output_subject_883",
+        "urgency": "output_urgency_740",
+        "required_action": "output_required_action_449"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_127",
+        "subject": "output_subject_883",
+        "urgency": "output_urgency_740",
+        "required_action": "output_required_action_449"
+      },
+      "timestamp": "2026-10-03T16:16:00.794000+00:00",
+      "duration_ms": 794,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_related_correspondence",
+      "input": {
+        "sender": "val_sender_22",
+        "subject": "val_subject_64"
+      },
+      "output": {
+        "transformed_value": "NaN",
+        "source_value": 150.0,
+        "units": "mismatched_timezone_and_currency"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_127",
+        "subject": "output_subject_883",
+        "urgency": "output_urgency_740",
+        "required_action": "output_required_action_449"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_127",
+        "subject": "output_subject_883",
+        "urgency": "output_urgency_740",
+        "required_action": "output_required_action_449",
+        "previous_threads": "output_previous_threads_453",
+        "context_notes": "output_context_notes_465"
+      },
+      "timestamp": "2026-10-03T16:16:01.718000+00:00",
+      "duration_ms": 859,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "draft_email_response",
+      "input": {
+        "subject": "val_subject_54",
+        "context_notes": "val_context_notes_17",
+        "required_action": "val_required_action_94"
+      },
+      "output": {
+        "draft_body": "output_draft_body_350",
+        "recipients": "output_recipients_353"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_127",
+        "subject": "output_subject_883",
+        "urgency": "output_urgency_740",
+        "required_action": "output_required_action_449",
+        "previous_threads": "output_previous_threads_453",
+        "context_notes": "output_context_notes_465"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_127",
+        "subject": "output_subject_883",
+        "urgency": "output_urgency_740",
+        "required_action": "output_required_action_449",
+        "previous_threads": "output_previous_threads_453",
+        "context_notes": "output_context_notes_465",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T16:16:02.769000+00:00",
+      "duration_ms": 923,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_mailbox_label",
+      "input": {
+        "email_id": 512,
+        "folder": "val_folder_85"
+      },
+      "output": {
+        "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_127",
+        "subject": "output_subject_883",
+        "urgency": "output_urgency_740",
+        "required_action": "output_required_action_449",
+        "previous_threads": "output_previous_threads_453",
+        "context_notes": "output_context_notes_465",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_127",
+        "subject": "output_subject_883",
+        "urgency": "output_urgency_740",
+        "required_action": "output_required_action_449",
+        "previous_threads": "output_previous_threads_453",
+        "context_notes": "output_context_notes_465",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream validation failed: expected numeric float, received 'NaN'"
+      },
+      "timestamp": "2026-10-03T16:16:02.240000+00:00",
+      "duration_ms": 560,
+      "status": "failed",
+      "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

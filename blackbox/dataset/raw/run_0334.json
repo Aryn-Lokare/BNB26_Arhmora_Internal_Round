@@ -1,0 +1,339 @@
+{
+  "run_id": "run_0334",
+  "task_type": "document_processing",
+  "agent_name": "document_processing_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T23:39:01.356000+00:00",
+  "end_time": "2026-10-03T23:39:03.516000+00:00",
+  "total_steps": 6,
+  "failure_type": "hallucinated_value",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "classify_document_type",
+      "input": {
+        "file_bytes": "val_file_bytes_65"
+      },
+      "output": {
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828"
+      },
+      "timestamp": "2026-10-03T23:39:01.356000+00:00",
+      "duration_ms": 1356,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "run_ocr_extraction",
+      "input": {
+        "file_bytes": "val_file_bytes_25",
+        "page_count": "val_page_count_28"
+      },
+      "output": {
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828",
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913"
+      },
+      "timestamp": "2026-10-03T23:39:00.426000+00:00",
+      "duration_ms": 213,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "extract_key_value_entities",
+      "input": {
+        "raw_text": "val_raw_text_34"
+      },
+      "output": {
+        "vendor_name": "output_vendor_name_645",
+        "invoice_date": "output_invoice_date_487",
+        "total_due": 848.51,
+        "line_items": [
+          {
+            "item_id": 77,
+            "score": 0.82
+          },
+          {
+            "item_id": 82,
+            "score": 0.77
+          }
+        ]
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828",
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828",
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913",
+        "vendor_name": "output_vendor_name_645",
+        "invoice_date": "output_invoice_date_487",
+        "total_due": 848.51,
+        "line_items": [
+          {
+            "item_id": 77,
+            "score": 0.82
+          },
+          {
+            "item_id": 82,
+            "score": 0.77
+          }
+        ]
+      },
+      "timestamp": "2026-10-03T23:39:01.404000+00:00",
+      "duration_ms": 468,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "validate_financial_totals",
+      "input": {
+        "line_items": "val_line_items_88",
+        "total_due": "val_total_due_85"
+      },
+      "output": {
+        "hallucinated_id": "FAKE_TOKEN_XYZ_9876",
+        "confidence": 0.99,
+        "verified": false
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828",
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913",
+        "vendor_name": "output_vendor_name_645",
+        "invoice_date": "output_invoice_date_487",
+        "total_due": 848.51,
+        "line_items": [
+          {
+            "item_id": 77,
+            "score": 0.82
+          },
+          {
+            "item_id": 82,
+            "score": 0.77
+          }
+        ]
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828",
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913",
+        "vendor_name": "output_vendor_name_645",
+        "invoice_date": "output_invoice_date_487",
+        "total_due": 848.51,
+        "line_items": [
+          {
+            "item_id": 77,
+            "score": 0.82
+          },
+          {
+            "item_id": 82,
+            "score": 0.77
+          }
+        ],
+        "math_valid": 4098,
+        "discrepancy": "output_discrepancy_974"
+      },
+      "timestamp": "2026-10-03T23:39:00.696000+00:00",
+      "duration_ms": 174,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "save_structured_doc_record",
+      "input": {
+        "vendor_name": "val_vendor_name_47",
+        "total_due": "val_total_due_29"
+      },
+      "output": {
+        "doc_id": 6368
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828",
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913",
+        "vendor_name": "output_vendor_name_645",
+        "invoice_date": "output_invoice_date_487",
+        "total_due": 848.51,
+        "line_items": [
+          {
+            "item_id": 77,
+            "score": 0.82
+          },
+          {
+            "item_id": 82,
+            "score": 0.77
+          }
+        ],
+        "math_valid": 4098,
+        "discrepancy": "output_discrepancy_974"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828",
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913",
+        "vendor_name": "output_vendor_name_645",
+        "invoice_date": "output_invoice_date_487",
+        "total_due": 848.51,
+        "line_items": [
+          {
+            "item_id": 77,
+            "score": 0.82
+          },
+          {
+            "item_id": 82,
+            "score": 0.77
+          }
+        ],
+        "math_valid": 4098,
+        "discrepancy": "output_discrepancy_974",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T23:39:05.880000+00:00",
+      "duration_ms": 1176,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "emit_doc_summary",
+      "input": {
+        "doc_id": 6368
+      },
+      "output": {
+        "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828",
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913",
+        "vendor_name": "output_vendor_name_645",
+        "invoice_date": "output_invoice_date_487",
+        "total_due": 848.51,
+        "line_items": [
+          {
+            "item_id": 77,
+            "score": 0.82
+          },
+          {
+            "item_id": 82,
+            "score": 0.77
+          }
+        ],
+        "math_valid": 4098,
+        "discrepancy": "output_discrepancy_974",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_999",
+        "page_count": "output_page_count_828",
+        "raw_text": "output_raw_text_233",
+        "bounding_boxes": "output_bounding_boxes_913",
+        "vendor_name": "output_vendor_name_645",
+        "invoice_date": "output_invoice_date_487",
+        "total_due": 848.51,
+        "line_items": [
+          {
+            "item_id": 77,
+            "score": 0.82
+          },
+          {
+            "item_id": 82,
+            "score": 0.77
+          }
+        ],
+        "math_valid": 4098,
+        "discrepancy": "output_discrepancy_974",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Hallucinated token does not exist in backend database; 401 Unauthorized"
+      },
+      "timestamp": "2026-10-03T23:39:03.516000+00:00",
+      "duration_ms": 586,
+      "status": "failed",
+      "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

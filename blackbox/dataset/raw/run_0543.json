@@ -1,0 +1,242 @@
+{
+  "run_id": "run_0543",
+  "task_type": "inventory_management",
+  "agent_name": "inventory_management_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T23:07:00.748000+00:00",
+  "end_time": "2026-10-03T23:07:04.758000+00:00",
+  "total_steps": 6,
+  "failure_type": "hallucinated_value",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "inspect_depletion_velocity",
+      "input": {
+        "product_id": 334
+      },
+      "output": {
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781"
+      },
+      "timestamp": "2026-10-03T23:07:00.748000+00:00",
+      "duration_ms": 748,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_current_shelf_quantity",
+      "input": {
+        "product_id": 334
+      },
+      "output": {
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781",
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832"
+      },
+      "timestamp": "2026-10-03T23:07:00.980000+00:00",
+      "duration_ms": 490,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "calculate_reorder_quantity",
+      "input": {
+        "units_on_hand": "val_units_on_hand_29",
+        "daily_burn_rate": "val_daily_burn_rate_34",
+        "safety_stock": "val_safety_stock_28"
+      },
+      "output": {
+        "hallucinated_id": "FAKE_TOKEN_XYZ_9876",
+        "confidence": 0.99,
+        "verified": false
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781",
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781",
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832",
+        "recommended_order_units": "output_recommended_order_units_311"
+      },
+      "timestamp": "2026-10-03T23:07:03.783000+00:00",
+      "duration_ms": 1261,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "submit_purchase_order",
+      "input": {
+        "product_id": 2048,
+        "recommended_order_units": "val_recommended_order_units_22",
+        "supplier_id": 1024
+      },
+      "output": {
+        "po_number": "output_po_number_646",
+        "eta_days": "output_eta_days_716"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781",
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832",
+        "recommended_order_units": "output_recommended_order_units_311"
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781",
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832",
+        "recommended_order_units": "output_recommended_order_units_311",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T23:07:02.844000+00:00",
+      "duration_ms": 711,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "update_procurement_ledger",
+      "input": {
+        "po_number": "val_po_number_26",
+        "product_id": 334
+      },
+      "output": {
+        "ledger_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781",
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832",
+        "recommended_order_units": "output_recommended_order_units_311",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781",
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832",
+        "recommended_order_units": "output_recommended_order_units_311",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T23:07:00.800000+00:00",
+      "duration_ms": 160,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "broadcast_restock_schedule",
+      "input": {
+        "po_number": "val_po_number_18",
+        "eta_days": "val_eta_days_51"
+      },
+      "output": {
+        "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781",
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832",
+        "recommended_order_units": "output_recommended_order_units_311",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "inventory_management",
+        "scenario": "reorder_stock_threshold",
+        "daily_burn_rate": 576.42,
+        "safety_stock": "output_safety_stock_781",
+        "units_on_hand": "output_units_on_hand_463",
+        "units_in_transit": "output_units_in_transit_832",
+        "recommended_order_units": "output_recommended_order_units_311",
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Hallucinated token does not exist in backend database; 401 Unauthorized"
+      },
+      "timestamp": "2026-10-03T23:07:04.758000+00:00",
+      "duration_ms": 793,
+      "status": "failed",
+      "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

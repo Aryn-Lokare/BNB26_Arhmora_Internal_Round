@@ -1,0 +1,204 @@
+{
+  "run_id": "run_0423",
+  "task_type": "database_assistant",
+  "agent_name": "database_assistant_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T17:47:00.927000+00:00",
+  "end_time": "2026-10-03T17:47:06.490000+00:00",
+  "total_steps": 5,
+  "failure_type": "wrong_agent_handoff",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "analyze_slow_query_log",
+      "input": {
+        "query_string": "Execute action analyze_slow_query_log for database_assistant workflow"
+      },
+      "output": {
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460"
+      },
+      "state_before": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization"
+      },
+      "state_after": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460"
+      },
+      "timestamp": "2026-10-03T17:47:00.927000+00:00",
+      "duration_ms": 927,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "explain_query_execution_plan",
+      "input": {
+        "query_string": "Execute action explain_query_execution_plan for database_assistant workflow"
+      },
+      "output": {
+        "total_cost": 1002.41,
+        "scan_type": "output_scan_type_536",
+        "bottleneck": "output_bottleneck_635"
+      },
+      "state_before": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460"
+      },
+      "state_after": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460",
+        "total_cost": 1002.41,
+        "scan_type": "output_scan_type_536",
+        "bottleneck": "output_bottleneck_635"
+      },
+      "timestamp": "2026-10-03T17:47:01.602000+00:00",
+      "duration_ms": 801,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "fetch_table_existing_indexes",
+      "input": {
+        "table_name": "val_table_name_24"
+      },
+      "output": {
+        "handoff_target": "legacy_deprecated_agent",
+        "protocol": "v0"
+      },
+      "state_before": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460",
+        "total_cost": 1002.41,
+        "scan_type": "output_scan_type_536",
+        "bottleneck": "output_bottleneck_635"
+      },
+      "state_after": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460",
+        "total_cost": 1002.41,
+        "scan_type": "output_scan_type_536",
+        "bottleneck": "output_bottleneck_635",
+        "current_indexes": "output_current_indexes_280"
+      },
+      "timestamp": "2026-10-03T17:47:02.301000+00:00",
+      "duration_ms": 767,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "recommend_index_ddl",
+      "input": {
+        "table_name": "val_table_name_64",
+        "filter_predicates": "val_filter_predicates_57",
+        "current_indexes": "val_current_indexes_32"
+      },
+      "output": {
+        "create_index_sql": "output_create_index_sql_666"
+      },
+      "state_before": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460",
+        "total_cost": 1002.41,
+        "scan_type": "output_scan_type_536",
+        "bottleneck": "output_bottleneck_635",
+        "current_indexes": "output_current_indexes_280"
+      },
+      "state_after": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460",
+        "total_cost": 1002.41,
+        "scan_type": "output_scan_type_536",
+        "bottleneck": "output_bottleneck_635",
+        "current_indexes": "output_current_indexes_280",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T17:47:04.076000+00:00",
+      "duration_ms": 1019,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "produce_optimization_report",
+      "input": {
+        "create_index_sql": "val_create_index_sql_30",
+        "total_cost": "val_total_cost_79"
+      },
+      "output": {
+        "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460",
+        "total_cost": 1002.41,
+        "scan_type": "output_scan_type_536",
+        "bottleneck": "output_bottleneck_635",
+        "current_indexes": "output_current_indexes_280",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "database_assistant",
+        "scenario": "slow_query_optimization",
+        "filter_predicates": "output_filter_predicates_520",
+        "table_name": "output_table_name_460",
+        "total_cost": 1002.41,
+        "scan_type": "output_scan_type_536",
+        "bottleneck": "output_bottleneck_635",
+        "current_indexes": "output_current_indexes_280",
+        "step_4_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Handoff to incompatible sub-agent resulted in dropped execution context"
+      },
+      "timestamp": "2026-10-03T17:47:06.490000+00:00",
+      "duration_ms": 1298,
+      "status": "failed",
+      "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

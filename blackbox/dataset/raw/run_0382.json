@@ -1,0 +1,254 @@
+{
+  "run_id": "run_0382",
+  "task_type": "data_analysis",
+  "agent_name": "data_analysis_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-04T00:52:00.486000+00:00",
+  "end_time": "2026-10-04T00:52:05.256000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_retrieval",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_analysis_plan",
+      "input": {
+        "analysis_question": "val_analysis_question_24"
+      },
+      "output": {
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391"
+      },
+      "timestamp": "2026-10-04T00:52:00.486000+00:00",
+      "duration_ms": 486,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "inspect_db_schema",
+      "input": {
+        "target_tables": "val_target_tables_27"
+      },
+      "output": {
+        "retrieved_records": [
+          {
+            "id": "MISMATCH_999",
+            "score": 0.12,
+            "content": "Unrelated topic"
+          }
+        ],
+        "top_match": "MISMATCH_999"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391",
+        "schema_columns": "output_schema_columns_504",
+        "foreign_keys": "output_foreign_keys_531"
+      },
+      "timestamp": "2026-10-04T00:52:00.324000+00:00",
+      "duration_ms": 162,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "construct_sql_query",
+      "input": {
+        "plan_steps": "val_plan_steps_14",
+        "schema_columns": "val_schema_columns_30"
+      },
+      "output": {
+        "sql_statement": "output_sql_statement_782"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391",
+        "schema_columns": "output_schema_columns_504",
+        "foreign_keys": "output_foreign_keys_531"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391",
+        "schema_columns": "output_schema_columns_504",
+        "foreign_keys": "output_foreign_keys_531",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T00:52:02.274000+00:00",
+      "duration_ms": 758,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_database_query",
+      "input": {
+        "sql_statement": "val_sql_statement_71"
+      },
+      "output": {
+        "query_result_rows": [
+          {
+            "item_id": 35,
+            "score": 0.73
+          },
+          {
+            "item_id": 63,
+            "score": 0.86
+          },
+          {
+            "item_id": 88,
+            "score": 0.91
+          }
+        ],
+        "row_count": "output_row_count_432"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391",
+        "schema_columns": "output_schema_columns_504",
+        "foreign_keys": "output_foreign_keys_531",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391",
+        "schema_columns": "output_schema_columns_504",
+        "foreign_keys": "output_foreign_keys_531",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-04T00:52:01.948000+00:00",
+      "duration_ms": 487,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "tool_call",
+      "action": "compute_aggregate_metrics",
+      "input": {
+        "query_result_rows": "Execute action compute_aggregate_metrics for data_analysis workflow"
+      },
+      "output": {
+        "metric_summary": "output_metric_summary_613"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391",
+        "schema_columns": "output_schema_columns_504",
+        "foreign_keys": "output_foreign_keys_531",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391",
+        "schema_columns": "output_schema_columns_504",
+        "foreign_keys": "output_foreign_keys_531",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-04T00:52:04.490000+00:00",
+      "duration_ms": 898,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "synthesize_analytical_answer",
+      "input": {
+        "metric_summary": "val_metric_summary_26"
+      },
+      "output": {
+        "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391",
+        "schema_columns": "output_schema_columns_504",
+        "foreign_keys": "output_foreign_keys_531",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_294",
+        "target_tables": "output_target_tables_391",
+        "schema_columns": "output_schema_columns_504",
+        "foreign_keys": "output_foreign_keys_531",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Retrieved entity mismatch: downstream operations applied to wrong entity"
+      },
+      "timestamp": "2026-10-04T00:52:05.256000+00:00",
+      "duration_ms": 876,
+      "status": "failed",
+      "error": "Retrieved entity mismatch: downstream operations applied to wrong entity",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

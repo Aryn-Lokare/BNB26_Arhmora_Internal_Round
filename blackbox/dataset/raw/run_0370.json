@@ -1,0 +1,320 @@
+{
+  "run_id": "run_0370",
+  "task_type": "data_analysis",
+  "agent_name": "data_analysis_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-04T01:31:01.123000+00:00",
+  "end_time": "2026-10-04T01:31:05.460000+00:00",
+  "total_steps": 6,
+  "failure_type": "stale_state",
+  "failure_step_id": "step_05",
+  "final_output": {
+    "error": "Downstream action attempted using stale version/cache token",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_analysis_plan",
+      "input": {
+        "analysis_question": "val_analysis_question_38"
+      },
+      "output": {
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700"
+      },
+      "timestamp": "2026-10-04T01:31:01.123000+00:00",
+      "duration_ms": 1123,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "inspect_db_schema",
+      "input": {
+        "target_tables": "val_target_tables_83"
+      },
+      "output": {
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700",
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380"
+      },
+      "timestamp": "2026-10-04T01:31:02.506000+00:00",
+      "duration_ms": 1253,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "construct_sql_query",
+      "input": {
+        "plan_steps": "val_plan_steps_85",
+        "schema_columns": "val_schema_columns_33"
+      },
+      "output": {
+        "sql_statement": "output_sql_statement_493"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700",
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700",
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380",
+        "sql_statement": "output_sql_statement_493"
+      },
+      "timestamp": "2026-10-04T01:31:00.819000+00:00",
+      "duration_ms": 273,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_database_query",
+      "input": {
+        "sql_statement": "val_sql_statement_92"
+      },
+      "output": {
+        "query_result_rows": [
+          {
+            "item_id": 56,
+            "score": 0.79
+          },
+          {
+            "item_id": 17,
+            "score": 0.73
+          },
+          {
+            "item_id": 9,
+            "score": 0.91
+          }
+        ],
+        "row_count": "output_row_count_982"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700",
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380",
+        "sql_statement": "output_sql_statement_493"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700",
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380",
+        "sql_statement": "output_sql_statement_493",
+        "query_result_rows": [
+          {
+            "item_id": 56,
+            "score": 0.79
+          },
+          {
+            "item_id": 17,
+            "score": 0.73
+          },
+          {
+            "item_id": 9,
+            "score": 0.91
+          }
+        ],
+        "row_count": "output_row_count_982"
+      },
+      "timestamp": "2026-10-04T01:31:04.284000+00:00",
+      "duration_ms": 1071,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "tool_call",
+      "action": "compute_aggregate_metrics",
+      "input": {
+        "query_result_rows": "Execute action compute_aggregate_metrics for data_analysis workflow"
+      },
+      "output": {
+        "balance": 0.0,
+        "version": "v1_deprecated_cache",
+        "is_stale": true
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700",
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380",
+        "sql_statement": "output_sql_statement_493",
+        "query_result_rows": [
+          {
+            "item_id": 56,
+            "score": 0.79
+          },
+          {
+            "item_id": 17,
+            "score": 0.73
+          },
+          {
+            "item_id": 9,
+            "score": 0.91
+          }
+        ],
+        "row_count": "output_row_count_982"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700",
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380",
+        "sql_statement": "output_sql_statement_493",
+        "query_result_rows": [
+          {
+            "item_id": 56,
+            "score": 0.79
+          },
+          {
+            "item_id": 17,
+            "score": 0.73
+          },
+          {
+            "item_id": 9,
+            "score": 0.91
+          }
+        ],
+        "row_count": "output_row_count_982",
+        "metric_summary": "output_metric_summary_289"
+      },
+      "timestamp": "2026-10-04T01:31:05.900000+00:00",
+      "duration_ms": 1180,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "synthesize_analytical_answer",
+      "input": {
+        "metric_summary": "val_metric_summary_99"
+      },
+      "output": {
+        "error": "Downstream action attempted using stale version/cache token",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700",
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380",
+        "sql_statement": "output_sql_statement_493",
+        "query_result_rows": [
+          {
+            "item_id": 56,
+            "score": 0.79
+          },
+          {
+            "item_id": 17,
+            "score": 0.73
+          },
+          {
+            "item_id": 9,
+            "score": 0.91
+          }
+        ],
+        "row_count": "output_row_count_982",
+        "metric_summary": "output_metric_summary_289"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_123",
+        "target_tables": "output_target_tables_700",
+        "schema_columns": "output_schema_columns_591",
+        "foreign_keys": "output_foreign_keys_380",
+        "sql_statement": "output_sql_statement_493",
+        "query_result_rows": [
+          {
+            "item_id": 56,
+            "score": 0.79
+          },
+          {
+            "item_id": 17,
+            "score": 0.73
+          },
+          {
+            "item_id": 9,
+            "score": 0.91
+          }
+        ],
+        "row_count": "output_row_count_982",
+        "metric_summary": "output_metric_summary_289",
+        "execution_status": "failed",
+        "last_error": "Downstream action attempted using stale version/cache token"
+      },
+      "timestamp": "2026-10-04T01:31:05.460000+00:00",
+      "duration_ms": 910,
+      "status": "failed",
+      "error": "Downstream action attempted using stale version/cache token",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

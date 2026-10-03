@@ -1,0 +1,163 @@
+{
+  "run_id": "run_0247",
+  "task_type": "calendar_scheduling",
+  "agent_name": "calendar_scheduling_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-04T02:18:01.067000+00:00",
+  "end_time": "2026-10-04T02:18:01.060000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_llm_decision",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_meeting_intent",
+      "input": {
+        "prompt": "Execute action parse_meeting_intent for calendar_scheduling workflow"
+      },
+      "output": {
+        "attendees": "output_attendees_224",
+        "duration_mins": "output_duration_mins_680",
+        "time_window": "output_time_window_648"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_224",
+        "duration_mins": "output_duration_mins_680",
+        "time_window": "output_time_window_648"
+      },
+      "timestamp": "2026-10-04T02:18:01.067000+00:00",
+      "duration_ms": 1067,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_calendar_freebusy",
+      "input": {
+        "attendees": "val_attendees_52",
+        "time_window": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "decision": "bypass_validation",
+        "reasoning": "Skipping prerequisite checks based on incorrect user assumption",
+        "route_to": "unsupported_path"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_224",
+        "duration_mins": "output_duration_mins_680",
+        "time_window": "output_time_window_648"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_224",
+        "duration_mins": "output_duration_mins_680",
+        "time_window": "output_time_window_648",
+        "common_free_slots": "output_common_free_slots_798"
+      },
+      "timestamp": "2026-10-04T02:18:01.630000+00:00",
+      "duration_ms": 815,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "select_optimal_slot",
+      "input": {
+        "common_free_slots": "val_common_free_slots_61",
+        "duration_mins": "val_duration_mins_17"
+      },
+      "output": {
+        "chosen_start": "output_chosen_start_747",
+        "chosen_end": "output_chosen_end_762"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_224",
+        "duration_mins": "output_duration_mins_680",
+        "time_window": "output_time_window_648",
+        "common_free_slots": "output_common_free_slots_798"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_224",
+        "duration_mins": "output_duration_mins_680",
+        "time_window": "output_time_window_648",
+        "common_free_slots": "output_common_free_slots_798",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T02:18:02.100000+00:00",
+      "duration_ms": 700,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "schedule_calendar_event",
+      "input": {
+        "attendees": "val_attendees_56",
+        "chosen_start": "val_chosen_start_78",
+        "chosen_end": "val_chosen_end_53",
+        "meeting_title": "val_meeting_title_20"
+      },
+      "output": {
+        "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_224",
+        "duration_mins": "output_duration_mins_680",
+        "time_window": "output_time_window_648",
+        "common_free_slots": "output_common_free_slots_798",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_224",
+        "duration_mins": "output_duration_mins_680",
+        "time_window": "output_time_window_648",
+        "common_free_slots": "output_common_free_slots_798",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "LLM made incorrect branch decision; prerequisite state missing downstream"
+      },
+      "timestamp": "2026-10-04T02:18:01.060000+00:00",
+      "duration_ms": 265,
+      "status": "failed",
+      "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

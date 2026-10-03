@@ -1,0 +1,263 @@
+{
+  "run_id": "run_0644",
+  "task_type": "research_assistant",
+  "agent_name": "research_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T17:31:01.380000+00:00",
+  "end_time": "2026-10-03T17:31:05.610000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_api_response_handling",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Downstream parser crashed attempting to index non-existent response attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_search_keywords",
+      "input": {
+        "research_query": "Execute action formulate_search_keywords for research_assistant workflow"
+      },
+      "output": {
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245"
+      },
+      "timestamp": "2026-10-03T17:31:01.380000+00:00",
+      "duration_ms": 1380,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_academic_index",
+      "input": {
+        "keywords": "val_keywords_21",
+        "min_year": "val_min_year_88"
+      },
+      "output": {
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245",
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382"
+      },
+      "timestamp": "2026-10-03T17:31:00.964000+00:00",
+      "duration_ms": 482,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "fetch_paper_abstracts",
+      "input": {
+        "paper_ids": 7289
+      },
+      "output": {
+        "abstract_texts": "output_abstract_texts_142",
+        "author_institutions": "output_author_institutions_145"
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245",
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245",
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382",
+        "abstract_texts": "output_abstract_texts_142",
+        "author_institutions": "output_author_institutions_145"
+      },
+      "timestamp": "2026-10-03T17:31:02.661000+00:00",
+      "duration_ms": 887,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "extract_methodology_findings",
+      "input": {
+        "abstract_texts": "val_abstract_texts_11"
+      },
+      "output": {
+        "code": 404,
+        "body": {
+          "message": "Not Found"
+        },
+        "treated_as_success": true
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245",
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382",
+        "abstract_texts": "output_abstract_texts_142",
+        "author_institutions": "output_author_institutions_145"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245",
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382",
+        "abstract_texts": "output_abstract_texts_142",
+        "author_institutions": "output_author_institutions_145",
+        "benchmark_results": "output_benchmark_results_236",
+        "comparative_table": "output_comparative_table_299"
+      },
+      "timestamp": "2026-10-03T17:31:02.800000+00:00",
+      "duration_ms": 700,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "store_annotated_bibliography",
+      "input": {
+        "comparative_table": "val_comparative_table_82"
+      },
+      "output": {
+        "bibliography_id": 4172
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245",
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382",
+        "abstract_texts": "output_abstract_texts_142",
+        "author_institutions": "output_author_institutions_145",
+        "benchmark_results": "output_benchmark_results_236",
+        "comparative_table": "output_comparative_table_299"
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245",
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382",
+        "abstract_texts": "output_abstract_texts_142",
+        "author_institutions": "output_author_institutions_145",
+        "benchmark_results": "output_benchmark_results_236",
+        "comparative_table": "output_comparative_table_299",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T17:31:04.680000+00:00",
+      "duration_ms": 936,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "draft_literature_review",
+      "input": {
+        "comparative_table": "val_comparative_table_29"
+      },
+      "output": {
+        "error": "Downstream parser crashed attempting to index non-existent response attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245",
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382",
+        "abstract_texts": "output_abstract_texts_142",
+        "author_institutions": "output_author_institutions_145",
+        "benchmark_results": "output_benchmark_results_236",
+        "comparative_table": "output_comparative_table_299",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "research_assistant",
+        "scenario": "literature_synthesis",
+        "keywords": "output_keywords_373",
+        "inclusion_criteria": "output_inclusion_criteria_247",
+        "min_year": "output_min_year_245",
+        "paper_ids": 7289,
+        "citation_counts": "output_citation_counts_382",
+        "abstract_texts": "output_abstract_texts_142",
+        "author_institutions": "output_author_institutions_145",
+        "benchmark_results": "output_benchmark_results_236",
+        "comparative_table": "output_comparative_table_299",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream parser crashed attempting to index non-existent response attributes"
+      },
+      "timestamp": "2026-10-03T17:31:05.610000+00:00",
+      "duration_ms": 935,
+      "status": "failed",
+      "error": "Downstream parser crashed attempting to index non-existent response attributes",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

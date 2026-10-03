@@ -1,0 +1,258 @@
+{
+  "run_id": "run_0513",
+  "task_type": "it_support",
+  "agent_name": "it_support_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-04T00:01:01.064000+00:00",
+  "end_time": "2026-10-04T00:01:07.536000+00:00",
+  "total_steps": 6,
+  "failure_type": "missing_information",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Downstream request rejected due to missing mandatory schema attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "evaluate_access_request",
+      "input": {
+        "ticket_text": "val_ticket_text_14"
+      },
+      "output": {
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283"
+      },
+      "timestamp": "2026-10-04T00:01:01.064000+00:00",
+      "duration_ms": 1064,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_ldap_directory",
+      "input": {},
+      "output": {
+        "status": "partial_payload",
+        "missing_required": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283",
+        "employee_status": "success",
+        "dept": "output_dept_798",
+        "security_clearance": "output_security_clearance_629"
+      },
+      "timestamp": "2026-10-04T00:01:00.828000+00:00",
+      "duration_ms": 414,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_security_policy",
+      "input": {
+        "requested_group": "val_requested_group_69",
+        "security_clearance": "val_security_clearance_20"
+      },
+      "output": {
+        "policy_satisfied": "output_policy_satisfied_454",
+        "mfa_enabled": "output_mfa_enabled_802"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283",
+        "employee_status": "success",
+        "dept": "output_dept_798",
+        "security_clearance": "output_security_clearance_629"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283",
+        "employee_status": "success",
+        "dept": "output_dept_798",
+        "security_clearance": "output_security_clearance_629",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T00:01:00.891000+00:00",
+      "duration_ms": 297,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "assign_vpn_profile",
+      "input": {
+        "username": "val_username_93",
+        "requested_group": "val_requested_group_61"
+      },
+      "output": {
+        "cert_serial": "output_cert_serial_922",
+        "provision_status": "success"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283",
+        "employee_status": "success",
+        "dept": "output_dept_798",
+        "security_clearance": "output_security_clearance_629",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283",
+        "employee_status": "success",
+        "dept": "output_dept_798",
+        "security_clearance": "output_security_clearance_629",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-04T00:01:01.148000+00:00",
+      "duration_ms": 287,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "audit_log_access_grant",
+      "input": {
+        "username": "val_username_30",
+        "cert_serial": "val_cert_serial_50"
+      },
+      "output": {
+        "audit_id": 3109
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283",
+        "employee_status": "success",
+        "dept": "output_dept_798",
+        "security_clearance": "output_security_clearance_629",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283",
+        "employee_status": "success",
+        "dept": "output_dept_798",
+        "security_clearance": "output_security_clearance_629",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-04T00:01:00.525000+00:00",
+      "duration_ms": 105,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "notify_user_credentials",
+      "input": {
+        "username": "val_username_74",
+        "provision_status": "val_provision_status_59"
+      },
+      "output": {
+        "error": "Downstream request rejected due to missing mandatory schema attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283",
+        "employee_status": "success",
+        "dept": "output_dept_798",
+        "security_clearance": "output_security_clearance_629",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_367",
+        "requested_group": "output_requested_group_531",
+        "manager_approved": "output_manager_approved_283",
+        "employee_status": "success",
+        "dept": "output_dept_798",
+        "security_clearance": "output_security_clearance_629",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream request rejected due to missing mandatory schema attributes"
+      },
+      "timestamp": "2026-10-04T00:01:07.536000+00:00",
+      "duration_ms": 1256,
+      "status": "failed",
+      "error": "Downstream request rejected due to missing mandatory schema attributes",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

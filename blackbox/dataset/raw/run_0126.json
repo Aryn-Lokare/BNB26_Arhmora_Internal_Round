@@ -1,0 +1,174 @@
+{
+  "run_id": "run_0126",
+  "task_type": "travel_booking",
+  "agent_name": "travel_booking_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-04T00:28:00.759000+00:00",
+  "end_time": "2026-10-04T00:28:03.216000+00:00",
+  "total_steps": 4,
+  "failure_type": "missing_information",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Downstream request rejected due to missing mandatory schema attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_flight_preferences",
+      "input": {
+        "user_prompt": "Execute action extract_flight_preferences for travel_booking workflow"
+      },
+      "output": {
+        "origin": "output_origin_225",
+        "destination": "output_destination_143",
+        "travel_date": "output_travel_date_572",
+        "cabin_class": "output_cabin_class_151"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_225",
+        "destination": "output_destination_143",
+        "travel_date": "output_travel_date_572",
+        "cabin_class": "output_cabin_class_151"
+      },
+      "timestamp": "2026-10-04T00:28:00.759000+00:00",
+      "duration_ms": 759,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_flight_routes",
+      "input": {
+        "destination": "val_destination_65",
+        "travel_date": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "status": "partial_payload",
+        "missing_required": true
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_225",
+        "destination": "output_destination_143",
+        "travel_date": "output_travel_date_572",
+        "cabin_class": "output_cabin_class_151"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_225",
+        "destination": "output_destination_143",
+        "travel_date": "output_travel_date_572",
+        "cabin_class": "output_cabin_class_151",
+        "flight_candidates": 7471,
+        "min_fare": "output_min_fare_608"
+      },
+      "timestamp": "2026-10-04T00:28:00.848000+00:00",
+      "duration_ms": 424,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "check_seat_inventory",
+      "input": {
+        "flight_number": "val_flight_number_58",
+        "cabin_class": "val_cabin_class_97"
+      },
+      "output": {
+        "available_seats": "output_available_seats_536",
+        "fare_quote": "output_fare_quote_276"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_225",
+        "destination": "output_destination_143",
+        "travel_date": "output_travel_date_572",
+        "cabin_class": "output_cabin_class_151",
+        "flight_candidates": 7471,
+        "min_fare": "output_min_fare_608"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_225",
+        "destination": "output_destination_143",
+        "travel_date": "output_travel_date_572",
+        "cabin_class": "output_cabin_class_151",
+        "flight_candidates": 7471,
+        "min_fare": "output_min_fare_608",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T00:28:00.420000+00:00",
+      "duration_ms": 140,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "hold_flight_seat",
+      "input": {
+        "flight_number": "val_flight_number_37",
+        "seat_number": "val_seat_number_33",
+        "passenger_id": 512
+      },
+      "output": {
+        "error": "Downstream request rejected due to missing mandatory schema attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_225",
+        "destination": "output_destination_143",
+        "travel_date": "output_travel_date_572",
+        "cabin_class": "output_cabin_class_151",
+        "flight_candidates": 7471,
+        "min_fare": "output_min_fare_608",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_225",
+        "destination": "output_destination_143",
+        "travel_date": "output_travel_date_572",
+        "cabin_class": "output_cabin_class_151",
+        "flight_candidates": 7471,
+        "min_fare": "output_min_fare_608",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream request rejected due to missing mandatory schema attributes"
+      },
+      "timestamp": "2026-10-04T00:28:03.216000+00:00",
+      "duration_ms": 804,
+      "status": "failed",
+      "error": "Downstream request rejected due to missing mandatory schema attributes",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

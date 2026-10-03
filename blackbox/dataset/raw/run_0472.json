@@ -1,0 +1,262 @@
+{
+  "run_id": "run_0472",
+  "task_type": "coding_assistant",
+  "agent_name": "coding_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T23:28:00.817000+00:00",
+  "end_time": "2026-10-03T23:28:03.120000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_database_operation",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_issue_description",
+      "input": {
+        "issue_text": "val_issue_text_52",
+        "stacktrace": "val_stacktrace_62"
+      },
+      "output": {
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581"
+      },
+      "timestamp": "2026-10-03T23:28:00.817000+00:00",
+      "duration_ms": 817,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "read_source_code_file",
+      "input": {
+        "target_file": "val_target_file_89",
+        "root_function": "val_root_function_13"
+      },
+      "output": {
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581",
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477"
+      },
+      "timestamp": "2026-10-03T23:28:01.364000+00:00",
+      "duration_ms": 682,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "generate_code_diff",
+      "input": {
+        "code_snippet": "val_code_snippet_47",
+        "issue_text": "val_issue_text_29"
+      },
+      "output": {
+        "sql": "SELECT * FROM records WHERE 1=0",
+        "rows_returned": 0,
+        "query_cost": 0.01
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581",
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581",
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477",
+        "patch_diff": "output_patch_diff_705",
+        "functions_modified": "output_functions_modified_126"
+      },
+      "timestamp": "2026-10-03T23:28:00.513000+00:00",
+      "duration_ms": 171,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "run_unit_test_suite",
+      "input": {
+        "patch_diff": "val_patch_diff_87",
+        "target_file": "val_target_file_37"
+      },
+      "output": {
+        "tests_passed": "output_tests_passed_927",
+        "coverage_pct": "output_coverage_pct_420"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581",
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477",
+        "patch_diff": "output_patch_diff_705",
+        "functions_modified": "output_functions_modified_126"
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581",
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477",
+        "patch_diff": "output_patch_diff_705",
+        "functions_modified": "output_functions_modified_126",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T23:28:01.188000+00:00",
+      "duration_ms": 297,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "create_git_pull_request",
+      "input": {
+        "patch_diff": "val_patch_diff_75",
+        "tests_passed": "val_tests_passed_84"
+      },
+      "output": {
+        "pr_number": "output_pr_number_829",
+        "pr_url": "output_pr_url_452"
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581",
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477",
+        "patch_diff": "output_patch_diff_705",
+        "functions_modified": "output_functions_modified_126",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581",
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477",
+        "patch_diff": "output_patch_diff_705",
+        "functions_modified": "output_functions_modified_126",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T23:28:05.630000+00:00",
+      "duration_ms": 1126,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "post_pr_summary",
+      "input": {
+        "pr_number": "val_pr_number_58",
+        "coverage_pct": "val_coverage_pct_84"
+      },
+      "output": {
+        "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581",
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477",
+        "patch_diff": "output_patch_diff_705",
+        "functions_modified": "output_functions_modified_126",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "coding_assistant",
+        "scenario": "bug_fix_and_test",
+        "target_file": "output_target_file_767",
+        "root_function": "output_root_function_483",
+        "repro_steps": "output_repro_steps_581",
+        "code_snippet": "output_code_snippet_264",
+        "imports": "output_imports_477",
+        "patch_diff": "output_patch_diff_705",
+        "functions_modified": "output_functions_modified_126",
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero"
+      },
+      "timestamp": "2026-10-03T23:28:03.120000+00:00",
+      "duration_ms": 520,
+      "status": "failed",
+      "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

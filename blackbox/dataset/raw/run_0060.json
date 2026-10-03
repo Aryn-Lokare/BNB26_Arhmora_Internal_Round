@@ -1,0 +1,198 @@
+{
+  "run_id": "run_0060",
+  "task_type": "ecommerce_order",
+  "agent_name": "ecommerce_order_agent_v1",
+  "status": "success",
+  "start_time": "2026-10-03T23:17:00.862000+00:00",
+  "end_time": "2026-10-03T23:17:05.680000+00:00",
+  "total_steps": 5,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "summary_text": "output_summary_text_185"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_promo_code",
+      "input": {
+        "user_input": "val_user_input_74"
+      },
+      "output": {
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859
+      },
+      "timestamp": "2026-10-03T23:17:00.862000+00:00",
+      "duration_ms": 862,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_cart_subtotal",
+      "input": {
+        "cart_id": 7859
+      },
+      "output": {
+        "subtotal": 971.45,
+        "eligible_categories": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859,
+        "subtotal": 971.45,
+        "eligible_categories": true
+      },
+      "timestamp": "2026-10-03T23:17:00.822000+00:00",
+      "duration_ms": 411,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_coupon_rules",
+      "input": {
+        "coupon_code": "val_coupon_code_42",
+        "subtotal": "val_subtotal_16"
+      },
+      "output": {
+        "discount_pct": "output_discount_pct_756",
+        "valid": 8873
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859,
+        "subtotal": 971.45,
+        "eligible_categories": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859,
+        "subtotal": 971.45,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_756",
+        "valid": 8873
+      },
+      "timestamp": "2026-10-03T23:17:01.089000+00:00",
+      "duration_ms": 363,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_discount_to_cart",
+      "input": {
+        "cart_id": 7859,
+        "discount_pct": "val_discount_pct_23"
+      },
+      "output": {
+        "new_total": 868.11
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859,
+        "subtotal": 971.45,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_756",
+        "valid": 8873
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859,
+        "subtotal": 971.45,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_756",
+        "valid": 8873,
+        "new_total": 868.11
+      },
+      "timestamp": "2026-10-03T23:17:03.360000+00:00",
+      "duration_ms": 840,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "format_cart_summary",
+      "input": {
+        "cart_id": 7859,
+        "new_total": "val_new_total_46"
+      },
+      "output": {
+        "summary_text": "output_summary_text_185"
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859,
+        "subtotal": 971.45,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_756",
+        "valid": 8873,
+        "new_total": 868.11
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_640",
+        "cart_id": 7859,
+        "subtotal": 971.45,
+        "eligible_categories": true,
+        "discount_pct": "output_discount_pct_756",
+        "valid": 8873,
+        "new_total": 868.11,
+        "summary_text": "output_summary_text_185"
+      },
+      "timestamp": "2026-10-03T23:17:05.680000+00:00",
+      "duration_ms": 1136,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

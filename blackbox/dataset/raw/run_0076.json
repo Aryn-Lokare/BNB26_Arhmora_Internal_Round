@@ -1,0 +1,197 @@
+{
+  "run_id": "run_0076",
+  "task_type": "ecommerce_order",
+  "agent_name": "ecommerce_order_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T11:16:00.871000+00:00",
+  "end_time": "2026-10-03T11:16:05.610000+00:00",
+  "total_steps": 5,
+  "failure_type": "incorrect_llm_decision",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_promo_code",
+      "input": {
+        "user_input": "val_user_input_74"
+      },
+      "output": {
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582
+      },
+      "timestamp": "2026-10-03T11:16:00.871000+00:00",
+      "duration_ms": 871,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_cart_subtotal",
+      "input": {
+        "cart_id": 5582
+      },
+      "output": {
+        "decision": "bypass_validation",
+        "reasoning": "Skipping prerequisite checks based on incorrect user assumption",
+        "route_to": "unsupported_path"
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582,
+        "subtotal": 186.63,
+        "eligible_categories": true
+      },
+      "timestamp": "2026-10-03T11:16:02.712000+00:00",
+      "duration_ms": 1356,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_coupon_rules",
+      "input": {
+        "coupon_code": "val_coupon_code_60",
+        "subtotal": "val_subtotal_57"
+      },
+      "output": {
+        "discount_pct": "output_discount_pct_913",
+        "valid": 6555
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582,
+        "subtotal": 186.63,
+        "eligible_categories": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582,
+        "subtotal": 186.63,
+        "eligible_categories": true,
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T11:16:00.834000+00:00",
+      "duration_ms": 278,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_discount_to_cart",
+      "input": {
+        "cart_id": 5582,
+        "discount_pct": "val_discount_pct_28"
+      },
+      "output": {
+        "new_total": 278.92
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582,
+        "subtotal": 186.63,
+        "eligible_categories": true,
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582,
+        "subtotal": 186.63,
+        "eligible_categories": true,
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T11:16:04.888000+00:00",
+      "duration_ms": 1222,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "format_cart_summary",
+      "input": {
+        "cart_id": 5582,
+        "new_total": "val_new_total_74"
+      },
+      "output": {
+        "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582,
+        "subtotal": 186.63,
+        "eligible_categories": true,
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "discount_coupon_apply",
+        "coupon_code": "output_coupon_code_561",
+        "cart_id": 5582,
+        "subtotal": 186.63,
+        "eligible_categories": true,
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "execution_status": "failed",
+        "last_error": "LLM made incorrect branch decision; prerequisite state missing downstream"
+      },
+      "timestamp": "2026-10-03T11:16:05.610000+00:00",
+      "duration_ms": 1122,
+      "status": "failed",
+      "error": "LLM made incorrect branch decision; prerequisite state missing downstream",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

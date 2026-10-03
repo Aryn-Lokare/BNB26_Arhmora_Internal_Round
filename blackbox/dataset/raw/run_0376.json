@@ -1,0 +1,158 @@
+{
+  "run_id": "run_0376",
+  "task_type": "data_analysis",
+  "agent_name": "data_analysis_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-04T02:10:00.877000+00:00",
+  "end_time": "2026-10-04T02:10:02.440000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_api_response_handling",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Downstream parser crashed attempting to index non-existent response attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_analysis_plan",
+      "input": {
+        "analysis_question": "val_analysis_question_33"
+      },
+      "output": {
+        "plan_steps": "output_plan_steps_453",
+        "target_tables": "output_target_tables_925"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_453",
+        "target_tables": "output_target_tables_925"
+      },
+      "timestamp": "2026-10-04T02:10:00.877000+00:00",
+      "duration_ms": 877,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "inspect_db_schema",
+      "input": {
+        "target_tables": "val_target_tables_80"
+      },
+      "output": {
+        "schema_columns": "output_schema_columns_708",
+        "foreign_keys": "output_foreign_keys_970"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_453",
+        "target_tables": "output_target_tables_925"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_453",
+        "target_tables": "output_target_tables_925",
+        "schema_columns": "output_schema_columns_708",
+        "foreign_keys": "output_foreign_keys_970"
+      },
+      "timestamp": "2026-10-04T02:10:02.336000+00:00",
+      "duration_ms": 1168,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "construct_sql_query",
+      "input": {
+        "plan_steps": "val_plan_steps_71",
+        "schema_columns": "val_schema_columns_85"
+      },
+      "output": {
+        "code": 404,
+        "body": {
+          "message": "Not Found"
+        },
+        "treated_as_success": true
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_453",
+        "target_tables": "output_target_tables_925",
+        "schema_columns": "output_schema_columns_708",
+        "foreign_keys": "output_foreign_keys_970"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_453",
+        "target_tables": "output_target_tables_925",
+        "schema_columns": "output_schema_columns_708",
+        "foreign_keys": "output_foreign_keys_970",
+        "sql_statement": "output_sql_statement_230"
+      },
+      "timestamp": "2026-10-04T02:10:02.712000+00:00",
+      "duration_ms": 904,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_database_query",
+      "input": {
+        "sql_statement": "val_sql_statement_11"
+      },
+      "output": {
+        "error": "Downstream parser crashed attempting to index non-existent response attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_453",
+        "target_tables": "output_target_tables_925",
+        "schema_columns": "output_schema_columns_708",
+        "foreign_keys": "output_foreign_keys_970",
+        "sql_statement": "output_sql_statement_230"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_453",
+        "target_tables": "output_target_tables_925",
+        "schema_columns": "output_schema_columns_708",
+        "foreign_keys": "output_foreign_keys_970",
+        "sql_statement": "output_sql_statement_230",
+        "execution_status": "failed",
+        "last_error": "Downstream parser crashed attempting to index non-existent response attributes"
+      },
+      "timestamp": "2026-10-04T02:10:02.440000+00:00",
+      "duration_ms": 610,
+      "status": "failed",
+      "error": "Downstream parser crashed attempting to index non-existent response attributes",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "run_id": "run_0153",
+  "task_type": "hotel_booking",
+  "agent_name": "hotel_booking_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-04T00:12:01.151000+00:00",
+  "end_time": "2026-10-04T00:12:05.635000+00:00",
+  "total_steps": 5,
+  "failure_type": "incorrect_api_response_handling",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Downstream parser crashed attempting to index non-existent response attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_hotel_criteria",
+      "input": {
+        "query": "Execute action parse_hotel_criteria for hotel_booking workflow"
+      },
+      "output": {
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519"
+      },
+      "timestamp": "2026-10-04T00:12:01.151000+00:00",
+      "duration_ms": 1151,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_available_hotels",
+      "input": {
+        "city": "val_city_30",
+        "checkin_date": "2026-10-04T09:00:00Z",
+        "nights": "val_nights_15"
+      },
+      "output": {
+        "code": 404,
+        "body": {
+          "message": "Not Found"
+        },
+        "treated_as_success": true
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519",
+        "hotel_ids": 9980,
+        "price_range": "output_price_range_608"
+      },
+      "timestamp": "2026-10-04T00:12:01.368000+00:00",
+      "duration_ms": 684,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_room_allocation",
+      "input": {
+        "hotel_id": 9081,
+        "room_type": "val_room_type_52",
+        "nights": "val_nights_40"
+      },
+      "output": {
+        "available": "output_available_102",
+        "nightly_rate": 64.66
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519",
+        "hotel_ids": 9980,
+        "price_range": "output_price_range_608"
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519",
+        "hotel_ids": 9980,
+        "price_range": "output_price_range_608",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T00:12:01.515000+00:00",
+      "duration_ms": 505,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "commit_hotel_reservation",
+      "input": {
+        "hotel_id": 1024,
+        "guest_name": "val_guest_name_83",
+        "total_price": 643.85
+      },
+      "output": {
+        "confirmation_num": "output_confirmation_num_252",
+        "voucher": "output_voucher_192"
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519",
+        "hotel_ids": 9980,
+        "price_range": "output_price_range_608",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519",
+        "hotel_ids": 9980,
+        "price_range": "output_price_range_608",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-04T00:12:01.048000+00:00",
+      "duration_ms": 262,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "generate_booking_confirmation",
+      "input": {
+        "confirmation_num": "val_confirmation_num_19"
+      },
+      "output": {
+        "error": "Downstream parser crashed attempting to index non-existent response attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519",
+        "hotel_ids": 9980,
+        "price_range": "output_price_range_608",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "hotel_booking",
+        "scenario": "room_reservation",
+        "city": "output_city_306",
+        "checkin_date": "output_checkin_date_466",
+        "nights": "output_nights_820",
+        "guests": "output_guests_519",
+        "hotel_ids": 9980,
+        "price_range": "output_price_range_608",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream parser crashed attempting to index non-existent response attributes"
+      },
+      "timestamp": "2026-10-04T00:12:05.635000+00:00",
+      "duration_ms": 1127,
+      "status": "failed",
+      "error": "Downstream parser crashed attempting to index non-existent response attributes",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

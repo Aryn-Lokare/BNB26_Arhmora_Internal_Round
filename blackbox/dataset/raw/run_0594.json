@@ -1,0 +1,180 @@
+{
+  "run_id": "run_0594",
+  "task_type": "hr_assistant",
+  "agent_name": "hr_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T18:52:01.092000+00:00",
+  "end_time": "2026-10-03T18:52:01.380000+00:00",
+  "total_steps": 4,
+  "failure_type": "incorrect_parameter",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Type error / out of bounds parameter encountered in downstream service call",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_leave_application",
+      "input": {
+        "form_data": "val_form_data_37"
+      },
+      "output": {
+        "employee_id": 7821,
+        "leave_type": "output_leave_type_602",
+        "start_date": "output_start_date_113",
+        "days_count": "output_days_count_415"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 7821,
+        "leave_type": "output_leave_type_602",
+        "start_date": "output_start_date_113",
+        "days_count": "output_days_count_415"
+      },
+      "timestamp": "2026-10-03T18:52:01.092000+00:00",
+      "duration_ms": 1092,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_pto_balance",
+      "input": {
+        "employee_id": 7821,
+        "leave_type": "val_leave_type_53",
+        "rate_limit_ms": "infinite_string",
+        "pct": 9999
+      },
+      "output": {
+        "warning": "coerced_bad_type"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 7821,
+        "leave_type": "output_leave_type_602",
+        "start_date": "output_start_date_113",
+        "days_count": "output_days_count_415"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 7821,
+        "leave_type": "output_leave_type_602",
+        "start_date": "output_start_date_113",
+        "days_count": "output_days_count_415",
+        "accrued_days": "output_accrued_days_745",
+        "used_days": "output_used_days_418",
+        "available_days": "output_available_days_800"
+      },
+      "timestamp": "2026-10-03T18:52:02.746000+00:00",
+      "duration_ms": 1373,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_blackout_periods",
+      "input": {
+        "start_date": "2026-10-04T09:00:00Z",
+        "days_count": "val_days_count_64",
+        "dept_id": 334
+      },
+      "output": {
+        "coverage_ok": "output_coverage_ok_224",
+        "blackout_conflict": "output_blackout_conflict_713"
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 7821,
+        "leave_type": "output_leave_type_602",
+        "start_date": "output_start_date_113",
+        "days_count": "output_days_count_415",
+        "accrued_days": "output_accrued_days_745",
+        "used_days": "output_used_days_418",
+        "available_days": "output_available_days_800"
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 7821,
+        "leave_type": "output_leave_type_602",
+        "start_date": "output_start_date_113",
+        "days_count": "output_days_count_415",
+        "accrued_days": "output_accrued_days_745",
+        "used_days": "output_used_days_418",
+        "available_days": "output_available_days_800",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T18:52:04.038000+00:00",
+      "duration_ms": 1346,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "deduct_pto_balance",
+      "input": {
+        "employee_id": 7821,
+        "days_count": "val_days_count_46"
+      },
+      "output": {
+        "error": "Type error / out of bounds parameter encountered in downstream service call",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 7821,
+        "leave_type": "output_leave_type_602",
+        "start_date": "output_start_date_113",
+        "days_count": "output_days_count_415",
+        "accrued_days": "output_accrued_days_745",
+        "used_days": "output_used_days_418",
+        "available_days": "output_available_days_800",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "hr_assistant",
+        "scenario": "leave_request_approval",
+        "employee_id": 7821,
+        "leave_type": "output_leave_type_602",
+        "start_date": "output_start_date_113",
+        "days_count": "output_days_count_415",
+        "accrued_days": "output_accrued_days_745",
+        "used_days": "output_used_days_418",
+        "available_days": "output_available_days_800",
+        "step_3_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Type error / out of bounds parameter encountered in downstream service call"
+      },
+      "timestamp": "2026-10-03T18:52:01.380000+00:00",
+      "duration_ms": 345,
+      "status": "failed",
+      "error": "Type error / out of bounds parameter encountered in downstream service call",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

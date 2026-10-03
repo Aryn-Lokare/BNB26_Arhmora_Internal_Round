@@ -1,0 +1,208 @@
+{
+  "run_id": "run_0241",
+  "task_type": "calendar_scheduling",
+  "agent_name": "calendar_scheduling_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T22:45:01.170000+00:00",
+  "end_time": "2026-10-03T22:45:05.840000+00:00",
+  "total_steps": 5,
+  "failure_type": "incorrect_database_operation",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_meeting_intent",
+      "input": {
+        "prompt": "Execute action parse_meeting_intent for calendar_scheduling workflow"
+      },
+      "output": {
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799"
+      },
+      "timestamp": "2026-10-03T22:45:01.170000+00:00",
+      "duration_ms": 1170,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "query_calendar_freebusy",
+      "input": {
+        "attendees": "val_attendees_70",
+        "time_window": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "common_free_slots": "output_common_free_slots_368"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799",
+        "common_free_slots": "output_common_free_slots_368"
+      },
+      "timestamp": "2026-10-03T22:45:01.756000+00:00",
+      "duration_ms": 878,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "select_optimal_slot",
+      "input": {
+        "common_free_slots": "val_common_free_slots_77",
+        "duration_mins": "val_duration_mins_65"
+      },
+      "output": {
+        "sql": "SELECT * FROM records WHERE 1=0",
+        "rows_returned": 0,
+        "query_cost": 0.01
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799",
+        "common_free_slots": "output_common_free_slots_368"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799",
+        "common_free_slots": "output_common_free_slots_368",
+        "chosen_start": "output_chosen_start_112",
+        "chosen_end": "output_chosen_end_395"
+      },
+      "timestamp": "2026-10-03T22:45:01.131000+00:00",
+      "duration_ms": 377,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "schedule_calendar_event",
+      "input": {
+        "attendees": "val_attendees_58",
+        "chosen_start": "val_chosen_start_96",
+        "chosen_end": "val_chosen_end_50",
+        "meeting_title": "val_meeting_title_77"
+      },
+      "output": {
+        "event_id": 1672,
+        "meeting_link": "output_meeting_link_199"
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799",
+        "common_free_slots": "output_common_free_slots_368",
+        "chosen_start": "output_chosen_start_112",
+        "chosen_end": "output_chosen_end_395"
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799",
+        "common_free_slots": "output_common_free_slots_368",
+        "chosen_start": "output_chosen_start_112",
+        "chosen_end": "output_chosen_end_395",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T22:45:03.996000+00:00",
+      "duration_ms": 999,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "send_calendar_invitations",
+      "input": {
+        "event_id": 1672,
+        "attendees": "val_attendees_65"
+      },
+      "output": {
+        "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799",
+        "common_free_slots": "output_common_free_slots_368",
+        "chosen_start": "output_chosen_start_112",
+        "chosen_end": "output_chosen_end_395",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "calendar_scheduling",
+        "scenario": "team_sync",
+        "attendees": "output_attendees_339",
+        "duration_mins": "output_duration_mins_488",
+        "time_window": "output_time_window_799",
+        "common_free_slots": "output_common_free_slots_368",
+        "chosen_start": "output_chosen_start_112",
+        "chosen_end": "output_chosen_end_395",
+        "step_4_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero"
+      },
+      "timestamp": "2026-10-03T22:45:05.840000+00:00",
+      "duration_ms": 1168,
+      "status": "failed",
+      "error": "Database query returned 0 rows due to flawed predicate; downstream math divided by zero",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

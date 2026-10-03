@@ -1,0 +1,210 @@
+{
+  "run_id": "run_0326",
+  "task_type": "document_processing",
+  "agent_name": "document_processing_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T19:43:01.104000+00:00",
+  "end_time": "2026-10-03T19:43:00.504000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_state_update",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "State update dropped critical context keys required by subsequent steps",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "classify_document_type",
+      "input": {
+        "file_bytes": "val_file_bytes_73"
+      },
+      "output": {
+        "doc_type": "output_doc_type_274",
+        "page_count": "output_page_count_665"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_274",
+        "page_count": "output_page_count_665"
+      },
+      "timestamp": "2026-10-03T19:43:01.104000+00:00",
+      "duration_ms": 1104,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "run_ocr_extraction",
+      "input": {
+        "file_bytes": "val_file_bytes_94",
+        "page_count": "val_page_count_82"
+      },
+      "output": {
+        "corrupted_keys": [
+          "all_context_cleared"
+        ],
+        "reset": true
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_274",
+        "page_count": "output_page_count_665"
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "timestamp": "2026-10-03T19:43:00.952000+00:00",
+      "duration_ms": 476,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "extract_key_value_entities",
+      "input": {
+        "raw_text": "val_raw_text_82"
+      },
+      "output": {
+        "vendor_name": "output_vendor_name_279",
+        "invoice_date": "output_invoice_date_166",
+        "total_due": 726.39,
+        "line_items": [
+          {
+            "item_id": 9,
+            "score": 0.74
+          },
+          {
+            "item_id": 73,
+            "score": 0.95
+          },
+          {
+            "item_id": 67,
+            "score": 0.91
+          }
+        ]
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T19:43:03.942000+00:00",
+      "duration_ms": 1314,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "validate_financial_totals",
+      "input": {
+        "line_items": "val_line_items_34",
+        "total_due": "val_total_due_96"
+      },
+      "output": {
+        "math_valid": 1378,
+        "discrepancy": "output_discrepancy_809"
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T19:43:02.564000+00:00",
+      "duration_ms": 641,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "save_structured_doc_record",
+      "input": {
+        "vendor_name": "val_vendor_name_88",
+        "total_due": "val_total_due_42"
+      },
+      "output": {
+        "doc_id": 8437
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T19:43:05.855000+00:00",
+      "duration_ms": 1171,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "emit_doc_summary",
+      "input": {
+        "doc_id": 8437
+      },
+      "output": {
+        "error": "State update dropped critical context keys required by subsequent steps",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "State update dropped critical context keys required by subsequent steps"
+      },
+      "timestamp": "2026-10-03T19:43:00.504000+00:00",
+      "duration_ms": 84,
+      "status": "failed",
+      "error": "State update dropped critical context keys required by subsequent steps",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

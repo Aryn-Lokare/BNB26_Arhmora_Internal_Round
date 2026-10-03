@@ -1,0 +1,194 @@
+{
+  "run_id": "run_0024",
+  "task_type": "customer_support",
+  "agent_name": "customer_support_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-04T02:29:00.185000+00:00",
+  "end_time": "2026-10-04T02:29:06.160000+00:00",
+  "total_steps": 5,
+  "failure_type": "wrong_tool_argument",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Invalid tool argument caused downstream processing error: entity not found",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_address_request",
+      "input": {
+        "user_message": "Execute action parse_address_request for customer_support workflow"
+      },
+      "output": {
+        "customer_id": 5136,
+        "new_address": "output_new_address_982"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 5136,
+        "new_address": "output_new_address_982"
+      },
+      "timestamp": "2026-10-04T02:29:00.185000+00:00",
+      "duration_ms": 185,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_shipping_address",
+      "input": {
+        "customer_id": "INVALID_CUSTOMER_ID_9999"
+      },
+      "output": {
+        "status": "accepted_with_bad_arg",
+        "warning": "Unchecked parameter format"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 5136,
+        "new_address": "output_new_address_982"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 5136,
+        "new_address": "output_new_address_982",
+        "current_address": "output_current_address_941",
+        "pending_shipments": "output_pending_shipments_166"
+      },
+      "timestamp": "2026-10-04T02:29:02.116000+00:00",
+      "duration_ms": 1058,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_postal_code",
+      "input": {
+        "zip_code": "val_zip_code_72"
+      },
+      "output": {
+        "valid_zone": 2213,
+        "carrier": "output_carrier_690"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 5136,
+        "new_address": "output_new_address_982",
+        "current_address": "output_current_address_941",
+        "pending_shipments": "output_pending_shipments_166"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 5136,
+        "new_address": "output_new_address_982",
+        "current_address": "output_current_address_941",
+        "pending_shipments": "output_pending_shipments_166",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T02:29:02.700000+00:00",
+      "duration_ms": 900,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "update_customer_record",
+      "input": {
+        "customer_id": 5136,
+        "new_address": "val_new_address_29"
+      },
+      "output": {
+        "records_updated": "output_records_updated_252"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 5136,
+        "new_address": "output_new_address_982",
+        "current_address": "output_current_address_941",
+        "pending_shipments": "output_pending_shipments_166",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 5136,
+        "new_address": "output_new_address_982",
+        "current_address": "output_current_address_941",
+        "pending_shipments": "output_pending_shipments_166",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-04T02:29:05.476000+00:00",
+      "duration_ms": 1369,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "generate_confirmation_response",
+      "input": {
+        "customer_id": 5136
+      },
+      "output": {
+        "error": "Invalid tool argument caused downstream processing error: entity not found",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 5136,
+        "new_address": "output_new_address_982",
+        "current_address": "output_current_address_941",
+        "pending_shipments": "output_pending_shipments_166",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 5136,
+        "new_address": "output_new_address_982",
+        "current_address": "output_current_address_941",
+        "pending_shipments": "output_pending_shipments_166",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Invalid tool argument caused downstream processing error: entity not found"
+      },
+      "timestamp": "2026-10-04T02:29:06.160000+00:00",
+      "duration_ms": 1232,
+      "status": "failed",
+      "error": "Invalid tool argument caused downstream processing error: entity not found",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

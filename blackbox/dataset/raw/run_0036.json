@@ -1,0 +1,202 @@
+{
+  "run_id": "run_0036",
+  "task_type": "customer_support",
+  "agent_name": "customer_support_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T12:27:00.555000+00:00",
+  "end_time": "2026-10-03T12:27:03.935000+00:00",
+  "total_steps": 5,
+  "failure_type": "incorrect_api_response_handling",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Downstream parser crashed attempting to index non-existent response attributes",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_address_request",
+      "input": {
+        "user_message": "Execute action parse_address_request for customer_support workflow"
+      },
+      "output": {
+        "customer_id": 8555,
+        "new_address": "output_new_address_753"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 8555,
+        "new_address": "output_new_address_753"
+      },
+      "timestamp": "2026-10-03T12:27:00.555000+00:00",
+      "duration_ms": 555,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_shipping_address",
+      "input": {
+        "customer_id": 8555
+      },
+      "output": {
+        "current_address": "output_current_address_361",
+        "pending_shipments": "output_pending_shipments_782"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 8555,
+        "new_address": "output_new_address_753"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 8555,
+        "new_address": "output_new_address_753",
+        "current_address": "output_current_address_361",
+        "pending_shipments": "output_pending_shipments_782"
+      },
+      "timestamp": "2026-10-03T12:27:01.200000+00:00",
+      "duration_ms": 600,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_postal_code",
+      "input": {
+        "zip_code": "val_zip_code_69"
+      },
+      "output": {
+        "code": 404,
+        "body": {
+          "message": "Not Found"
+        },
+        "treated_as_success": true
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 8555,
+        "new_address": "output_new_address_753",
+        "current_address": "output_current_address_361",
+        "pending_shipments": "output_pending_shipments_782"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 8555,
+        "new_address": "output_new_address_753",
+        "current_address": "output_current_address_361",
+        "pending_shipments": "output_pending_shipments_782",
+        "valid_zone": 5712,
+        "carrier": "output_carrier_793"
+      },
+      "timestamp": "2026-10-03T12:27:00.297000+00:00",
+      "duration_ms": 99,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "update_customer_record",
+      "input": {
+        "customer_id": 8555,
+        "new_address": "val_new_address_19"
+      },
+      "output": {
+        "records_updated": "output_records_updated_552"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 8555,
+        "new_address": "output_new_address_753",
+        "current_address": "output_current_address_361",
+        "pending_shipments": "output_pending_shipments_782",
+        "valid_zone": 5712,
+        "carrier": "output_carrier_793"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 8555,
+        "new_address": "output_new_address_753",
+        "current_address": "output_current_address_361",
+        "pending_shipments": "output_pending_shipments_782",
+        "valid_zone": 5712,
+        "carrier": "output_carrier_793",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T12:27:04.796000+00:00",
+      "duration_ms": 1199,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "llm_decision",
+      "action": "generate_confirmation_response",
+      "input": {
+        "customer_id": 8555
+      },
+      "output": {
+        "error": "Downstream parser crashed attempting to index non-existent response attributes",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 8555,
+        "new_address": "output_new_address_753",
+        "current_address": "output_current_address_361",
+        "pending_shipments": "output_pending_shipments_782",
+        "valid_zone": 5712,
+        "carrier": "output_carrier_793",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 8555,
+        "new_address": "output_new_address_753",
+        "current_address": "output_current_address_361",
+        "pending_shipments": "output_pending_shipments_782",
+        "valid_zone": 5712,
+        "carrier": "output_carrier_793",
+        "step_4_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream parser crashed attempting to index non-existent response attributes"
+      },
+      "timestamp": "2026-10-03T12:27:03.935000+00:00",
+      "duration_ms": 787,
+      "status": "failed",
+      "error": "Downstream parser crashed attempting to index non-existent response attributes",
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "run_id": "run_0514",
+  "task_type": "it_support",
+  "agent_name": "it_support_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T21:27:00.902000+00:00",
+  "end_time": "2026-10-03T21:27:05.190000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_order_of_operations",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "Order of operations violation: action executed prior to authorization check",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "evaluate_access_request",
+      "input": {
+        "ticket_text": "val_ticket_text_64"
+      },
+      "output": {
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410"
+      },
+      "timestamp": "2026-10-03T21:27:00.902000+00:00",
+      "duration_ms": 902,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "lookup_ldap_directory",
+      "input": {
+        "username": "val_username_43"
+      },
+      "output": {
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410",
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749"
+      },
+      "timestamp": "2026-10-03T21:27:01.900000+00:00",
+      "duration_ms": 950,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "verify_security_policy",
+      "input": {
+        "requested_group": "val_requested_group_87",
+        "security_clearance": "val_security_clearance_67"
+      },
+      "output": {
+        "policy_satisfied": "output_policy_satisfied_614",
+        "mfa_enabled": "output_mfa_enabled_481"
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410",
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410",
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749",
+        "policy_satisfied": "output_policy_satisfied_614",
+        "mfa_enabled": "output_mfa_enabled_481"
+      },
+      "timestamp": "2026-10-03T21:27:00.951000+00:00",
+      "duration_ms": 317,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "premature_assign_vpn_profile",
+      "input": {
+        "username": "val_username_52",
+        "requested_group": "val_requested_group_78"
+      },
+      "output": {
+        "executed_unverified": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410",
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749",
+        "policy_satisfied": "output_policy_satisfied_614",
+        "mfa_enabled": "output_mfa_enabled_481"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410",
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749",
+        "policy_satisfied": "output_policy_satisfied_614",
+        "mfa_enabled": "output_mfa_enabled_481",
+        "cert_serial": "output_cert_serial_473",
+        "provision_status": "success"
+      },
+      "timestamp": "2026-10-03T21:27:04.196000+00:00",
+      "duration_ms": 1049,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "audit_log_access_grant",
+      "input": {
+        "username": "val_username_32",
+        "cert_serial": "val_cert_serial_64"
+      },
+      "output": {
+        "audit_id": 9711
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410",
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749",
+        "policy_satisfied": "output_policy_satisfied_614",
+        "mfa_enabled": "output_mfa_enabled_481",
+        "cert_serial": "output_cert_serial_473",
+        "provision_status": "success"
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410",
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749",
+        "policy_satisfied": "output_policy_satisfied_614",
+        "mfa_enabled": "output_mfa_enabled_481",
+        "cert_serial": "output_cert_serial_473",
+        "provision_status": "success",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T21:27:01.540000+00:00",
+      "duration_ms": 308,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "notify_user_credentials",
+      "input": {
+        "username": "val_username_96",
+        "provision_status": "val_provision_status_20"
+      },
+      "output": {
+        "error": "Order of operations violation: action executed prior to authorization check",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410",
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749",
+        "policy_satisfied": "output_policy_satisfied_614",
+        "mfa_enabled": "output_mfa_enabled_481",
+        "cert_serial": "output_cert_serial_473",
+        "provision_status": "success",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "it_support",
+        "scenario": "vpn_access_provision",
+        "username": "output_username_889",
+        "requested_group": "output_requested_group_155",
+        "manager_approved": "output_manager_approved_410",
+        "employee_status": "success",
+        "dept": "output_dept_859",
+        "security_clearance": "output_security_clearance_749",
+        "policy_satisfied": "output_policy_satisfied_614",
+        "mfa_enabled": "output_mfa_enabled_481",
+        "cert_serial": "output_cert_serial_473",
+        "provision_status": "success",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Order of operations violation: action executed prior to authorization check"
+      },
+      "timestamp": "2026-10-03T21:27:05.190000+00:00",
+      "duration_ms": 865,
+      "status": "failed",
+      "error": "Order of operations violation: action executed prior to authorization check",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

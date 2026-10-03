@@ -1,0 +1,16 @@
+{
+  "total_generated": 650,
+  "successful_count": 350,
+  "failed_count": 300,
+  "train_count": 413,
+  "validation_count": 88,
+  "test_count": 149,
+  "unseen_test_count": 59,
+  "files": {
+    "train": "blackbox\\dataset\\train.jsonl",
+    "validation": "blackbox\\dataset\\validation.jsonl",
+    "test": "blackbox\\dataset\\test.jsonl",
+    "unseen_test": "blackbox\\dataset\\unseen_test.jsonl",
+    "raw_dir": "blackbox\\dataset\\raw"
+  }
+}

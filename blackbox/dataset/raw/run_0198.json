@@ -1,0 +1,267 @@
+{
+  "run_id": "run_0198",
+  "task_type": "payment_processing",
+  "agent_name": "payment_processing_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T12:38:01.178000+00:00",
+  "end_time": "2026-10-03T12:38:03.858000+00:00",
+  "total_steps": 6,
+  "failure_type": "hallucinated_value",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "verify_payment_parameters",
+      "input": {
+        "payment_request": "val_payment_request_23"
+      },
+      "output": {
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690
+      },
+      "timestamp": "2026-10-03T12:38:01.178000+00:00",
+      "duration_ms": 1178,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "check_merchant_account_status",
+      "input": {
+        "merchant_id": 6690
+      },
+      "output": {
+        "hallucinated_id": "FAKE_TOKEN_XYZ_9876",
+        "confidence": 0.99,
+        "verified": false
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690,
+        "merchant_active": "output_merchant_active_121",
+        "payout_schedule": "output_payout_schedule_805"
+      },
+      "timestamp": "2026-10-03T12:38:01.956000+00:00",
+      "duration_ms": 978,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "run_fraud_scoring",
+      "input": {
+        "customer_token": "val_customer_token_55",
+        "amount": 695.07,
+        "currency": "val_currency_42"
+      },
+      "output": {
+        "risk_score": "output_risk_score_140",
+        "fraud_verdict": "output_fraud_verdict_596"
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690,
+        "merchant_active": "output_merchant_active_121",
+        "payout_schedule": "output_payout_schedule_805"
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690,
+        "merchant_active": "output_merchant_active_121",
+        "payout_schedule": "output_payout_schedule_805",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-03T12:38:02.559000+00:00",
+      "duration_ms": 853,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_card_charge",
+      "input": {
+        "customer_token": "val_customer_token_81",
+        "amount": 297.61,
+        "currency": "val_currency_99"
+      },
+      "output": {
+        "auth_code": "output_auth_code_601",
+        "charge_id": 4109
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690,
+        "merchant_active": "output_merchant_active_121",
+        "payout_schedule": "output_payout_schedule_805",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690,
+        "merchant_active": "output_merchant_active_121",
+        "payout_schedule": "output_payout_schedule_805",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T12:38:03.904000+00:00",
+      "duration_ms": 976,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "record_ledger_entry",
+      "input": {
+        "charge_id": 4109,
+        "merchant_id": 6690,
+        "amount": 346.59
+      },
+      "output": {
+        "ledger_balance": 892.26
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690,
+        "merchant_active": "output_merchant_active_121",
+        "payout_schedule": "output_payout_schedule_805",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690,
+        "merchant_active": "output_merchant_active_121",
+        "payout_schedule": "output_payout_schedule_805",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T12:38:06.200000+00:00",
+      "duration_ms": 1240,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "compose_receipt",
+      "input": {
+        "charge_id": 4109,
+        "amount": 870.89
+      },
+      "output": {
+        "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690,
+        "merchant_active": "output_merchant_active_121",
+        "payout_schedule": "output_payout_schedule_805",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "payment_processing",
+        "scenario": "gateway_charge",
+        "amount": 194.7,
+        "currency": "output_currency_338",
+        "customer_token": "output_customer_token_424",
+        "merchant_id": 6690,
+        "merchant_active": "output_merchant_active_121",
+        "payout_schedule": "output_payout_schedule_805",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Hallucinated token does not exist in backend database; 401 Unauthorized"
+      },
+      "timestamp": "2026-10-03T12:38:03.858000+00:00",
+      "duration_ms": 643,
+      "status": "failed",
+      "error": "Hallucinated token does not exist in backend database; 401 Unauthorized",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

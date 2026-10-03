@@ -1,0 +1,275 @@
+{
+  "run_id": "run_0295",
+  "task_type": "email_assistant",
+  "agent_name": "email_assistant_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T17:22:00.503000+00:00",
+  "end_time": "2026-10-03T17:22:04.452000+00:00",
+  "total_steps": 6,
+  "failure_type": "invalid_tool_output_handling",
+  "failure_step_id": "step_05",
+  "final_output": {
+    "error": "Agent failed to extract fields from tool output, causing NullReferenceError",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_email_thread",
+      "input": {
+        "raw_email": "val_raw_email_86"
+      },
+      "output": {
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844"
+      },
+      "timestamp": "2026-10-03T17:22:00.503000+00:00",
+      "duration_ms": 503,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_related_correspondence",
+      "input": {
+        "sender": "val_sender_63",
+        "subject": "val_subject_33"
+      },
+      "output": {
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844",
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911"
+      },
+      "timestamp": "2026-10-03T17:22:00.934000+00:00",
+      "duration_ms": 467,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "draft_email_response",
+      "input": {
+        "subject": "val_subject_13",
+        "context_notes": "val_context_notes_47",
+        "required_action": "val_required_action_43"
+      },
+      "output": {
+        "draft_body": "output_draft_body_341",
+        "recipients": "output_recipients_732"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844",
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844",
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911",
+        "draft_body": "output_draft_body_341",
+        "recipients": "output_recipients_732"
+      },
+      "timestamp": "2026-10-03T17:22:01.134000+00:00",
+      "duration_ms": 378,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_mailbox_label",
+      "input": {
+        "email_id": 2048,
+        "folder": "val_folder_57"
+      },
+      "output": {
+        "label_applied": "output_label_applied_696"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844",
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911",
+        "draft_body": "output_draft_body_341",
+        "recipients": "output_recipients_732"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844",
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911",
+        "draft_body": "output_draft_body_341",
+        "recipients": "output_recipients_732",
+        "label_applied": "output_label_applied_696"
+      },
+      "timestamp": "2026-10-03T17:22:04.012000+00:00",
+      "duration_ms": 1003,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "queue_outbox_message",
+      "input": {
+        "draft_body": "val_draft_body_20",
+        "recipients": "val_recipients_11"
+      },
+      "output": {
+        "raw_output": "200 OK",
+        "parsed_as": null,
+        "extracted": {}
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844",
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911",
+        "draft_body": "output_draft_body_341",
+        "recipients": "output_recipients_732",
+        "label_applied": "output_label_applied_696"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844",
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911",
+        "draft_body": "output_draft_body_341",
+        "recipients": "output_recipients_732",
+        "label_applied": "output_label_applied_696",
+        "queue_id": 8682,
+        "scheduled_send": "output_scheduled_send_236"
+      },
+      "timestamp": "2026-10-03T17:22:05.090000+00:00",
+      "duration_ms": 1018,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "summarize_email_action",
+      "input": {
+        "queue_id": 8682
+      },
+      "output": {
+        "error": "Agent failed to extract fields from tool output, causing NullReferenceError",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844",
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911",
+        "draft_body": "output_draft_body_341",
+        "recipients": "output_recipients_732",
+        "label_applied": "output_label_applied_696",
+        "queue_id": 8682,
+        "scheduled_send": "output_scheduled_send_236"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_320",
+        "subject": "output_subject_943",
+        "urgency": "output_urgency_389",
+        "required_action": "output_required_action_844",
+        "previous_threads": "output_previous_threads_518",
+        "context_notes": "output_context_notes_911",
+        "draft_body": "output_draft_body_341",
+        "recipients": "output_recipients_732",
+        "label_applied": "output_label_applied_696",
+        "queue_id": 8682,
+        "scheduled_send": "output_scheduled_send_236",
+        "execution_status": "failed",
+        "last_error": "Agent failed to extract fields from tool output, causing NullReferenceError"
+      },
+      "timestamp": "2026-10-03T17:22:04.452000+00:00",
+      "duration_ms": 742,
+      "status": "failed",
+      "error": "Agent failed to extract fields from tool output, causing NullReferenceError",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

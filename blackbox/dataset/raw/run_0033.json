@@ -1,0 +1,159 @@
+{
+  "run_id": "run_0033",
+  "task_type": "customer_support",
+  "agent_name": "customer_support_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T23:15:00.921000+00:00",
+  "end_time": "2026-10-03T23:15:04.432000+00:00",
+  "total_steps": 4,
+  "failure_type": "invalid_data_transformation",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_address_request",
+      "input": {
+        "user_message": "Execute action parse_address_request for customer_support workflow"
+      },
+      "output": {
+        "customer_id": 1715,
+        "new_address": "output_new_address_425"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 1715,
+        "new_address": "output_new_address_425"
+      },
+      "timestamp": "2026-10-03T23:15:00.921000+00:00",
+      "duration_ms": 921,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "fetch_shipping_address",
+      "input": {
+        "customer_id": 1715
+      },
+      "output": {
+        "current_address": "output_current_address_495",
+        "pending_shipments": "output_pending_shipments_779"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 1715,
+        "new_address": "output_new_address_425"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 1715,
+        "new_address": "output_new_address_425",
+        "current_address": "output_current_address_495",
+        "pending_shipments": "output_pending_shipments_779"
+      },
+      "timestamp": "2026-10-03T23:15:02.096000+00:00",
+      "duration_ms": 1048,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "validate_postal_code",
+      "input": {
+        "zip_code": "val_zip_code_73"
+      },
+      "output": {
+        "transformed_value": "NaN",
+        "source_value": 150.0,
+        "units": "mismatched_timezone_and_currency"
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 1715,
+        "new_address": "output_new_address_425",
+        "current_address": "output_current_address_495",
+        "pending_shipments": "output_pending_shipments_779"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 1715,
+        "new_address": "output_new_address_425",
+        "current_address": "output_current_address_495",
+        "pending_shipments": "output_pending_shipments_779",
+        "valid_zone": 1606,
+        "carrier": "output_carrier_229"
+      },
+      "timestamp": "2026-10-03T23:15:01.173000+00:00",
+      "duration_ms": 391,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "update_customer_record",
+      "input": {
+        "customer_id": 1715,
+        "new_address": "val_new_address_52"
+      },
+      "output": {
+        "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 1715,
+        "new_address": "output_new_address_425",
+        "current_address": "output_current_address_495",
+        "pending_shipments": "output_pending_shipments_779",
+        "valid_zone": 1606,
+        "carrier": "output_carrier_229"
+      },
+      "state_after": {
+        "workflow_domain": "customer_support",
+        "scenario": "address_change",
+        "customer_id": 1715,
+        "new_address": "output_new_address_425",
+        "current_address": "output_current_address_495",
+        "pending_shipments": "output_pending_shipments_779",
+        "valid_zone": 1606,
+        "carrier": "output_carrier_229",
+        "execution_status": "failed",
+        "last_error": "Downstream validation failed: expected numeric float, received 'NaN'"
+      },
+      "timestamp": "2026-10-03T23:15:04.432000+00:00",
+      "duration_ms": 1108,
+      "status": "failed",
+      "error": "Downstream validation failed: expected numeric float, received 'NaN'",
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

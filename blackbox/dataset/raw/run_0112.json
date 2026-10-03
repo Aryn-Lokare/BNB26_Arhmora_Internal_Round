@@ -1,0 +1,267 @@
+{
+  "run_id": "run_0112",
+  "task_type": "travel_booking",
+  "agent_name": "travel_booking_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-04T00:59:00.835000+00:00",
+  "end_time": "2026-10-04T00:59:06.438000+00:00",
+  "total_steps": 6,
+  "failure_type": "stale_state",
+  "failure_step_id": "step_02",
+  "final_output": {
+    "error": "Downstream action attempted using stale version/cache token",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_flight_preferences",
+      "input": {
+        "user_prompt": "Execute action extract_flight_preferences for travel_booking workflow"
+      },
+      "output": {
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695"
+      },
+      "timestamp": "2026-10-04T00:59:00.835000+00:00",
+      "duration_ms": 835,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_flight_routes",
+      "input": {
+        "origin": "val_origin_21",
+        "destination": "val_destination_68",
+        "travel_date": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "balance": 0.0,
+        "version": "v1_deprecated_cache",
+        "is_stale": true
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695",
+        "flight_candidates": 6869,
+        "min_fare": "output_min_fare_970"
+      },
+      "timestamp": "2026-10-04T00:59:00.170000+00:00",
+      "duration_ms": 85,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "check_seat_inventory",
+      "input": {
+        "flight_number": "val_flight_number_78",
+        "cabin_class": "val_cabin_class_60"
+      },
+      "output": {
+        "available_seats": "output_available_seats_323",
+        "fare_quote": "output_fare_quote_539"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695",
+        "flight_candidates": 6869,
+        "min_fare": "output_min_fare_970"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695",
+        "flight_candidates": 6869,
+        "min_fare": "output_min_fare_970",
+        "step_3_propagated": true
+      },
+      "timestamp": "2026-10-04T00:59:00.627000+00:00",
+      "duration_ms": 209,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "hold_flight_seat",
+      "input": {
+        "flight_number": "val_flight_number_73",
+        "seat_number": "val_seat_number_44",
+        "passenger_id": 512
+      },
+      "output": {
+        "hold_id": 5646,
+        "expiry": "output_expiry_445"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695",
+        "flight_candidates": 6869,
+        "min_fare": "output_min_fare_970",
+        "step_3_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695",
+        "flight_candidates": 6869,
+        "min_fare": "output_min_fare_970",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-04T00:59:02.052000+00:00",
+      "duration_ms": 513,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "store_pending_booking",
+      "input": {
+        "hold_id": 5646,
+        "fare_quote": "val_fare_quote_26"
+      },
+      "output": {
+        "booking_reference": "output_booking_reference_679"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695",
+        "flight_candidates": 6869,
+        "min_fare": "output_min_fare_970",
+        "step_3_propagated": true,
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695",
+        "flight_candidates": 6869,
+        "min_fare": "output_min_fare_970",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-04T00:59:06+00:00",
+      "duration_ms": 1200,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "present_flight_itinerary",
+      "input": {
+        "booking_reference": "val_booking_reference_53",
+        "fare_quote": "val_fare_quote_97"
+      },
+      "output": {
+        "error": "Downstream action attempted using stale version/cache token",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695",
+        "flight_candidates": 6869,
+        "min_fare": "output_min_fare_970",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_565",
+        "destination": "output_destination_599",
+        "travel_date": "output_travel_date_435",
+        "cabin_class": "output_cabin_class_695",
+        "flight_candidates": 6869,
+        "min_fare": "output_min_fare_970",
+        "step_3_propagated": true,
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Downstream action attempted using stale version/cache token"
+      },
+      "timestamp": "2026-10-04T00:59:06.438000+00:00",
+      "duration_ms": 1073,
+      "status": "failed",
+      "error": "Downstream action attempted using stale version/cache token",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

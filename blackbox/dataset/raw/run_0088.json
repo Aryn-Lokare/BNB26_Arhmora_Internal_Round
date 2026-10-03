@@ -1,0 +1,178 @@
+{
+  "run_id": "run_0088",
+  "task_type": "travel_booking",
+  "agent_name": "travel_booking_agent_v2",
+  "status": "success",
+  "start_time": "2026-10-03T10:46:00.903000+00:00",
+  "end_time": "2026-10-03T10:46:02.944000+00:00",
+  "total_steps": 4,
+  "failure_type": null,
+  "failure_step_id": null,
+  "final_output": {
+    "hold_id": 9540,
+    "expiry": "output_expiry_326"
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "extract_flight_preferences",
+      "input": {
+        "user_prompt": "Execute action extract_flight_preferences for travel_booking workflow"
+      },
+      "output": {
+        "origin": "output_origin_549",
+        "destination": "output_destination_339",
+        "travel_date": "output_travel_date_652",
+        "cabin_class": "output_cabin_class_322"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_549",
+        "destination": "output_destination_339",
+        "travel_date": "output_travel_date_652",
+        "cabin_class": "output_cabin_class_322"
+      },
+      "timestamp": "2026-10-03T10:46:00.903000+00:00",
+      "duration_ms": 903,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_flight_routes",
+      "input": {
+        "origin": "val_origin_27",
+        "destination": "val_destination_74",
+        "travel_date": "2026-10-04T09:00:00Z"
+      },
+      "output": {
+        "flight_candidates": 5739,
+        "min_fare": "output_min_fare_339"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_549",
+        "destination": "output_destination_339",
+        "travel_date": "output_travel_date_652",
+        "cabin_class": "output_cabin_class_322"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_549",
+        "destination": "output_destination_339",
+        "travel_date": "output_travel_date_652",
+        "cabin_class": "output_cabin_class_322",
+        "flight_candidates": 5739,
+        "min_fare": "output_min_fare_339"
+      },
+      "timestamp": "2026-10-03T10:46:00.390000+00:00",
+      "duration_ms": 195,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "check_seat_inventory",
+      "input": {
+        "flight_number": "val_flight_number_50",
+        "cabin_class": "val_cabin_class_83"
+      },
+      "output": {
+        "available_seats": "output_available_seats_712",
+        "fare_quote": "output_fare_quote_891"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_549",
+        "destination": "output_destination_339",
+        "travel_date": "output_travel_date_652",
+        "cabin_class": "output_cabin_class_322",
+        "flight_candidates": 5739,
+        "min_fare": "output_min_fare_339"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_549",
+        "destination": "output_destination_339",
+        "travel_date": "output_travel_date_652",
+        "cabin_class": "output_cabin_class_322",
+        "flight_candidates": 5739,
+        "min_fare": "output_min_fare_339",
+        "available_seats": "output_available_seats_712",
+        "fare_quote": "output_fare_quote_891"
+      },
+      "timestamp": "2026-10-03T10:46:03.777000+00:00",
+      "duration_ms": 1259,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "hold_flight_seat",
+      "input": {
+        "flight_number": "val_flight_number_40",
+        "seat_number": "val_seat_number_48",
+        "passenger_id": 2048
+      },
+      "output": {
+        "hold_id": 9540,
+        "expiry": "output_expiry_326"
+      },
+      "state_before": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_549",
+        "destination": "output_destination_339",
+        "travel_date": "output_travel_date_652",
+        "cabin_class": "output_cabin_class_322",
+        "flight_candidates": 5739,
+        "min_fare": "output_min_fare_339",
+        "available_seats": "output_available_seats_712",
+        "fare_quote": "output_fare_quote_891"
+      },
+      "state_after": {
+        "workflow_domain": "travel_booking",
+        "scenario": "flight_itinerary",
+        "origin": "output_origin_549",
+        "destination": "output_destination_339",
+        "travel_date": "output_travel_date_652",
+        "cabin_class": "output_cabin_class_322",
+        "flight_candidates": 5739,
+        "min_fare": "output_min_fare_339",
+        "available_seats": "output_available_seats_712",
+        "fare_quote": "output_fare_quote_891",
+        "hold_id": 9540,
+        "expiry": "output_expiry_326"
+      },
+      "timestamp": "2026-10-03T10:46:02.944000+00:00",
+      "duration_ms": 736,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    }
+  ]
+}

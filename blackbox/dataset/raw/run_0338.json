@@ -1,0 +1,350 @@
+{
+  "run_id": "run_0338",
+  "task_type": "document_processing",
+  "agent_name": "document_processing_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-04T00:02:01.267000+00:00",
+  "end_time": "2026-10-04T00:02:05.082000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_agent_handoff",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "classify_document_type",
+      "input": {
+        "file_bytes": "val_file_bytes_93"
+      },
+      "output": {
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583"
+      },
+      "timestamp": "2026-10-04T00:02:01.267000+00:00",
+      "duration_ms": 1267,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "tool_call",
+      "action": "run_ocr_extraction",
+      "input": {
+        "file_bytes": "val_file_bytes_29",
+        "page_count": "val_page_count_60"
+      },
+      "output": {
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583",
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332"
+      },
+      "timestamp": "2026-10-04T00:02:02.258000+00:00",
+      "duration_ms": 1129,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "retrieval",
+      "action": "extract_key_value_entities",
+      "input": {
+        "raw_text": "val_raw_text_70"
+      },
+      "output": {
+        "handoff_target": "legacy_deprecated_agent",
+        "protocol": "v0"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583",
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332"
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583",
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332",
+        "vendor_name": "output_vendor_name_339",
+        "invoice_date": "output_invoice_date_628",
+        "total_due": 725.05,
+        "line_items": [
+          {
+            "item_id": 97,
+            "score": 0.84
+          },
+          {
+            "item_id": 60,
+            "score": 0.8
+          },
+          {
+            "item_id": 11,
+            "score": 0.79
+          }
+        ]
+      },
+      "timestamp": "2026-10-04T00:02:01.527000+00:00",
+      "duration_ms": 509,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "validate_financial_totals",
+      "input": {
+        "line_items": "val_line_items_64",
+        "total_due": "val_total_due_99"
+      },
+      "output": {
+        "math_valid": 7843,
+        "discrepancy": "output_discrepancy_314"
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583",
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332",
+        "vendor_name": "output_vendor_name_339",
+        "invoice_date": "output_invoice_date_628",
+        "total_due": 725.05,
+        "line_items": [
+          {
+            "item_id": 97,
+            "score": 0.84
+          },
+          {
+            "item_id": 60,
+            "score": 0.8
+          },
+          {
+            "item_id": 11,
+            "score": 0.79
+          }
+        ]
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583",
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332",
+        "vendor_name": "output_vendor_name_339",
+        "invoice_date": "output_invoice_date_628",
+        "total_due": 725.05,
+        "line_items": [
+          {
+            "item_id": 97,
+            "score": 0.84
+          },
+          {
+            "item_id": 60,
+            "score": 0.8
+          },
+          {
+            "item_id": 11,
+            "score": 0.79
+          }
+        ],
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-04T00:02:01.856000+00:00",
+      "duration_ms": 464,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "save_structured_doc_record",
+      "input": {
+        "vendor_name": "val_vendor_name_67",
+        "total_due": "val_total_due_81"
+      },
+      "output": {
+        "doc_id": 1493
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583",
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332",
+        "vendor_name": "output_vendor_name_339",
+        "invoice_date": "output_invoice_date_628",
+        "total_due": 725.05,
+        "line_items": [
+          {
+            "item_id": 97,
+            "score": 0.84
+          },
+          {
+            "item_id": 60,
+            "score": 0.8
+          },
+          {
+            "item_id": 11,
+            "score": 0.79
+          }
+        ],
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583",
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332",
+        "vendor_name": "output_vendor_name_339",
+        "invoice_date": "output_invoice_date_628",
+        "total_due": 725.05,
+        "line_items": [
+          {
+            "item_id": 97,
+            "score": 0.84
+          },
+          {
+            "item_id": 60,
+            "score": 0.8
+          },
+          {
+            "item_id": 11,
+            "score": 0.79
+          }
+        ],
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-04T00:02:04.890000+00:00",
+      "duration_ms": 978,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "emit_doc_summary",
+      "input": {
+        "doc_id": 1493
+      },
+      "output": {
+        "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583",
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332",
+        "vendor_name": "output_vendor_name_339",
+        "invoice_date": "output_invoice_date_628",
+        "total_due": 725.05,
+        "line_items": [
+          {
+            "item_id": 97,
+            "score": 0.84
+          },
+          {
+            "item_id": 60,
+            "score": 0.8
+          },
+          {
+            "item_id": 11,
+            "score": 0.79
+          }
+        ],
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "document_processing",
+        "scenario": "invoice_extraction",
+        "doc_type": "output_doc_type_112",
+        "page_count": "output_page_count_583",
+        "raw_text": "output_raw_text_333",
+        "bounding_boxes": "output_bounding_boxes_332",
+        "vendor_name": "output_vendor_name_339",
+        "invoice_date": "output_invoice_date_628",
+        "total_due": 725.05,
+        "line_items": [
+          {
+            "item_id": 97,
+            "score": 0.84
+          },
+          {
+            "item_id": 60,
+            "score": 0.8
+          },
+          {
+            "item_id": 11,
+            "score": 0.79
+          }
+        ],
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Handoff to incompatible sub-agent resulted in dropped execution context"
+      },
+      "timestamp": "2026-10-04T00:02:05.082000+00:00",
+      "duration_ms": 847,
+      "status": "failed",
+      "error": "Handoff to incompatible sub-agent resulted in dropped execution context",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

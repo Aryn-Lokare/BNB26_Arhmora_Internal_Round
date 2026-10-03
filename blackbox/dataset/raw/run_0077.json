@@ -1,0 +1,248 @@
+{
+  "run_id": "run_0077",
+  "task_type": "ecommerce_order",
+  "agent_name": "ecommerce_order_agent_v2",
+  "status": "failed",
+  "start_time": "2026-10-03T23:44:01.050000+00:00",
+  "end_time": "2026-10-03T23:44:05.004000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_state_update",
+  "failure_step_id": "step_04",
+  "final_output": {
+    "error": "State update dropped critical context keys required by subsequent steps",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_order_payload",
+      "input": {
+        "checkout_payload": "val_checkout_payload_76"
+      },
+      "output": {
+        "order_id": 8487,
+        "item_list": [
+          {
+            "item_id": 78,
+            "score": 0.96
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_243"
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8487,
+        "item_list": [
+          {
+            "item_id": 78,
+            "score": 0.96
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_243"
+      },
+      "timestamp": "2026-10-03T23:44:01.050000+00:00",
+      "duration_ms": 1050,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "check_warehouse_stock",
+      "input": {
+        "item_list": "val_item_list_88"
+      },
+      "output": {
+        "warehouse_id": 6218,
+        "stock_available": "output_stock_available_266"
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8487,
+        "item_list": [
+          {
+            "item_id": 78,
+            "score": 0.96
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_243"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8487,
+        "item_list": [
+          {
+            "item_id": 78,
+            "score": 0.96
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_243",
+        "warehouse_id": 6218,
+        "stock_available": "output_stock_available_266"
+      },
+      "timestamp": "2026-10-03T23:44:01.502000+00:00",
+      "duration_ms": 751,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "reserve_inventory_units",
+      "input": {
+        "warehouse_id": 6218,
+        "item_list": "val_item_list_48"
+      },
+      "output": {
+        "reservation_id": 6511
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8487,
+        "item_list": [
+          {
+            "item_id": 78,
+            "score": 0.96
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_243",
+        "warehouse_id": 6218,
+        "stock_available": "output_stock_available_266"
+      },
+      "state_after": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8487,
+        "item_list": [
+          {
+            "item_id": 78,
+            "score": 0.96
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_243",
+        "warehouse_id": 6218,
+        "stock_available": "output_stock_available_266",
+        "reservation_id": 6511
+      },
+      "timestamp": "2026-10-03T23:44:02.652000+00:00",
+      "duration_ms": 884,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "create_shipping_label",
+      "input": {
+        "order_id": 8487,
+        "warehouse_id": 6218,
+        "shipping_speed": "val_shipping_speed_72"
+      },
+      "output": {
+        "corrupted_keys": [
+          "all_context_cleared"
+        ],
+        "reset": true
+      },
+      "state_before": {
+        "workflow_domain": "ecommerce_order",
+        "scenario": "order_fulfillment",
+        "order_id": 8487,
+        "item_list": [
+          {
+            "item_id": 78,
+            "score": 0.96
+          }
+        ],
+        "shipping_speed": "output_shipping_speed_243",
+        "warehouse_id": 6218,
+        "stock_available": "output_stock_available_266",
+        "reservation_id": 6511
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "timestamp": "2026-10-03T23:44:04.472000+00:00",
+      "duration_ms": 1118,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "mark_order_dispatched",
+      "input": {
+        "order_id": 8487,
+        "tracking_number": "val_tracking_number_12"
+      },
+      "output": {
+        "order_status": "success"
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely"
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T23:44:03.465000+00:00",
+      "duration_ms": 693,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "send_dispatch_notification",
+      "input": {
+        "order_id": 8487,
+        "tracking_number": "val_tracking_number_96"
+      },
+      "output": {
+        "error": "State update dropped critical context keys required by subsequent steps",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "error_state": "state_wiped_prematurely",
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "error_state": "state_wiped_prematurely",
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "State update dropped critical context keys required by subsequent steps"
+      },
+      "timestamp": "2026-10-03T23:44:05.004000+00:00",
+      "duration_ms": 834,
+      "status": "failed",
+      "error": "State update dropped critical context keys required by subsequent steps",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

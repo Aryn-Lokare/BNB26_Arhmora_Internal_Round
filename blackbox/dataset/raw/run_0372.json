@@ -1,0 +1,244 @@
+{
+  "run_id": "run_0372",
+  "task_type": "data_analysis",
+  "agent_name": "data_analysis_agent_v1",
+  "status": "failed",
+  "start_time": "2026-10-03T12:56:00.946000+00:00",
+  "end_time": "2026-10-03T12:56:01.692000+00:00",
+  "total_steps": 6,
+  "failure_type": "wrong_order_of_operations",
+  "failure_step_id": "step_03",
+  "final_output": {
+    "error": "Order of operations violation: action executed prior to authorization check",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "formulate_analysis_plan",
+      "input": {
+        "analysis_question": "val_analysis_question_94"
+      },
+      "output": {
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354"
+      },
+      "timestamp": "2026-10-03T12:56:00.946000+00:00",
+      "duration_ms": 946,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "inspect_db_schema",
+      "input": {
+        "target_tables": "val_target_tables_15"
+      },
+      "output": {
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354",
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901"
+      },
+      "timestamp": "2026-10-03T12:56:01.390000+00:00",
+      "duration_ms": 695,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "premature_construct_sql_query",
+      "input": {
+        "plan_steps": "val_plan_steps_94",
+        "schema_columns": "val_schema_columns_78"
+      },
+      "output": {
+        "executed_unverified": true
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354",
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354",
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901",
+        "sql_statement": "output_sql_statement_555"
+      },
+      "timestamp": "2026-10-03T12:56:02.040000+00:00",
+      "duration_ms": 680,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "execute_database_query",
+      "input": {
+        "sql_statement": "val_sql_statement_83"
+      },
+      "output": {
+        "query_result_rows": [
+          {
+            "item_id": 89,
+            "score": 0.79
+          },
+          {
+            "item_id": 46,
+            "score": 0.88
+          }
+        ],
+        "row_count": "output_row_count_622"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354",
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901",
+        "sql_statement": "output_sql_statement_555"
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354",
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901",
+        "sql_statement": "output_sql_statement_555",
+        "step_4_propagated": true
+      },
+      "timestamp": "2026-10-03T12:56:01.464000+00:00",
+      "duration_ms": 366,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "tool_call",
+      "action": "compute_aggregate_metrics",
+      "input": {
+        "query_result_rows": "Execute action compute_aggregate_metrics for data_analysis workflow"
+      },
+      "output": {
+        "metric_summary": "output_metric_summary_804"
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354",
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901",
+        "sql_statement": "output_sql_statement_555",
+        "step_4_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354",
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901",
+        "sql_statement": "output_sql_statement_555",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "timestamp": "2026-10-03T12:56:02.545000+00:00",
+      "duration_ms": 509,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "synthesize_analytical_answer",
+      "input": {
+        "metric_summary": "val_metric_summary_94"
+      },
+      "output": {
+        "error": "Order of operations violation: action executed prior to authorization check",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354",
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901",
+        "sql_statement": "output_sql_statement_555",
+        "step_4_propagated": true,
+        "step_5_propagated": true
+      },
+      "state_after": {
+        "workflow_domain": "data_analysis",
+        "scenario": "sql_metrics_aggregation",
+        "plan_steps": "output_plan_steps_100",
+        "target_tables": "output_target_tables_354",
+        "schema_columns": "output_schema_columns_631",
+        "foreign_keys": "output_foreign_keys_901",
+        "sql_statement": "output_sql_statement_555",
+        "step_4_propagated": true,
+        "step_5_propagated": true,
+        "execution_status": "failed",
+        "last_error": "Order of operations violation: action executed prior to authorization check"
+      },
+      "timestamp": "2026-10-03T12:56:01.692000+00:00",
+      "duration_ms": 282,
+      "status": "failed",
+      "error": "Order of operations violation: action executed prior to authorization check",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}

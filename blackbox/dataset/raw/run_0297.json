@@ -1,0 +1,275 @@
+{
+  "run_id": "run_0297",
+  "task_type": "email_assistant",
+  "agent_name": "email_assistant_agent_v3",
+  "status": "failed",
+  "start_time": "2026-10-03T12:16:00.263000+00:00",
+  "end_time": "2026-10-03T12:16:06.516000+00:00",
+  "total_steps": 6,
+  "failure_type": "incorrect_parameter",
+  "failure_step_id": "step_05",
+  "final_output": {
+    "error": "Type error / out of bounds parameter encountered in downstream service call",
+    "execution_aborted": true
+  },
+  "steps": [
+    {
+      "step_id": "step_01",
+      "step_number": 1,
+      "step_type": "llm_decision",
+      "action": "parse_email_thread",
+      "input": {
+        "raw_email": "val_raw_email_50"
+      },
+      "output": {
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245"
+      },
+      "timestamp": "2026-10-03T12:16:00.263000+00:00",
+      "duration_ms": 263,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_01",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_02",
+      "step_number": 2,
+      "step_type": "retrieval",
+      "action": "search_related_correspondence",
+      "input": {
+        "sender": "val_sender_24",
+        "subject": "val_subject_50"
+      },
+      "output": {
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245",
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230"
+      },
+      "timestamp": "2026-10-03T12:16:01.226000+00:00",
+      "duration_ms": 613,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_02",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_03",
+      "step_number": 3,
+      "step_type": "tool_call",
+      "action": "draft_email_response",
+      "input": {
+        "subject": "val_subject_45",
+        "context_notes": "val_context_notes_56",
+        "required_action": "val_required_action_65"
+      },
+      "output": {
+        "draft_body": "output_draft_body_389",
+        "recipients": "output_recipients_997"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245",
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245",
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230",
+        "draft_body": "output_draft_body_389",
+        "recipients": "output_recipients_997"
+      },
+      "timestamp": "2026-10-03T12:16:03.306000+00:00",
+      "duration_ms": 1102,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_03",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_04",
+      "step_number": 4,
+      "step_type": "tool_call",
+      "action": "apply_mailbox_label",
+      "input": {
+        "email_id": 334,
+        "folder": "val_folder_43"
+      },
+      "output": {
+        "label_applied": "output_label_applied_629"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245",
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230",
+        "draft_body": "output_draft_body_389",
+        "recipients": "output_recipients_997"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245",
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230",
+        "draft_body": "output_draft_body_389",
+        "recipients": "output_recipients_997",
+        "label_applied": "output_label_applied_629"
+      },
+      "timestamp": "2026-10-03T12:16:02.476000+00:00",
+      "duration_ms": 619,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_04",
+      "failure_label": 0
+    },
+    {
+      "step_id": "step_05",
+      "step_number": 5,
+      "step_type": "state_update",
+      "action": "queue_outbox_message",
+      "input": {
+        "draft_body": "val_draft_body_65",
+        "recipients": "val_recipients_31",
+        "rate_limit_ms": "infinite_string",
+        "pct": 9999
+      },
+      "output": {
+        "warning": "coerced_bad_type"
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245",
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230",
+        "draft_body": "output_draft_body_389",
+        "recipients": "output_recipients_997",
+        "label_applied": "output_label_applied_629"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245",
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230",
+        "draft_body": "output_draft_body_389",
+        "recipients": "output_recipients_997",
+        "label_applied": "output_label_applied_629",
+        "queue_id": 6169,
+        "scheduled_send": "output_scheduled_send_854"
+      },
+      "timestamp": "2026-10-03T12:16:03.605000+00:00",
+      "duration_ms": 721,
+      "status": "success",
+      "error": null,
+      "checkpoint_id": "cp_05",
+      "failure_label": 1
+    },
+    {
+      "step_id": "step_06",
+      "step_number": 6,
+      "step_type": "llm_decision",
+      "action": "summarize_email_action",
+      "input": {
+        "queue_id": 6169
+      },
+      "output": {
+        "error": "Type error / out of bounds parameter encountered in downstream service call",
+        "execution_aborted": true
+      },
+      "state_before": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245",
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230",
+        "draft_body": "output_draft_body_389",
+        "recipients": "output_recipients_997",
+        "label_applied": "output_label_applied_629",
+        "queue_id": 6169,
+        "scheduled_send": "output_scheduled_send_854"
+      },
+      "state_after": {
+        "workflow_domain": "email_assistant",
+        "scenario": "inbox_triage_reply",
+        "sender": "output_sender_827",
+        "subject": "output_subject_643",
+        "urgency": "output_urgency_543",
+        "required_action": "output_required_action_245",
+        "previous_threads": "output_previous_threads_145",
+        "context_notes": "output_context_notes_230",
+        "draft_body": "output_draft_body_389",
+        "recipients": "output_recipients_997",
+        "label_applied": "output_label_applied_629",
+        "queue_id": 6169,
+        "scheduled_send": "output_scheduled_send_854",
+        "execution_status": "failed",
+        "last_error": "Type error / out of bounds parameter encountered in downstream service call"
+      },
+      "timestamp": "2026-10-03T12:16:06.516000+00:00",
+      "duration_ms": 1086,
+      "status": "failed",
+      "error": "Type error / out of bounds parameter encountered in downstream service call",
+      "checkpoint_id": "cp_06",
+      "failure_label": 0
+    }
+  ]
+}
