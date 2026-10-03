@@ -7,9 +7,10 @@ export function getPool(): any {
     return null;
   }
   try {
-    // Dynamic import to prevent crash when pg is not installed in local dev
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { Pool } = require("pg");
+    // Dynamic import to prevent Turbopack build warning when pg is not installed in local dev
+    // eslint-disable-next-line @typescript-eslint/no-implied-eval
+    const dynamicRequire = eval("require");
+    const { Pool } = dynamicRequire("pg");
     poolInstance = new Pool({
       connectionString,
       ssl: { rejectUnauthorized: false },
