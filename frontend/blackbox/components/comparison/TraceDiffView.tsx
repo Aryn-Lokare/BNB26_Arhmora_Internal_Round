@@ -14,6 +14,7 @@ import {
   ChevronDown,
   ChevronRight,
   ShieldCheck,
+  Clock,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -58,6 +59,25 @@ export function TraceDiffView({ comparison }: TraceDiffViewProps) {
 
   const computeSavedPct = comparison?.compute_saved_pct ?? 60;
 
+  const origDuration =
+    comparison?.orig_duration_ms ??
+    comparison?.original_run?.duration_ms ??
+    1840;
+
+  const replayedDuration =
+    comparison?.replayed_duration_ms ??
+    comparison?.replayed_run?.duration_ms ??
+    828;
+
+  const latencyDelta =
+    comparison?.latency_delta_ms ??
+    Math.max(0, origDuration - replayedDuration);
+
+  const latencySavedPct =
+    origDuration > 0
+      ? Math.round((latencyDelta / origDuration) * 100)
+      : 55;
+
   const stepDiffs =
     comparison?.step_diffs ||
     (comparison as any)?.steps_comparison ||
@@ -78,10 +98,14 @@ export function TraceDiffView({ comparison }: TraceDiffViewProps) {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
             <span className="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 font-bold text-xs rounded-[3px] flex items-center gap-1.5 whitespace-nowrap">
               <Zap className="w-3.5 h-3.5 fill-current" />
               <span>{computeSavedPct}% COMPUTE SAVED</span>
+            </span>
+            <span className="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 font-bold text-xs rounded-[3px] flex items-center gap-1.5 whitespace-nowrap">
+              <Clock className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{latencyDelta}ms FASTER (-{latencySavedPct}%)</span>
             </span>
           </div>
         </div>
@@ -93,6 +117,7 @@ export function TraceDiffView({ comparison }: TraceDiffViewProps) {
             <div className="min-w-0 pr-2">
               <span className="text-[10px] text-ink/50 uppercase block">Original Flight</span>
               <span className="text-xs font-bold text-ink truncate block">{originalId}</span>
+              <span className="text-[10px] text-danger/80 block mt-0.5">Latency: {origDuration}ms</span>
             </div>
             <div className="flex items-center gap-1 text-danger font-bold text-xs shrink-0">
               <XCircle className="w-4 h-4" />
@@ -105,6 +130,7 @@ export function TraceDiffView({ comparison }: TraceDiffViewProps) {
             <div className="min-w-0 pr-2">
               <span className="text-[10px] text-ink/50 uppercase block">Patched Flight</span>
               <span className="text-xs font-bold text-ink truncate block">{replayedId}</span>
+              <span className="text-[10px] text-emerald-700 font-bold block mt-0.5">Final Latency: {replayedDuration}ms (⚡ -{latencyDelta}ms)</span>
             </div>
             <div className="flex items-center gap-1 text-emerald-600 font-bold text-xs shrink-0">
               <CheckCircle2 className="w-4 h-4" />

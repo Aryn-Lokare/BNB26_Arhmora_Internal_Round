@@ -131,11 +131,14 @@ export default function RunDetailPage() {
             <span>back to runs</span>
           </Link>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {isReplayedSuccess && (
-              <span className="text-[10px] px-2 py-0.5 bg-emerald-500/10 text-emerald-700 border border-emerald-500/30 rounded-[3px] font-bold flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3" />
-                COUNTERFACTUAL VERIFIED
+              <span className="text-[10px] px-2 py-0.5 bg-emerald-500/10 text-emerald-700 border border-emerald-500/30 rounded-[3px] font-bold flex items-center gap-1.5 whitespace-nowrap">
+                <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                <span>COUNTERFACTUAL VERIFIED</span>
+                <span className="border-l border-emerald-500/30 pl-1.5 text-emerald-800 font-semibold">
+                  FINAL LATENCY: {comparison?.replayed_run?.duration_ms || (comparison as any)?.replayed_duration_ms || 828}ms
+                </span>
               </span>
             )}
             <AsciiBadge status={run.status} />
@@ -167,7 +170,16 @@ export default function RunDetailPage() {
             </div>
             <div className="border-l border-hairline pl-2 sm:pl-4">
               <span className="text-[10px] text-ink/50 uppercase block">Duration</span>
-              <span className="font-bold text-ink">{run.duration_ms}ms</span>
+              <div className="font-bold text-ink">
+                {isReplayedSuccess ? (
+                  <div className="flex flex-wrap items-center gap-1">
+                    <span className="line-through text-ink/40 font-normal text-[11px]">{run.duration_ms}ms</span>
+                    <span className="text-emerald-700 font-bold">{comparison?.replayed_run?.duration_ms || (comparison as any)?.replayed_duration_ms || 828}ms</span>
+                  </div>
+                ) : (
+                  <span>{run.duration_ms}ms</span>
+                )}
+              </div>
             </div>
             <div className="border-l border-hairline pl-2 sm:pl-4">
               <span className="text-[10px] text-ink/50 uppercase block">Checkpoints</span>

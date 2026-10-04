@@ -106,6 +106,7 @@ export interface ReplayJob {
   steps_executed: number;
   compute_saved_pct: number;
   latency_improvement_ms?: number;
+  final_latency_ms?: number;
   outcome?: RunOutcome;
   message?: string;
   created_at: string;
@@ -166,6 +167,9 @@ export interface RunComparison {
   steps_skipped: number;
   compute_saved_pct: number;
   diagnosis_validated: boolean;
+  latency_delta_ms?: number;
+  orig_duration_ms?: number;
+  replayed_duration_ms?: number;
   step_diffs: StepDiff[];
   summary_changes?: string[];
 }

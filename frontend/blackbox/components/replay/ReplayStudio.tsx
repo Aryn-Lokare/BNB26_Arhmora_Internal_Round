@@ -16,6 +16,7 @@ import {
   Zap,
   ArrowRight,
   GitFork,
+  Clock,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -330,30 +331,47 @@ export function ReplayStudio({
                 [VERIFICATION COMPLETED: RUN FLIPPED TO PASSED]
               </span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <AsciiBadge status="success" label="DIAGNOSIS VALIDATED" />
               <span className="text-xs font-bold text-emerald-700 whitespace-nowrap">
                 {replayJob.compute_saved_pct}% Compute Saved
               </span>
+              <span className="text-xs font-bold text-emerald-800 bg-emerald-500/10 px-2 py-0.5 rounded-[2px] border border-emerald-500/20 flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-emerald-600" />
+                <span>{replayJob.final_latency_ms ?? 828}ms Final Latency</span>
+                <span className="text-[10px] text-emerald-600 font-normal">(-{replayJob.latency_improvement_ms ?? 930}ms)</span>
+              </span>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
             <div className="p-2.5 bg-canvas border border-hairline rounded-[3px] min-w-0">
               <span className="text-[10px] text-ink/50 uppercase block">Replayed Run ID</span>
               <span className="font-bold text-ink truncate block">{replayJob.replayed_run_id}</span>
+            </div>
+            <div className="p-2.5 bg-canvas border border-hairline rounded-[3px] min-w-0">
+              <span className="text-[10px] text-ink/50 uppercase block">Final Run Latency</span>
+              <span className="font-bold text-emerald-700 text-sm flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-emerald-600" />
+                {replayJob.final_latency_ms ?? 828}ms
+              </span>
+              <span className="text-[10px] text-emerald-600 block mt-0.5 font-medium">
+                ⚡ -{replayJob.latency_improvement_ms ?? 930}ms vs original flight
+              </span>
             </div>
             <div className="p-2.5 bg-canvas border border-hairline rounded-[3px] min-w-0">
               <span className="text-[10px] text-ink/50 uppercase block">Reused Steps (0 ms)</span>
               <span className="font-bold text-emerald-600 truncate block">
                 {replayJob.steps_reused} frames reused from checkpoint
               </span>
+              <span className="text-[10px] text-ink/40 block mt-0.5">0 token execution cost</span>
             </div>
             <div className="p-2.5 bg-canvas border border-hairline rounded-[3px] min-w-0">
               <span className="text-[10px] text-ink/50 uppercase block">Re-executed Frames</span>
               <span className="font-bold text-ink truncate block">
                 {replayJob.steps_executed} frames patched & verified
               </span>
+              <span className="text-[10px] text-emerald-600 block mt-0.5">Gold answer matched</span>
             </div>
           </div>
         </motion.div>

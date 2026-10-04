@@ -18,6 +18,7 @@ export interface ReplayJobResult {
   steps_executed?: number;
   compute_saved_pct: number;
   latency_improvement_ms: number;
+  final_latency_ms?: number;
   outcome: "success" | "fail";
   created_at: string;
   message: string;
@@ -106,6 +107,7 @@ export async function executeReplay(req: ReplayRequest): Promise<ReplayJobResult
     steps_executed: Math.max(1, totalSteps - skippedSteps),
     compute_saved_pct: computeSaved,
     latency_improvement_ms: Math.round((originalRun?.duration_ms || 1840) * 0.55),
+    final_latency_ms: replayedRun.duration_ms,
     outcome: "success",
     created_at: new Date().toISOString(),
     message: `Execution successfully forked from checkpoint before Step ${req.checkpoint_step}. Reused ${skippedSteps} steps with 0 token cost.`,
@@ -196,6 +198,8 @@ export async function compareRuns(origId: string, repId: string) {
     original_status: orig.status,
     replayed_status: rep.status,
     latency_delta_ms: Math.max(0, orig.duration_ms - rep.duration_ms),
+    orig_duration_ms: orig.duration_ms,
+    replayed_duration_ms: rep.duration_ms,
     step_diffs: stepDiffs,
     steps_comparison: stepDiffs, // backward compatibility
     summary_changes: [
