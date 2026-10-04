@@ -254,11 +254,81 @@ Or configure it in your client's `mcp_config.json`:
 ```
 
 #### Exposed MCP Tools:
-- `list_runs`: List recorded runs with execution metadata and outcomes.
+- `record_step`: Programmatically stream step execution states (nodes, inputs, outputs, state deltas, latency).
+- `diagnose_failure`: Run root-cause localizer on a failed run with calibrated confidence and suspect step.
+- `simulate_counterfactual_patch`: Fork at a checkpoint, inject a patch, and verify if the failure is resolved.
 - `get_run_trace`: Fetch sequential step execution trace and checkpoint IDs.
-- `diagnose_failure`: Run root-cause localizer on a failed run.
-- `simulate_counterfactual_patch`: Fork at a checkpoint and simulate patched execution.
-- `record_step`: Programmatically log step execution states.
+- `list_runs`: List recorded runs with execution metadata and outcomes.
+
+### Building Your Own Agent with Black Box MCP
+
+Black Box can be used with **any agent framework** (LangGraph, CrewAI, AutoGen, or a custom Python loop) to provide flight recording, failure diagnosis, and self-healing:
+
+```python
+import time
+import uuid
+
+# 1. Connect to Black Box MCP Server
+# (via JSON-RPC stdio or standard MCP client SDK)
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+# 2. Instrument Your Agent's Step Loop
+def execute_agent_step(run_id, step_idx, node_name, action, input_data, state_before):
+    t0 = time.time()
+    try:
+        output_data = call_your_llm_or_tool(node_name, input_data)
+        state_after = {**state_before, "last_result": output_data}
+        
+        # Stream step to Black Box
+        mcp_session.call_tool("record_step", {
+            "run_id": run_id,
+            "step_idx": step_idx,
+            "node": node_name,
+            "step_type": "tool_call",
+            "action": action,
+            "input": input_data,
+            "output": output_data,
+            "state_before": state_before,
+            "state_after": state_after,
+            "latency_ms": int((time.time() - t0) * 1000),
+            "checkpoint_id": f"cp_{step_idx:02d}",
+            "status": "success",
+        })
+        return output_data, state_after
+    except Exception as exc:
+        # Record failed step
+        mcp_session.call_tool("record_step", {
+            "run_id": run_id,
+            "step_idx": step_idx,
+            "node": node_name,
+            "action": action,
+            "input": input_data,
+            "status": "failed",
+            "error": str(exc),
+            "latency_ms": int((time.time() - t0) * 1000),
+            "checkpoint_id": f"cp_{step_idx:02d}",
+        })
+        
+        # 3. Auto-Diagnose Root Cause Using Transformer
+        diagnosis = mcp_session.call_tool("diagnose_failure", {
+            "run_id": run_id,
+            "top_k": 3
+        })
+        print(f"Root cause culprit: {diagnosis['root_cause_suspect']}")
+        print(f"Confidence: {diagnosis['calibrated_confidence'] * 100:.1f}%")
+        
+        # 4. Test a Counterfactual Patch Before Retrying
+        fork_step = diagnosis["top_candidates"][0]["step_number"]
+        sim = mcp_session.call_tool("simulate_counterfactual_patch", {
+            "run_id": run_id,
+            "forked_at_step": fork_step,
+            "patch": {"input": {"fixed_argument": "corrected_value"}},
+        })
+        if sim.get("diagnosis_confirmed"):
+            print(f"Counterfactual fix verified! Saved {sim['compute_saved_pct']}% compute.")
+        raise exc
+```
 
 ---
 

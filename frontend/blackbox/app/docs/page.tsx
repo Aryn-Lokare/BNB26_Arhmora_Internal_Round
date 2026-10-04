@@ -192,6 +192,173 @@ export default function DocsPage() {
       </section>
 
       {/* ==================================================
+          BUILDING YOUR OWN AGENT WITH BLACK BOX MCP
+          ================================================== */}
+      <section className="space-y-6">
+        <div className="border-b border-hairline pb-2 space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="text-xs px-2 py-0.5 rounded-[2px] bg-accent/15 text-accent font-bold">GUIDE</span>
+            <h2 className="text-sm sm:text-base font-bold uppercase tracking-wider text-ink">
+              Building Your Own Agent with Black Box MCP
+            </h2>
+          </div>
+          <p className="text-xs sm:text-sm text-ink/75 leading-relaxed">
+            Black Box works with any agent architecture (LangGraph, CrewAI, AutoGen, or custom loops). By connecting to the MCP server, your agent gains automated flight recording, step-level root cause diagnosis, and counterfactual self-healing.
+          </p>
+        </div>
+
+        {/* 3 Step Integration Pattern */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="border border-hairline bg-canvas p-4 rounded-[4px] space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold text-ink">
+              <span className="w-5 h-5 rounded-full bg-surface-dark text-canvas flex items-center justify-center text-[10px]">1</span>
+              <span>Stream Steps</span>
+            </div>
+            <p className="text-xs text-ink/70 leading-relaxed">
+              Log every node execution, tool call, state delta, and latency to <code>record_step</code>.
+            </p>
+          </div>
+
+          <div className="border border-hairline bg-canvas p-4 rounded-[4px] space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold text-ink">
+              <span className="w-5 h-5 rounded-full bg-surface-dark text-canvas flex items-center justify-center text-[10px]">2</span>
+              <span>Auto-Diagnose</span>
+            </div>
+            <p className="text-xs text-ink/70 leading-relaxed">
+              When a run fails, query <code>diagnose_failure</code> to let the Transformer identify the true culprit step.
+            </p>
+          </div>
+
+          <div className="border border-hairline bg-canvas p-4 rounded-[4px] space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold text-ink">
+              <span className="w-5 h-5 rounded-full bg-surface-dark text-canvas flex items-center justify-center text-[10px]">3</span>
+              <span>Self-Heal & Replay</span>
+            </div>
+            <p className="text-xs text-ink/70 leading-relaxed">
+              Test patches counterfactually with <code>simulate_counterfactual_patch</code> before retrying.
+            </p>
+          </div>
+        </div>
+
+        {/* Complete Python Integration Example */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-xs">
+            <span className="font-bold text-ink flex items-center gap-1.5">
+              <Code className="w-3.5 h-3.5 text-accent" />
+              <span>Python Integration: Self-Healing Agent Loop</span>
+            </span>
+            <span className="text-ink/50 text-[11px]">PYTHON // MCP CLIENT</span>
+          </div>
+
+          <div className="border border-hairline bg-surface-dark text-canvas rounded-[4px] p-4 text-xs font-mono space-y-2">
+            <pre className="text-[11px] leading-relaxed overflow-x-auto text-[#eee]">
+{`import time
+import uuid
+# Example using standard JSON-RPC stdio or your MCP Client SDK
+from your_mcp_client import MCPClient
+
+mcp = MCPClient(command="python", args=["mcp_server.py"], cwd="n:/bnb/blackbox-worker")
+
+def run_custom_agent(user_query: str):
+    run_id = f"agent-run-{uuid.uuid4().hex[:8]}"
+    state = {"query": user_query, "context": {}}
+    
+    # ---------------------------------------------------------
+    # 1. INSTRUMENT EACH STEP IN YOUR AGENT LOOP
+    # ---------------------------------------------------------
+    steps = [
+        {"node": "planner", "action": "create_plan", "input": {"query": user_query}},
+        {"node": "select_tool", "action": "generate_sql", "input": {"query": user_query}},
+        {"node": "run_tool", "action": "execute_query", "input": {"sql": "SELECT dept, MAX(budget)..."}},
+        {"node": "reflect", "action": "validate_result", "input": {}},
+    ]
+    
+    for idx, step in enumerate(steps, start=1):
+        t0 = time.time()
+        try:
+            # Your agent node execution logic here
+            result = execute_agent_node(step["node"], step["input"], state)
+            state_after = {**state, "last_result": result}
+            
+            # Record step telemetry to Black Box MCP
+            mcp.call_tool("record_step", {
+                "run_id": run_id,
+                "step_idx": idx,
+                "node": step["node"],
+                "step_type": "tool_call" if "tool" in step["node"] else "llm_decision",
+                "action": step["action"],
+                "input": step["input"],
+                "output": result,
+                "state_before": state,
+                "state_after": state_after,
+                "latency_ms": int((time.time() - t0) * 1000),
+                "checkpoint_id": f"cp_{idx:02d}",
+                "status": "success",
+            })
+            state = state_after
+
+        except Exception as err:
+            # Step crashed: Record failure to Black Box
+            mcp.call_tool("record_step", {
+                "run_id": run_id,
+                "step_idx": idx,
+                "node": step["node"],
+                "action": step["action"],
+                "input": step["input"],
+                "status": "failed",
+                "error": str(err),
+                "latency_ms": int((time.time() - t0) * 1000),
+                "checkpoint_id": f"cp_{idx:02d}",
+            })
+            
+            # -----------------------------------------------------
+            # 2. AUTO-DIAGNOSE THE ROOT CAUSE WITH THE ML MODEL
+            # -----------------------------------------------------
+            diagnosis = mcp.call_tool("diagnose_failure", {
+                "run_id": run_id,
+                "top_k": 3
+            })
+            print(f"Culprit identified: {diagnosis['root_cause_suspect']}")
+            print(f"Confidence: {diagnosis['calibrated_confidence'] * 100:.1f}%")
+            
+            # -----------------------------------------------------
+            # 3. TEST A COUNTERFACTUAL PATCH BEFORE FULL RE-RUN
+            # -----------------------------------------------------
+            culprit_step_idx = diagnosis["top_candidates"][0]["step_number"]
+            patch_fix = {"input": {"sql": "SELECT department, MAX(budget) FROM depts GROUP BY department"}}
+            
+            sim_result = mcp.call_tool("simulate_counterfactual_patch", {
+                "run_id": run_id,
+                "forked_at_step": culprit_step_idx,
+                "patch": patch_fix,
+            })
+            
+            if sim_result.get("diagnosis_confirmed"):
+                print(f"SUCCESS: Patch verified! Saved {sim_result['compute_saved_pct']}% compute.")
+                return sim_result
+            break`}
+            </pre>
+          </div>
+        </div>
+
+        {/* Framework Specific Tips */}
+        <div className="border border-hairline p-4 rounded-[4px] bg-surface-soft space-y-2 text-xs">
+          <span className="font-bold text-ink">Framework Integration Tips:</span>
+          <ul className="list-disc list-inside space-y-1 text-ink/75">
+            <li>
+              <strong>LangGraph:</strong> Hook into LangGraph&apos;s <code>AsyncCallbackHandler</code> or <code>on_tool_end</code> / <code>on_chain_end</code> listeners to stream steps automatically into <code>record_step</code>.
+            </li>
+            <li>
+              <strong>CrewAI & AutoGen:</strong> Wrap agent task delegates with a decorator that logs the input arguments, tool returns, and checkpoint IDs.
+            </li>
+            <li>
+              <strong>Offline Mode:</strong> If running without a live Postgres database, the MCP server automatically persists trace files locally to the <code>traces/</code> directory for zero-config offline debugging.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* ==================================================
           TYPICAL WORKFLOW
           ================================================== */}
       <section className="space-y-3">
