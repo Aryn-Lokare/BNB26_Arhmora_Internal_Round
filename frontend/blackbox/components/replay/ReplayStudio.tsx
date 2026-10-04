@@ -81,27 +81,32 @@ export function ReplayStudio({
     }, 950);
 
     setTimeout(async () => {
-      setReplayProgress(100);
-      setReplayStageText("Validating final state and recording verification diff...");
-
-      let parsedPatch: Patch = {
-        step_index: selectedStepIndex,
-        patch_type: "override_input",
-        payload: { query: "SELECT department, budget FROM departments ORDER BY budget DESC LIMIT 1;" },
-        description: "Replaced MIN with MAX budget query",
-      };
-
       try {
-        parsedPatch.payload = JSON.parse(patchCode);
-      } catch (e) {
-        console.warn("Patch JSON parse warning", e);
-      }
+        setReplayProgress(100);
+        setReplayStageText("Validating final state and recording verification diff...");
 
-      const job = await triggerReplay(runId, selectedStepIndex, parsedPatch);
-      setReplayJob(job);
-      setIsReplaying(false);
-      if (onReplayComplete) {
-        onReplayComplete(job);
+        let parsedPatch: Patch = {
+          step_index: selectedStepIndex,
+          patch_type: "override_input",
+          payload: { query: "SELECT department, budget FROM departments ORDER BY budget DESC LIMIT 1;" },
+          description: "Replaced MIN with MAX budget query",
+        };
+
+        try {
+          parsedPatch.payload = JSON.parse(patchCode);
+        } catch (e) {
+          console.warn("Patch JSON parse warning", e);
+        }
+
+        const job = await triggerReplay(runId, selectedStepIndex, parsedPatch);
+        setReplayJob(job);
+        setIsReplaying(false);
+        if (onReplayComplete) {
+          onReplayComplete(job);
+        }
+      } catch (err) {
+        console.error("Replay execution failed:", err);
+        setIsReplaying(false);
       }
     }, 1500);
   };
@@ -109,18 +114,18 @@ export function ReplayStudio({
   return (
     <div className="font-mono space-y-4">
       {/* Top Controller Bar */}
-      <div className="p-4 border border-hairline bg-surface-card rounded-[4px] flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-4 border border-hairline bg-surface-card rounded-[4px] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="text-xs font-bold text-ink flex items-center gap-2">
-            <RotateCcw className="w-4 h-4 text-accent" />
-            <span>[TIME MACHINE: STATE-REWIND & PATCH INJECTOR]</span>
+            <RotateCcw className="w-4 h-4 text-accent shrink-0" />
+            <span className="break-words">[TIME MACHINE: STATE-REWIND & PATCH INJECTOR]</span>
           </div>
           <p className="text-[11px] text-ink/60 mt-1">
             Fork execution at any past checkpoint, inject modified inputs or tools, and deterministically replay the future.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
           <button
             onClick={() => handleRewind(selectedStepIndex)}
             className="px-3 py-1.5 border border-hairline rounded-[3px] bg-canvas hover:bg-surface-soft text-xs flex items-center gap-1.5 transition-colors"
@@ -132,7 +137,7 @@ export function ReplayStudio({
           <button
             disabled={isReplaying}
             onClick={handleExecuteReplay}
-            className={`px-4 py-1.5 rounded-[3px] text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors ${
+            className={`px-4 py-1.5 rounded-[3px] text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors whitespace-nowrap ${
               isReplaying
                 ? "bg-ink/30 text-canvas cursor-wait"
                 : "bg-ink text-canvas hover:bg-accent"
@@ -155,7 +160,7 @@ export function ReplayStudio({
 
       {/* Checkpoint Scrubber / Step Selector */}
       <div className="border border-hairline bg-surface-card rounded-[4px] p-4">
-        <div className="flex items-center justify-between text-xs mb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs mb-3">
           <span className="font-bold text-ink flex items-center gap-1.5">
             <Sliders className="w-3.5 h-3.5 text-ink/60" />
             <span>SELECT FORK CHECKPOINT: STEP {selectedStepIndex}</span>
@@ -166,7 +171,7 @@ export function ReplayStudio({
         </div>
 
         {/* Step Scrubber Pills */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
           {steps.map((step) => {
             const stepIdx = step.step_index ?? step.step_idx ?? 0;
             const isSelected = stepIdx === selectedStepIndex;
@@ -243,11 +248,11 @@ export function ReplayStudio({
       {/* Side-by-side State & Patch Editor */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Left: Original State at Checkpoint */}
-        <div className="border border-hairline bg-surface-card rounded-[4px] p-4 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between text-xs font-bold text-ink mb-2">
+        <div className="border border-hairline bg-surface-card rounded-[4px] p-4 flex flex-col justify-between min-w-0 overflow-hidden">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center justify-between text-xs font-bold text-ink mb-2 gap-2">
               <span className="flex items-center gap-1.5">
-                <Database className="w-3.5 h-3.5 text-ink/60" />
+                <Database className="w-3.5 h-3.5 text-ink/60 shrink-0" />
                 <span>ORIGINAL RECORDED INPUT (STEP {selectedStepIndex})</span>
               </span>
               <span className="text-[10px] text-danger font-semibold">[FAULTY LOGIC]</span>
@@ -255,25 +260,27 @@ export function ReplayStudio({
             <p className="text-[11px] text-ink/60 mb-2">
               The exact arguments executed during the original recorded flight run:
             </p>
-            <CodeBlock
-              code={selectedStep.inputs || selectedStep.input || {}}
-              language="json"
-              title={`original_step_${selectedStepIndex}_input.json`}
-            />
+            <div className="overflow-x-auto max-w-full">
+              <CodeBlock
+                code={selectedStep.inputs || selectedStep.input || {}}
+                language="json"
+                title={`original_step_${selectedStepIndex}_input.json`}
+              />
+            </div>
           </div>
 
-          <div className="mt-3 pt-3 border-t border-hairline flex items-center justify-between text-[11px] text-ink/60">
+          <div className="mt-3 pt-3 border-t border-hairline flex flex-wrap items-center justify-between gap-1 text-[11px] text-ink/60">
             <span>Snapshot ID: {selectedStep.checkpoint_id || "chk-default"}</span>
             <span className="text-emerald-600 font-semibold">[PERSISTED ON DISK]</span>
           </div>
         </div>
 
         {/* Right: Interactive Patch Editor */}
-        <div className="border border-accent/40 bg-surface-card rounded-[4px] p-4 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between text-xs font-bold text-ink mb-2">
+        <div className="border border-accent/40 bg-surface-card rounded-[4px] p-4 flex flex-col justify-between min-w-0">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center justify-between text-xs font-bold text-ink mb-2 gap-2">
               <span className="flex items-center gap-1.5 text-accent">
-                <GitFork className="w-3.5 h-3.5" />
+                <GitFork className="w-3.5 h-3.5 shrink-0" />
                 <span>PATCH INJECTION EDITOR</span>
               </span>
               <span className="text-[10px] px-1.5 py-0.5 bg-accent/15 text-accent rounded-[2px] font-bold">
@@ -288,12 +295,12 @@ export function ReplayStudio({
               rows={8}
               value={patchCode}
               onChange={(e) => setPatchCode(e.target.value)}
-              className="w-full p-3 font-mono text-xs bg-surface-dark text-[#f0eeee] border border-hairline rounded-[3px] focus:outline-none focus:ring-1 focus:ring-accent resize-none leading-relaxed"
+              className="w-full max-w-full p-3 font-mono text-xs bg-surface-dark text-[#f0eeee] border border-hairline rounded-[3px] focus:outline-none focus:ring-1 focus:ring-accent resize-none leading-relaxed"
               spellCheck={false}
             />
           </div>
 
-          <div className="mt-3 pt-3 border-t border-hairline flex items-center justify-between text-[11px]">
+          <div className="mt-3 pt-3 border-t border-hairline flex flex-wrap items-center justify-between gap-2 text-[11px]">
             <span className="text-ink/60">
               Injects into agent graph at Step {selectedStepIndex}
             </span>
@@ -318,33 +325,33 @@ export function ReplayStudio({
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-emerald-500/20">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span className="font-bold text-xs text-ink">
                 [VERIFICATION COMPLETED: RUN FLIPPED TO PASSED]
               </span>
             </div>
             <div className="flex items-center gap-2">
               <AsciiBadge status="success" label="DIAGNOSIS VALIDATED" />
-              <span className="text-xs font-bold text-emerald-700">
+              <span className="text-xs font-bold text-emerald-700 whitespace-nowrap">
                 {replayJob.compute_saved_pct}% Compute Saved
               </span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-            <div className="p-2.5 bg-canvas border border-hairline rounded-[3px]">
+            <div className="p-2.5 bg-canvas border border-hairline rounded-[3px] min-w-0">
               <span className="text-[10px] text-ink/50 uppercase block">Replayed Run ID</span>
-              <span className="font-bold text-ink">{replayJob.replayed_run_id}</span>
+              <span className="font-bold text-ink truncate block">{replayJob.replayed_run_id}</span>
             </div>
-            <div className="p-2.5 bg-canvas border border-hairline rounded-[3px]">
+            <div className="p-2.5 bg-canvas border border-hairline rounded-[3px] min-w-0">
               <span className="text-[10px] text-ink/50 uppercase block">Reused Steps (0 ms)</span>
-              <span className="font-bold text-emerald-600">
+              <span className="font-bold text-emerald-600 truncate block">
                 {replayJob.steps_reused} frames reused from checkpoint
               </span>
             </div>
-            <div className="p-2.5 bg-canvas border border-hairline rounded-[3px]">
+            <div className="p-2.5 bg-canvas border border-hairline rounded-[3px] min-w-0">
               <span className="text-[10px] text-ink/50 uppercase block">Re-executed Frames</span>
-              <span className="font-bold text-ink">
+              <span className="font-bold text-ink truncate block">
                 {replayJob.steps_executed} frames patched & verified
               </span>
             </div>

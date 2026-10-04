@@ -74,7 +74,7 @@ export function ExecutionTimeline({
       </div>
 
       {/* Step List */}
-      <div className="relative pl-6 space-y-3 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[1px] before:bg-hairline">
+      <div className="relative pl-7 sm:pl-8 space-y-3 before:absolute before:left-[13px] before:top-2 before:bottom-2 before:w-[1px] before:bg-hairline">
         {steps.map((step) => {
           const stepIndex = step.step_index ?? step.step_idx ?? 0;
           const isExpanded = !!expandedSteps[stepIndex];
@@ -91,7 +91,7 @@ export function ExecutionTimeline({
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.15 }}
-              className={`relative border rounded-[4px] transition-all bg-surface-card ${
+              className={`relative border rounded-[4px] transition-all bg-surface-card min-w-0 ${
                 isRootCause
                   ? "border-warning/60 shadow-xs ring-1 ring-warning/30 bg-warning/[0.02]"
                   : "border-hairline hover:border-ink/20"
@@ -99,7 +99,7 @@ export function ExecutionTimeline({
             >
               {/* Timeline Node Indicator on line */}
               <div
-                className={`absolute -left-[30px] top-3.5 w-4 h-4 rounded-full border flex items-center justify-center text-[9px] bg-canvas z-10 ${
+                className={`absolute -left-[27px] top-3.5 w-4 h-4 rounded-full border flex items-center justify-center text-[9px] bg-canvas z-10 shrink-0 ${
                   isRootCause
                     ? "border-warning text-warning font-bold ring-2 ring-warning/20"
                     : step.status === "failed" || step.is_suspect
@@ -115,7 +115,7 @@ export function ExecutionTimeline({
                 onClick={() => toggleStep(stepIndex)}
                 className="p-3 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-2 select-none"
               >
-                <div className="flex items-center gap-2.5">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="text-ink/50">
                     {isExpanded ? (
                       <ChevronDown className="w-4 h-4" />
@@ -124,11 +124,11 @@ export function ExecutionTimeline({
                     )}
                   </span>
 
-                  <span className="font-bold text-sm text-ink">
+                  <span className="font-bold text-sm text-ink whitespace-nowrap">
                     Step {stepIndex}:
                   </span>
 
-                  <span className="px-1.5 py-0.5 rounded-[3px] bg-surface-dark text-canvas text-xs font-semibold">
+                  <span className="px-1.5 py-0.5 rounded-[3px] bg-surface-dark text-canvas text-xs font-semibold whitespace-nowrap">
                     {nodeName}
                   </span>
 
@@ -140,7 +140,7 @@ export function ExecutionTimeline({
                   )}
 
                   {isRootCause && (
-                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-warning/15 border border-warning/40 text-warning text-[10px] rounded-[3px] font-bold animate-pulse">
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-warning/15 border border-warning/40 text-warning text-[10px] rounded-[3px] font-bold animate-pulse whitespace-nowrap">
                       <AlertTriangle className="w-3 h-3" />
                       PREDICTED ROOT CAUSE
                     </span>
@@ -148,7 +148,7 @@ export function ExecutionTimeline({
                 </div>
 
                 {/* Right Meta details */}
-                <div className="flex items-center gap-3 text-xs pl-6 sm:pl-0">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs pl-6 sm:pl-0">
                   {/* Probability meter if present */}
                   {failureProb > 0 && (
                     <div className="flex items-center gap-1.5" title={`Failure probability: ${Math.round(failureProb * 100)}%`}>
@@ -171,7 +171,7 @@ export function ExecutionTimeline({
                     </div>
                   )}
 
-                  <div className="flex items-center gap-1 text-ink/50 text-[11px]">
+                  <div className="flex items-center gap-1 text-ink/50 text-[11px] whitespace-nowrap">
                     <Clock className="w-3 h-3" />
                     <span>{duration}ms</span>
                   </div>
@@ -184,7 +184,7 @@ export function ExecutionTimeline({
                         e.stopPropagation();
                         onSelectCheckpoint(step);
                       }}
-                      className="flex items-center gap-1 px-2 py-0.5 text-[10px] border border-hairline rounded-[3px] bg-canvas hover:bg-ink hover:text-canvas transition-colors ml-1"
+                      className="flex items-center gap-1 px-2 py-0.5 text-[10px] border border-hairline rounded-[3px] bg-canvas hover:bg-ink hover:text-canvas transition-colors ml-1 whitespace-nowrap"
                       title="Rewind execution to this checkpoint"
                     >
                       <RotateCcw className="w-2.5 h-2.5" />
@@ -202,13 +202,13 @@ export function ExecutionTimeline({
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.18 }}
-                    className="border-t border-hairline p-3 bg-surface-soft/40 space-y-3 text-xs"
+                    className="border-t border-hairline p-3 bg-surface-soft/40 space-y-3 text-xs overflow-hidden"
                   >
                     {/* Checkpoint ID banner */}
                     {step.checkpoint_id && (
-                      <div className="flex items-center justify-between px-2.5 py-1.5 bg-canvas border border-hairline rounded-[3px] text-[11px] text-ink/70">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-2.5 py-1.5 bg-canvas border border-hairline rounded-[3px] text-[11px] text-ink/70">
                         <div className="flex items-center gap-1.5">
-                          <Database className="w-3 h-3 text-ink/50" />
+                          <Database className="w-3 h-3 text-ink/50 shrink-0" />
                           <span className="text-ink/50">Checkpoint:</span>
                           <span className="font-semibold text-ink">{step.checkpoint_id}</span>
                         </div>
@@ -220,28 +220,32 @@ export function ExecutionTimeline({
 
                     {/* Inputs and Outputs Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                      <div>
+                      <div className="min-w-0">
                         <div className="text-[11px] font-bold text-ink/70 mb-1 flex items-center justify-between">
                           <span>[INPUT PAYLOAD]</span>
                           <span className="text-[10px] font-normal text-ink/50">parameters</span>
                         </div>
-                        <CodeBlock
-                          code={inputs}
-                          language="json"
-                          title={`step_${stepIndex}_input.json`}
-                        />
+                        <div className="overflow-x-auto max-w-full">
+                          <CodeBlock
+                            code={inputs}
+                            language="json"
+                            title={`step_${stepIndex}_input.json`}
+                          />
+                        </div>
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <div className="text-[11px] font-bold text-ink/70 mb-1 flex items-center justify-between">
                           <span>[OUTPUT ARTIFACT]</span>
                           <span className="text-[10px] font-normal text-ink/50">result / return</span>
                         </div>
-                        <CodeBlock
-                          code={outputs}
-                          language="json"
-                          title={`step_${stepIndex}_output.json`}
-                        />
+                        <div className="overflow-x-auto max-w-full">
+                          <CodeBlock
+                            code={outputs}
+                            language="json"
+                            title={`step_${stepIndex}_output.json`}
+                          />
+                        </div>
                       </div>
                     </div>
 

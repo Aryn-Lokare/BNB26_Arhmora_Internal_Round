@@ -41,20 +41,28 @@ export default function RunDetailPage() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    let active = true;
     async function loadData() {
       setLoading(true);
-      const runData = await getRunById(runId);
-      setRun(runData);
+      try {
+        const runData = await getRunById(runId);
+        if (active) setRun(runData);
 
-      const diagData = await getDiagnosis(runId);
-      setDiagnosis(diagData);
+        const diagData = await getDiagnosis(runId);
+        if (active) setDiagnosis(diagData);
 
-      const compData = await getRunComparison(runId, "run-4f81c9a0");
-      setComparison(compData);
-
-      setLoading(false);
+        const compData = await getRunComparison(runId, "run-4f81c9a0");
+        if (active && compData) setComparison(compData);
+      } catch (err) {
+        console.error("Failed to load run detail data:", err);
+      } finally {
+        if (active) setLoading(false);
+      }
     }
     loadData();
+    return () => {
+      active = false;
+    };
   }, [runId]);
 
   const handleSelectCheckpoint = (step: TraceStep) => {
@@ -67,8 +75,16 @@ export default function RunDetailPage() {
     setActiveTab("replay");
   };
 
-  const handleReplayComplete = (job: ReplayJob) => {
+  const handleReplayComplete = async (job: ReplayJob) => {
     setIsReplayedSuccess(true);
+    try {
+      const compData = await getRunComparison(runId, job.replayed_run_id || "run-4f81c9a0");
+      if (compData) {
+        setComparison(compData);
+      }
+    } catch (e) {
+      console.warn("Could not load replayed comparison:", e);
+    }
     // Switch to comparison tab to show verification & diff
     setTimeout(() => {
       setActiveTab("comparison");
@@ -128,9 +144,9 @@ export default function RunDetailPage() {
 
         {/* Title & Task Summary */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-ink">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-ink break-all">
                 {run.id}
               </h1>
               <span className="text-ink/40">/</span>
@@ -144,16 +160,16 @@ export default function RunDetailPage() {
           </div>
 
           {/* Quick Metrics Bar */}
-          <div className="flex items-center gap-4 text-xs border border-hairline bg-surface-card p-2.5 rounded-[4px]">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 text-xs border border-hairline bg-surface-card p-2.5 rounded-[4px] w-full sm:w-auto shrink-0">
             <div>
               <span className="text-[10px] text-ink/50 uppercase block">Frames</span>
               <span className="font-bold text-ink">{(run.steps || []).length} steps</span>
             </div>
-            <div className="border-l border-hairline pl-4">
+            <div className="border-l border-hairline pl-2 sm:pl-4">
               <span className="text-[10px] text-ink/50 uppercase block">Duration</span>
               <span className="font-bold text-ink">{run.duration_ms}ms</span>
             </div>
-            <div className="border-l border-hairline pl-4">
+            <div className="border-l border-hairline pl-2 sm:pl-4">
               <span className="text-[10px] text-ink/50 uppercase block">Checkpoints</span>
               <span className="font-bold text-ink">
                 {(run.steps || []).filter((s) => s.checkpoint_id).length} snapshots
@@ -164,10 +180,10 @@ export default function RunDetailPage() {
       </div>
 
       {/* Flight Recorder Stage Tabs (The Continuous Debugging Pipeline) */}
-      <div className="flex items-center gap-2 border-b border-hairline pb-2 overflow-x-auto text-xs">
+      <div className="flex items-center gap-2 border-b border-hairline pb-2 overflow-x-auto text-xs no-scrollbar">
         <button
           onClick={() => setActiveTab("trace")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] transition-all whitespace-nowrap ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] transition-all whitespace-nowrap shrink-0 ${
             activeTab === "trace"
               ? "bg-ink text-canvas font-bold shadow-xs"
               : "border border-hairline text-ink/70 hover:bg-surface-soft hover:text-ink"
@@ -241,16 +257,16 @@ export default function RunDetailPage() {
           <div className="space-y-4">
             {/* Quick alert bar pointing to failure diagnosis */}
             {diagnosis && (
-              <div className="p-3 border border-warning/40 bg-warning/[0.04] rounded-[3px] flex items-center justify-between text-xs">
+              <div className="p-3 border border-warning/40 bg-warning/[0.04] rounded-[3px] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                 <div className="flex items-center gap-2 text-ink">
-                  <AlertTriangle className="w-4 h-4 text-warning" />
-                  <span>
+                  <AlertTriangle className="w-4 h-4 text-warning shrink-0" />
+                  <span className="leading-relaxed">
                     Root cause detected at <strong>Step {diagnosis.root_cause_step_index} ({diagnosis.root_cause_node})</strong> with 94% confidence.
                   </span>
                 </div>
                 <button
                   onClick={() => setActiveTab("diagnosis")}
-                  className="text-xs text-warning font-bold hover:underline flex items-center gap-1"
+                  className="text-xs text-warning font-bold hover:underline flex items-center gap-1 shrink-0 self-end sm:self-auto"
                 >
                   <span>Inspect Diagnosis</span>
                   <span>›</span>
@@ -282,8 +298,17 @@ export default function RunDetailPage() {
           />
         )}
 
-        {activeTab === "comparison" && comparison && (
-          <TraceDiffView comparison={comparison} />
+        {activeTab === "comparison" && (
+          comparison ? (
+            <TraceDiffView comparison={comparison} />
+          ) : (
+            <div className="py-12 text-center border border-hairline bg-surface-card rounded-[4px] space-y-2">
+              <div className="text-xs font-bold text-ink">[NO COMPARISON RECORD AVAILABLE]</div>
+              <p className="text-[11px] text-ink/60">
+                Execute a replay with a counterfactual patch to compare executions.
+              </p>
+            </div>
+          )
         )}
       </div>
     </div>

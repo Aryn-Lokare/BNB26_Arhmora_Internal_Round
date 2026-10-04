@@ -57,7 +57,7 @@ export function DiagnosisPanel({
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <div className="flex flex-col items-start md:items-end">
               <span className="text-[10px] text-ink/50 uppercase">Confidence</span>
               <div className="flex items-center gap-1.5">
@@ -78,20 +78,20 @@ export function DiagnosisPanel({
           <div className="text-[11px] text-ink/60 uppercase font-semibold mb-1">
             Explanation:
           </div>
-          <p className="text-xs text-ink/85 leading-relaxed bg-canvas/70 p-2.5 rounded-[3px] border border-hairline">
+          <p className="text-xs text-ink/85 leading-relaxed bg-canvas/70 p-2.5 rounded-[3px] border border-hairline break-words">
             {diagnosis.explanation}
           </p>
         </div>
 
         {/* CTA to jump straight to checkpoint rewind */}
         {onRewindToStep && (
-          <div className="mt-4 flex items-center justify-between pt-2">
+          <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
             <span className="text-[11px] text-ink/60">
               Ready to fix? Rewind execution to Step {rootCauseStep} and apply a counterfactual patch.
             </span>
             <button
               onClick={() => onRewindToStep(rootCauseStep)}
-              className="px-3 py-1.5 bg-ink text-canvas hover:bg-accent text-xs rounded-[3px] font-semibold flex items-center gap-1.5 transition-colors shadow-xs"
+              className="px-3 py-1.5 bg-ink text-canvas hover:bg-accent text-xs rounded-[3px] font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-xs w-full sm:w-auto whitespace-nowrap"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Rewind to Step {rootCauseStep}</span>

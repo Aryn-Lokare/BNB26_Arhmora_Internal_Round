@@ -101,9 +101,13 @@ export interface ReplayJob {
   result_run_id?: string;
   replayed_run_id?: string;
   steps_skipped?: number;
+  steps_saved?: number;
   steps_reused?: number;
   steps_executed: number;
   compute_saved_pct: number;
+  latency_improvement_ms?: number;
+  outcome?: RunOutcome;
+  message?: string;
   created_at: string;
 }
 
@@ -147,6 +151,10 @@ export interface StepDiff {
   replayed_step?: TraceStep;
   original_error?: string | null;
   replayed_error?: string | null;
+  original_status?: string;
+  replayed_status?: string;
+  diverged?: boolean;
+  reused_from_cache?: boolean;
   state_diff?: Record<string, { before: any; after: any }>;
 }
 

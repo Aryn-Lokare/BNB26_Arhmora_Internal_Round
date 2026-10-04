@@ -141,10 +141,77 @@ export default function RunsPage() {
       </div>
 
       {/* ==================================================
-          TABLE
+          RUNS LIST / TABLE & MOBILE CARDS
           ================================================== */}
       <div className="border border-hairline bg-canvas rounded-[4px] overflow-hidden shadow-xs">
-        <div className="overflow-x-auto">
+        {/* Mobile Cards (visible below md) */}
+        <div className="block md:hidden divide-y divide-hairline">
+          {filteredRuns.length === 0 ? (
+            <div className="p-8 text-center space-y-2">
+              <p className="text-sm font-bold text-ink">No runs found.</p>
+              <p className="text-xs text-ink/60">
+                Try changing your filters or record a new agent execution.
+              </p>
+            </div>
+          ) : (
+            filteredRuns.map((run) => {
+              const failureLabel = run.failure_type || (run.status === "failed" ? "Runtime Fault" : null);
+              const createdDate = new Date(run.created_at).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+
+              return (
+                <div key={run.id} className="p-4 space-y-2.5 hover:bg-surface-soft transition-colors">
+                  <div className="flex items-center justify-between gap-2">
+                    <Link href={`/runs/${run.id}`} className="font-bold text-ink hover:underline text-sm truncate">
+                      {run.id}
+                    </Link>
+                    <AsciiBadge status={run.status} size="sm" />
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 text-[10px]">
+                    <span className="border border-hairline px-1.5 py-0.5 rounded-[2px] bg-surface-card text-ink/75">
+                      {run.agent_name || "Text2SQL-Agent"}
+                    </span>
+                    <span className="text-ink/50">{createdDate}</span>
+                  </div>
+
+                  <p className="text-xs text-ink/80 leading-relaxed line-clamp-2">
+                    {run.task || run.task_text || "—"}
+                  </p>
+
+                  {failureLabel && (
+                    <div className="text-[11px] text-warning bg-warning/10 border border-warning/30 px-2 py-1 rounded-[2px] font-semibold">
+                      [!] {failureLabel}
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-between pt-1 border-t border-hairline/60 text-xs">
+                    <div className="flex items-center gap-3 text-ink/60 text-[11px]">
+                      <span>{run.steps?.length ?? run.step_count ?? 5} steps</span>
+                      <span>•</span>
+                      <span>{run.duration_ms}ms</span>
+                    </div>
+
+                    <Link
+                      href={`/runs/${run.id}`}
+                      className="px-3 py-1 bg-ink text-canvas hover:bg-accent rounded-[3px] text-xs font-semibold inline-flex items-center gap-1 transition-colors"
+                    >
+                      <span>Inspect</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        {/* Desktop Table (hidden on mobile, visible on md+) */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="border-b border-hairline bg-surface-soft text-ink/70 font-semibold uppercase text-[11px]">
